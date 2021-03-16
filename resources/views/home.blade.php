@@ -13,3 +13,7 @@
 
     <link rel="stylesheet" href="hola">
 @endsection
+
+@section('content')
+    @include('components.header')
+@endsection

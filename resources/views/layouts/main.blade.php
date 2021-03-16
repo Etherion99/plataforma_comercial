@@ -7,11 +7,12 @@
     <title>@yield('title')</title>
 
     @section('styles')
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/templates/style.css') }}">
     @show
 
     @section('scripts')
-        <link rel="stylesheet" href="">
+        <script src="{{ asset('js/app.js') }}"></script>
     @show
 </head>
 <body>
