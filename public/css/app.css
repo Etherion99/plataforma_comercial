@@ -1,0 +1,6 @@
+.doc {
+  color: red !important;
+}
+.doc:hover {
+  color: blue !important;
+}
