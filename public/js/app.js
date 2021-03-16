@@ -15369,9 +15369,12 @@ return jQuery;
 /*!*********************************!*\
   !*** ./resources/sass/app.sass ***!
   \*********************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nModuleBuildError: Module build failed (from ./node_modules/css-loader/dist/cjs.js):\nError: Can't resolve 'css/templates/flaticon.css' in 'D:\\Proyectos\\externos\\Plataforma Comercial\\Desarrollo\\Final\\plataforma_comercial\\resources\\sass'\n    at finishWithoutResolve (D:\\Proyectos\\externos\\Plataforma Comercial\\Desarrollo\\Final\\plataforma_comercial\\node_modules\\enhanced-resolve\\lib\\Resolver.js:293:18)\n    at D:\\Proyectos\\externos\\Plataforma Comercial\\Desarrollo\\Final\\plataforma_comercial\\node_modules\\enhanced-resolve\\lib\\Resolver.js:362:15\n    at D:\\Proyectos\\externos\\Plataforma Comercial\\Desarrollo\\Final\\plataforma_comercial\\node_modules\\enhanced-resolve\\lib\\Resolver.js:410:5\n    at eval (eval at create (D:\\Proyectos\\externos\\Plataforma Comercial\\Desarrollo\\Final\\plataforma_comercial\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:16:1)\n    at D:\\Proyectos\\externos\\Plataforma Comercial\\Desarrollo\\Final\\plataforma_comercial\\node_modules\\enhanced-resolve\\lib\\Resolver.js:410:5\n    at eval (eval at create (D:\\Proyectos\\externos\\Plataforma Comercial\\Desarrollo\\Final\\plataforma_comercial\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:27:1)\n    at D:\\Proyectos\\externos\\Plataforma Comercial\\Desarrollo\\Final\\plataforma_comercial\\node_modules\\enhanced-resolve\\lib\\DescriptionFilePlugin.js:87:43\n    at D:\\Proyectos\\externos\\Plataforma Comercial\\Desarrollo\\Final\\plataforma_comercial\\node_modules\\enhanced-resolve\\lib\\Resolver.js:410:5\n    at eval (eval at create (D:\\Proyectos\\externos\\Plataforma Comercial\\Desarrollo\\Final\\plataforma_comercial\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:15:1)\n    at D:\\Proyectos\\externos\\Plataforma Comercial\\Desarrollo\\Final\\plataforma_comercial\\node_modules\\enhanced-resolve\\lib\\Resolver.js:410:5\n    at processResult (D:\\Proyectos\\externos\\Plataforma Comercial\\Desarrollo\\Final\\plataforma_comercial\\node_modules\\webpack\\lib\\NormalModule.js:598:19)\n    at D:\\Proyectos\\externos\\Plataforma Comercial\\Desarrollo\\Final\\plataforma_comercial\\node_modules\\webpack\\lib\\NormalModule.js:692:5\n    at D:\\Proyectos\\externos\\Plataforma Comercial\\Desarrollo\\Final\\plataforma_comercial\\node_modules\\loader-runner\\lib\\LoaderRunner.js:399:11\n    at D:\\Proyectos\\externos\\Plataforma Comercial\\Desarrollo\\Final\\plataforma_comercial\\node_modules\\loader-runner\\lib\\LoaderRunner.js:251:18\n    at context.callback (D:\\Proyectos\\externos\\Plataforma Comercial\\Desarrollo\\Final\\plataforma_comercial\\node_modules\\loader-runner\\lib\\LoaderRunner.js:124:13)\n    at Object.loader (D:\\Proyectos\\externos\\Plataforma Comercial\\Desarrollo\\Final\\plataforma_comercial\\node_modules\\css-loader\\dist\\index.js:154:5)\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ }),
 
@@ -18176,9 +18179,9 @@ Popper.Defaults = Defaults;
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/header"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/header"], () => (__webpack_require__("./resources/sass/app.sass")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/header"], () => (__webpack_require__("./resources/sass/components/header.sass")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/header"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/header"], () => (__webpack_require__("./resources/sass/app.sass")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app","css/header"], () => (__webpack_require__("./resources/sass/components/header.sass")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
