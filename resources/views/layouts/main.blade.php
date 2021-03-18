@@ -9,10 +9,13 @@
     @section('styles')
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/templates/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/templates/flaticon.css') }}">
+
     @show
 
     @section('scripts')
         <script src="{{ asset('js/app.js') }}"></script>
+
     @show
 </head>
 <body>
