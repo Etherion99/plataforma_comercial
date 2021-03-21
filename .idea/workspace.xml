@@ -2,19 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3c449e0-7216-4440-a61b-a4f633bc2bec" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/img/logo/loder.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/logo/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/components/loader.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/iconsAndFonts/fontawesome-all.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/iconsAndFonts/themify-icons.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/fonts/_flaticon.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/gallery/app-logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/gallery/app-logo2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/gallery/footer_bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/logo/logo2_footer.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/components/footer.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/components/scrollup.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/templates/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/templates/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/sass/app.sass" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.sass" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/header.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" afterDir="false" />
     </list>
@@ -163,7 +165,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/img/logo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/css/iconsAndFonts" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="watcher.settings" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -173,9 +175,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/css/iconsAndFonts" />
+      <recent name="$PROJECT_DIR$/public/fonts" />
+      <recent name="$PROJECT_DIR$/public/img/gallery" />
       <recent name="$PROJECT_DIR$/public/img/logo" />
       <recent name="$PROJECT_DIR$/public/img/hero" />
-      <recent name="$PROJECT_DIR$/public/css" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/css/templates" />
@@ -212,7 +216,9 @@
       <updated>1615905735115</updated>
       <workItem from="1615905738804" duration="8528000" />
       <workItem from="1615917988881" duration="343000" />
-      <workItem from="1616079695904" duration="7760000" />
+      <workItem from="1616079695904" duration="7959000" />
+      <workItem from="1616195791712" duration="2428000" />
+      <workItem from="1616335711442" duration="457000" />
     </task>
     <servers />
   </component>

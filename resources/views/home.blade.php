@@ -50,4 +50,6 @@
         </div>
     </div>
     <!--Hero Area End-->
+    @include('components.footer')
+    @include('components.scrollup')
 @endsection
