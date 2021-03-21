@@ -4825,61 +4825,7 @@ __webpack_require__(/*! slicknav/dist/jquery.slicknav.min */ "./node_modules/sli
 /*  jQuery Nice Select - v1.0
     https://github.com/hernansartorio/jquery-nice-select
     Made by Hernán Sartorio  */
-!function (e) {
-    e.fn.niceSelect = function (t) {
-        function s(t) {
-            t.after(e("<div></div>").addClass("nice-select").addClass(t.attr("class") || "").addClass(t.attr("disabled") ? "disabled" : "").attr("tabindex", t.attr("disabled") ? null : "0").html('<span class="current"></span><ul class="list"></ul>'));
-            var s = t.next(), n = t.find("option"), i = t.find("option:selected");
-            s.find(".current").html(i.data("display") || i.text()), n.each(function (t) {
-                var n = e(this), i = n.data("display");
-                s.find("ul").append(e("<li></li>").attr("data-value", n.val()).attr("data-display", i || null).addClass("option" + (n.is(":selected") ? " selected" : "") + (n.is(":disabled") ? " disabled" : "")).html(n.text()))
-            })
-        }
-
-        if ("string" == typeof t) return "update" == t ? this.each(function () {
-            var t = e(this), n = e(this).next(".nice-select"), i = n.hasClass("open");
-            n.length && (n.remove(), s(t), i && t.next().trigger("click"))
-        }) : "destroy" == t ? (this.each(function () {
-            var t = e(this), s = e(this).next(".nice-select");
-            s.length && (s.remove(), t.css("display", ""))
-        }), 0 == e(".nice-select").length && e(document).off(".nice_select")) : console.log('Method "' + t + '" does not exist.'), this;
-        this.hide(), this.each(function () {
-            var t = e(this);
-            t.next().hasClass("nice-select") || s(t)
-        }), e(document).off(".nice_select"), e(document).on("click.nice_select", ".nice-select", function (t) {
-            var s = e(this);
-            e(".nice-select").not(s).removeClass("open"), s.toggleClass("open"), s.hasClass("open") ? (s.find(".option"), s.find(".focus").removeClass("focus"), s.find(".selected").addClass("focus")) : s.focus()
-        }), e(document).on("click.nice_select", function (t) {
-            0 === e(t.target).closest(".nice-select").length && e(".nice-select").removeClass("open").find(".option")
-        }), e(document).on("click.nice_select", ".nice-select .option:not(.disabled)", function (t) {
-            var s = e(this), n = s.closest(".nice-select");
-            n.find(".selected").removeClass("selected"), s.addClass("selected");
-            var i = s.data("display") || s.text();
-            n.find(".current").text(i), n.prev("select").val(s.data("value")).trigger("change")
-        }), e(document).on("keydown.nice_select", ".nice-select", function (t) {
-            var s = e(this), n = e(s.find(".focus") || s.find(".list .option.selected"));
-            if (32 == t.keyCode || 13 == t.keyCode) return s.hasClass("open") ? n.trigger("click") : s.trigger("click"), !1;
-            if (40 == t.keyCode) {
-                if (s.hasClass("open")) {
-                    var i = n.nextAll(".option:not(.disabled)").first();
-                    i.length > 0 && (s.find(".focus").removeClass("focus"), i.addClass("focus"))
-                } else s.trigger("click");
-                return !1
-            }
-            if (38 == t.keyCode) {
-                if (s.hasClass("open")) {
-                    var l = n.prevAll(".option:not(.disabled)").first();
-                    l.length > 0 && (s.find(".focus").removeClass("focus"), l.addClass("focus"))
-                } else s.trigger("click");
-                return !1
-            }
-            if (27 == t.keyCode) s.hasClass("open") && s.trigger("click"); else if (9 == t.keyCode && s.hasClass("open")) return !1
-        });
-        var n = document.createElement("a").style;
-        return n.cssText = "pointer-events:auto", "auto" !== n.pointerEvents && e("html").addClass("no-csspointerevents"), this
-    }
-}(jQuery);
-
+!function(e){e.fn.niceSelect=function(t){function s(t){t.after(e("<div></div>").addClass("nice-select").addClass(t.attr("class")||"").addClass(t.attr("disabled")?"disabled":"").attr("tabindex",t.attr("disabled")?null:"0").html('<span class="current"></span><ul class="list"></ul>'));var s=t.next(),n=t.find("option"),i=t.find("option:selected");s.find(".current").html(i.data("display")||i.text()),n.each(function(t){var n=e(this),i=n.data("display");s.find("ul").append(e("<li></li>").attr("data-value",n.val()).attr("data-display",i||null).addClass("option"+(n.is(":selected")?" selected":"")+(n.is(":disabled")?" disabled":"")).html(n.text()))})}if("string"==typeof t)return"update"==t?this.each(function(){var t=e(this),n=e(this).next(".nice-select"),i=n.hasClass("open");n.length&&(n.remove(),s(t),i&&t.next().trigger("click"))}):"destroy"==t?(this.each(function(){var t=e(this),s=e(this).next(".nice-select");s.length&&(s.remove(),t.css("display",""))}),0==e(".nice-select").length&&e(document).off(".nice_select")):console.log('Method "'+t+'" does not exist.'),this;this.hide(),this.each(function(){var t=e(this);t.next().hasClass("nice-select")||s(t)}),e(document).off(".nice_select"),e(document).on("click.nice_select",".nice-select",function(t){var s=e(this);e(".nice-select").not(s).removeClass("open"),s.toggleClass("open"),s.hasClass("open")?(s.find(".option"),s.find(".focus").removeClass("focus"),s.find(".selected").addClass("focus")):s.focus()}),e(document).on("click.nice_select",function(t){0===e(t.target).closest(".nice-select").length&&e(".nice-select").removeClass("open").find(".option")}),e(document).on("click.nice_select",".nice-select .option:not(.disabled)",function(t){var s=e(this),n=s.closest(".nice-select");n.find(".selected").removeClass("selected"),s.addClass("selected");var i=s.data("display")||s.text();n.find(".current").text(i),n.prev("select").val(s.data("value")).trigger("change")}),e(document).on("keydown.nice_select",".nice-select",function(t){var s=e(this),n=e(s.find(".focus")||s.find(".list .option.selected"));if(32==t.keyCode||13==t.keyCode)return s.hasClass("open")?n.trigger("click"):s.trigger("click"),!1;if(40==t.keyCode){if(s.hasClass("open")){var i=n.nextAll(".option:not(.disabled)").first();i.length>0&&(s.find(".focus").removeClass("focus"),i.addClass("focus"))}else s.trigger("click");return!1}if(38==t.keyCode){if(s.hasClass("open")){var l=n.prevAll(".option:not(.disabled)").first();l.length>0&&(s.find(".focus").removeClass("focus"),l.addClass("focus"))}else s.trigger("click");return!1}if(27==t.keyCode)s.hasClass("open")&&s.trigger("click");else if(9==t.keyCode&&s.hasClass("open"))return!1});var n=document.createElement("a").style;return n.cssText="pointer-events:auto","auto"!==n.pointerEvents&&e("html").addClass("no-csspointerevents"),this}}(jQuery);
 
 /***/ }),
 
@@ -15779,9 +15725,12 @@ return jQuery;
 /*!*********************************!*\
   !*** ./resources/sass/app.sass ***!
   \*********************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):\nSassError: Can't find stylesheet to import.\n  ╷\n4 │ @import \"\"\n  │         ^^\n  ╵\n  resources/sass/app.sass 4:9  root stylesheet\n    at processResult (/home/arley/backend/plataforma_comercial/node_modules/webpack/lib/NormalModule.js:598:19)\n    at /home/arley/backend/plataforma_comercial/node_modules/webpack/lib/NormalModule.js:692:5\n    at /home/arley/backend/plataforma_comercial/node_modules/loader-runner/lib/LoaderRunner.js:399:11\n    at /home/arley/backend/plataforma_comercial/node_modules/loader-runner/lib/LoaderRunner.js:251:18\n    at context.callback (/home/arley/backend/plataforma_comercial/node_modules/loader-runner/lib/LoaderRunner.js:124:13)\n    at /home/arley/backend/plataforma_comercial/node_modules/sass-loader/dist/index.js:62:7\n    at Function.call$2 (/home/arley/backend/plataforma_comercial/node_modules/sass/sass.dart.js:91729:16)\n    at _render_closure1.call$2 (/home/arley/backend/plataforma_comercial/node_modules/sass/sass.dart.js:80373:12)\n    at _RootZone.runBinary$3$3 (/home/arley/backend/plataforma_comercial/node_modules/sass/sass.dart.js:27269:18)\n    at _FutureListener.handleError$1 (/home/arley/backend/plataforma_comercial/node_modules/sass/sass.dart.js:25797:19)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
 
 /***/ }),
 
@@ -21621,9 +21570,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/header"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/header"], () => (__webpack_require__("./resources/sass/app.sass")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/header"], () => (__webpack_require__("./resources/sass/components/header.sass")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/header"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/header"], () => (__webpack_require__("./resources/sass/app.sass")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app","css/header"], () => (__webpack_require__("./resources/sass/components/header.sass")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

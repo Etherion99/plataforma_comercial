@@ -29,9 +29,9 @@
                                             </ul>
                                         </li>
                                         <li><a href="contact.html">Contact</a></li>
-                                        <li class="add-list"><a href="listing_details.html"><i class="ti-plus"></i> add Listing</a></li>
+                                        <li class="add-list"><a href="listing_details.html"><i class="ti ti-plus"></i> add Listing</a></li>
                                         <li class="login"><a href="#">
-                                                <i class="ti-user"></i> Sign in or Register</a>
+                                                <i class="ti ti-user"></i> Sign in or Register</a>
                                         </li>
                                     </ul>
                                 </nav>

@@ -7,11 +7,9 @@
     <title>@yield('title')</title>
 
     @section('styles')
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">   
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/templates/style.css') }}">
         <link rel="stylesheet" href="{{ asset('css/templates/flaticon.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/iconsAndFonts/fontawesome-all.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/iconsAndFonts/themify-icons.css') }}">
     @show
 
     @section('scripts')
