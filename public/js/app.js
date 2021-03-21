@@ -15779,12 +15779,9 @@ return jQuery;
 /*!*********************************!*\
   !*** ./resources/sass/app.sass ***!
   \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
+throw new Error("Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):\nSassError: Can't find stylesheet to import.\n  ╷\n4 │ @import \"\"\n  │         ^^\n  ╵\n  resources/sass/app.sass 4:9  root stylesheet\n    at processResult (/home/arley/backend/plataforma_comercial/node_modules/webpack/lib/NormalModule.js:598:19)\n    at /home/arley/backend/plataforma_comercial/node_modules/webpack/lib/NormalModule.js:692:5\n    at /home/arley/backend/plataforma_comercial/node_modules/loader-runner/lib/LoaderRunner.js:399:11\n    at /home/arley/backend/plataforma_comercial/node_modules/loader-runner/lib/LoaderRunner.js:251:18\n    at context.callback (/home/arley/backend/plataforma_comercial/node_modules/loader-runner/lib/LoaderRunner.js:124:13)\n    at /home/arley/backend/plataforma_comercial/node_modules/sass-loader/dist/index.js:62:7\n    at Function.call$2 (/home/arley/backend/plataforma_comercial/node_modules/sass/sass.dart.js:91729:16)\n    at _render_closure1.call$2 (/home/arley/backend/plataforma_comercial/node_modules/sass/sass.dart.js:80373:12)\n    at _RootZone.runBinary$3$3 (/home/arley/backend/plataforma_comercial/node_modules/sass/sass.dart.js:27269:18)\n    at _FutureListener.handleError$1 (/home/arley/backend/plataforma_comercial/node_modules/sass/sass.dart.js:25797:19)");
 
 /***/ }),
 
@@ -21624,9 +21621,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/header"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/header"], () => (__webpack_require__("./resources/sass/app.sass")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app","css/header"], () => (__webpack_require__("./resources/sass/components/header.sass")))
+/******/ 	__webpack_require__.O(undefined, ["css/header"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/header"], () => (__webpack_require__("./resources/sass/app.sass")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/header"], () => (__webpack_require__("./resources/sass/components/header.sass")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3c449e0-7216-4440-a61b-a4f633bc2bec" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/public/css/iconsAndFonts/fontawesome-all.min.css" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/css/iconsAndFonts/themify-icons.css" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/fonts/_flaticon.scss" afterDir="false" />
@@ -19,6 +20,13 @@
       <change beforePath="$PROJECT_DIR$/resources/sass/app.sass" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.sass" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/main.blade.php" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/app.sass" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.sass" afterDir="false" />
+>>>>>>> main
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,10 +223,14 @@
       <option name="presentableId" value="Default" />
       <updated>1615905735115</updated>
       <workItem from="1615905738804" duration="8528000" />
+<<<<<<< HEAD
       <workItem from="1615917988881" duration="343000" />
       <workItem from="1616079695904" duration="7959000" />
       <workItem from="1616195791712" duration="2428000" />
       <workItem from="1616335711442" duration="457000" />
+=======
+      <workItem from="1616020083967" duration="72000" />
+>>>>>>> main
     </task>
     <servers />
   </component>
