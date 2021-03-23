@@ -17,7 +17,7 @@
         <div class="single-slider hero-overly  slider-height d-flex align-items-center">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-xl-8 col-lg-9">
+                    <div class="col-xl-8 col-lg-9 principal-search">
                         <!-- Hero Caption -->
                         <div class="hero__caption">
                             <span>Explore the city</span>
@@ -31,6 +31,15 @@
                             <div class="select-form">
                                 <div class="select-itms">
                                     <select name="select" id="select1">
+                                        <option value="">Servicios</option>
+                                        <option value="">Categorias</option>
+                                        <option value="">Etc</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="select-form">
+                                <div class="select-itms">
+                                    <select name="select" id="select2">
                                         <option value="">All Catagories</option>
                                         <option value="">Catagories One</option>
                                         <option value="">Catagories Two</option>
