@@ -69,21 +69,12 @@ function search() {
         _iterator.f();
       }
 
-      if (showingResults && data.length === 0 || !showingResults && data.length !== 0) {
-        if (data.length === 0) {
-          searchResults.slideToggle();
-        }
-      } else {
-        if (data.length !== 0) {
-          searchResults.slideToggle();
-        }
-      }
-
-      searchResults.slideToggle(false);
+      if (showingResults && data.length === 0 || !showingResults && data.length !== 0) searchResults.slideToggle();
       showingResults = data.length !== 0;
     });
   } else {
     searchResults.slideUp();
+    showingResults = false;
     inSearchResults.html('');
   }
 }
@@ -116,6 +107,7 @@ $(document).ready(function () {
   searchResults.hide();
   searchBar.blur(function () {
     searchResults.slideUp();
+    showingResults = false;
   });
   searchBar.focus(activateSearch);
   filters.change(function () {

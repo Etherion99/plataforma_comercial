@@ -52,6 +52,7 @@ function search() {
         });
     } else {
         searchResults.slideUp();
+        showingResults = false;
         inSearchResults.html('');
     }
 }
@@ -97,7 +98,7 @@ $(document).ready(function () {
 
     searchResults.hide();
 
-    searchBar.blur(function(){searchResults.slideUp()});
+    searchBar.blur(function(){searchResults.slideUp(); showingResults=false});
 
     searchBar.focus(activateSearch);
 
