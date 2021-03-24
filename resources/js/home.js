@@ -1,10 +1,11 @@
-var categoryFilter = $('#category-filter'), groupFilter = $('#group-filter'), filters = $('.filter'), searchBar = $('#search-bar');
+var categoryFilter = $('#category-filter'), groupFilter = $('#group-filter'), filters = $('.filter'),
+    searchBar = $('#search-bar'), searchResults = $('#search-results');
 var inSearchResults = $('#in-search-results');
 
 var searchCompany;
 
-function fillFilter(filter){
-    if(filter.val() !== '')
+function fillFilter(filter) {
+    if (filter.val() !== '0')
         filter.addClass('filter-selected');
     else
         filter.removeClass('filter-selected');
@@ -12,52 +13,53 @@ function fillFilter(filter){
     filter.niceSelect('update');
 }
 
-function loadCategories(){
+function loadCategories() {
     var group = $(this).val();
 
     categoryFilter.html($('<option>', {value: '0', text: 'Categoría'}));
 
-    if(group !== '0')
-        $.get('/api/categories/group/' + group, {}, function(data){
+    if (group !== '0')
+        $.get('/api/categories/group/' + group, {}, function (data) {
             data.map((option) => categoryFilter.append($('<option>', {value: option.id, text: option.name})));
 
             categoryFilter.prop('disabled', false);
             fillFilter(categoryFilter);
             categoryFilter.niceSelect('update');
         });
-    else{
+    else {
         categoryFilter.prop('disabled', true);
         fillFilter(categoryFilter);
     }
 }
 
-function search(){
+function search() {
     let text = searchBar.val();
     let group = groupFilter.val();
     let category = categoryFilter.val();
 
-    if(text !== ''){
+    if (text !== '') {
         category = category === '0' ? group : category;
 
-        $.get('/api/companies/' + category + '/search/' + text, function(data){
+        $.get('/api/companies/' + category + '/search/' + text, function (data) {
             console.log(data);
-
             inSearchResults.html('');
-
-            for(let result of data){
+            searchResults.toggle(data.length!==0);
+            for (let result of data) {
                 fillResult(result);
             }
-
             /*searchResults.html(data);
 
             searchResult.click(function(){
                 window.location.href = '/empresa/' + $(this).attr('id').split('-')[2];
             });*/
         });
-    }else{
+    } else {
+        searchResults.slideUp();
+
         inSearchResults.html('');
     }
 }
+
 /*<div class="col">
                                     <div class="row g-0 bg-light position-relative">
                                         <div class="col-md-3 mb-md-0 p-md-4">
@@ -71,7 +73,7 @@ function search(){
                                         </div>
                                     </div>
                                 </div>*/
-function fillResult(result){
+function fillResult(result) {
     let col = $('<div>', {
         'class': 'col'
     }).html(
@@ -102,15 +104,18 @@ function fillResult(result){
     inSearchResults.append(col);
 }
 
-$(document).ready(function(){
-    groupFilter.change(loadCategories);
+function activateSearch() {
+    clearTimeout(searchCompany);
+    searchCompany = setTimeout(search, 1000);
+}
 
-    filters.change(function (){
+$(document).ready(function () {
+    groupFilter.change(loadCategories);
+    searchResults.hide();
+    searchBar.blur(function(){searchResults.slideUp()});
+    searchBar.focus(activateSearch);
+    filters.change(function () {
         fillFilter($(this));
     });
-
-    searchBar.keyup(function (){
-        clearTimeout(searchCompany);
-        searchCompany = setTimeout(search, 1000);
-    })
+    searchBar.keyup(activateSearch)
 });

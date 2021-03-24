@@ -12,12 +12,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 var categoryFilter = $('#category-filter'),
     groupFilter = $('#group-filter'),
     filters = $('.filter'),
-    searchBar = $('#search-bar');
+    searchBar = $('#search-bar'),
+    searchResults = $('#search-results');
 var inSearchResults = $('#in-search-results');
 var searchCompany;
 
 function fillFilter(filter) {
-  if (filter.val() !== '') filter.addClass('filter-selected');else filter.removeClass('filter-selected');
+  if (filter.val() !== '0') filter.addClass('filter-selected');else filter.removeClass('filter-selected');
   filter.niceSelect('update');
 }
 
@@ -53,6 +54,7 @@ function search() {
     $.get('/api/companies/' + category + '/search/' + text, function (data) {
       console.log(data);
       inSearchResults.html('');
+      searchResults.toggle(data.length !== 0);
 
       var _iterator = _createForOfIteratorHelper(data),
           _step;
@@ -74,6 +76,7 @@ function search() {
       }
     });
   } else {
+    searchResults.slideUp();
     inSearchResults.html('');
   }
 }
@@ -110,15 +113,22 @@ function fillResult(result) {
   inSearchResults.append(col);
 }
 
+function activateSearch() {
+  clearTimeout(searchCompany);
+  searchCompany = setTimeout(search, 1000);
+}
+
 $(document).ready(function () {
   groupFilter.change(loadCategories);
+  searchResults.hide();
+  searchBar.blur(function () {
+    searchResults.slideUp();
+  });
+  searchBar.focus(activateSearch);
   filters.change(function () {
     fillFilter($(this));
   });
-  searchBar.keyup(function () {
-    clearTimeout(searchCompany);
-    searchCompany = setTimeout(search, 1000);
-  });
+  searchBar.keyup(activateSearch);
 });
 /******/ })()
 ;
