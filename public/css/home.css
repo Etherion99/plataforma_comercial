@@ -1,3 +1,8 @@
 .filter-selected {
   color: #FF6600 !important;
+  font-weight: bold !important;
+}
+
+.nice-select.disabled {
+  opacity: 0.75;
 }

@@ -3,19 +3,22 @@ var __webpack_exports__ = {};
 /*!******************************!*\
   !*** ./resources/js/home.js ***!
   \******************************/
-var categoryFilter = $('#category-filter');
+var categoryFilter = $('#category-filter'),
+    groupFilter = $('#group-filter'),
+    filters = $('.filter');
 
 function fillFilter(filter) {
-  if (filter.val() !== '' && filter.val() !== '0') filter.addClass('filter-selected');else filter.removeClass('filter-selected');
+  if (filter.val() !== '') filter.addClass('filter-selected');else filter.removeClass('filter-selected');
+  filter.niceSelect('update');
 }
 
 function loadCategories() {
   var group = $(this).val();
   categoryFilter.html($('<option>', {
-    value: '0',
+    value: '',
     text: 'Categoría'
   }));
-  if (group !== '0') $.get('/api/categories/group/' + group, {}, function (data) {
+  if (group !== '') $.get('/api/categories/group/' + group, {}, function (data) {
     data.map(function (option) {
       return categoryFilter.append($('<option>', {
         value: option.id,
@@ -24,6 +27,7 @@ function loadCategories() {
     });
     categoryFilter.prop('disabled', false);
     fillFilter(categoryFilter);
+    categoryFilter.niceSelect('update');
   });else {
     categoryFilter.prop('disabled', true);
     fillFilter(categoryFilter);
@@ -31,7 +35,10 @@ function loadCategories() {
 }
 
 $(document).ready(function () {
-  categoryFilter.change(loadCategories);
+  groupFilter.change(loadCategories);
+  filters.change(function () {
+    fillFilter($(this));
+  });
 });
 /******/ })()
 ;

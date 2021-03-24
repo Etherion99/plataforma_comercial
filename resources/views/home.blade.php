@@ -9,7 +9,7 @@
 
 @section('scripts')
     @parent
-    <script src="{{ asset('js/home.js') }}"></script>
+    <script src="{{ asset('js/home.js') }}" defer></script>
 @endsection
 
 @section('content')
@@ -43,7 +43,7 @@
                             <div class="select-form">
                                 <div class="select-itms">
                                     <select name="select" class="filter" id="category-filter" disabled>
-                                        <option value=""></option>
+                                        <option value="">Categoría</option>
                                     </select>
                                 </div>
                             </div>
