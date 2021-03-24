@@ -39,14 +39,13 @@ function search() {
 
     if (text !== '') {
         category = category === '0' ? group : category;
-
         $.get('/api/companies/' + category + '/search/' + text, function (data) {
             console.log(data);
             inSearchResults.html('');
-            searchResults.toggle(data.length!==0);
             for (let result of data) {
                 fillResult(result);
             }
+            searchResults.slideToggle(data.length!==0);
             /*searchResults.html(data);
 
             searchResult.click(function(){
@@ -54,8 +53,7 @@ function search() {
             });*/
         });
     } else {
-        searchResults.slideUp();
-
+        searchResults.fadeOut();
         inSearchResults.html('');
     }
 }

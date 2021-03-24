@@ -54,7 +54,6 @@ function search() {
     $.get('/api/companies/' + category + '/search/' + text, function (data) {
       console.log(data);
       inSearchResults.html('');
-      searchResults.toggle(data.length !== 0);
 
       var _iterator = _createForOfIteratorHelper(data),
           _step;
@@ -64,19 +63,20 @@ function search() {
           var result = _step.value;
           fillResult(result);
         }
-        /*searchResults.html(data);
-         searchResult.click(function(){
-            window.location.href = '/empresa/' + $(this).attr('id').split('-')[2];
-        });*/
-
       } catch (err) {
         _iterator.e(err);
       } finally {
         _iterator.f();
       }
+
+      searchResults.slideToggle(data.length !== 0);
+      /*searchResults.html(data);
+       searchResult.click(function(){
+          window.location.href = '/empresa/' + $(this).attr('id').split('-')[2];
+      });*/
     });
   } else {
-    searchResults.slideUp();
+    searchResults.fadeOut();
     inSearchResults.html('');
   }
 }
