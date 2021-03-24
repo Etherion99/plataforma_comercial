@@ -40,20 +40,28 @@ function search() {
     if (text !== '') {
         category = category === '0' ? group : category;
         $.get('/api/companies/' + category + '/search/' + text, function (data) {
-            inSearchResults.html('');
+            if (showingResults && data.length === 0)
+                inSearchResults.html('Puto el q lo lea');
+            else if(!showingResults && data.length !== 0){
+                inSearchResults.html('');
+                for (let result of data)
+                    fillResult(result);
 
-            for (let result of data)
-                fillResult(result);
-
-            if(showingResults && data.length === 0 || !showingResults && data.length !== 0)
                 searchResults.slideToggle();
-            
-            showingResults = data.length!==0;
+            }else{
+                inSearchResults.html('');
+                for (let result of data)
+                    fillResult(result);
+            }
+
+            showingResults = true;
+            console.log("showing ", showingResults);
         });
     } else {
-        searchResults.slideUp();
+        searchResults.slideUp(function (){
+            inSearchResults.html('');
+        });
         showingResults = false;
-        inSearchResults.html('');
     }
 }
 
@@ -98,13 +106,11 @@ $(document).ready(function () {
 
     searchResults.hide();
 
-    searchBar.blur(function(){searchResults.slideUp(); showingResults=false});
-
-    searchBar.focus(activateSearch);
-
     filters.change(function () {
         fillFilter($(this));
     });
 
-    searchBar.keyup(activateSearch)
+    searchBar.keyup(activateSearch);
+    groupFilter.change(activateSearch);
+    categoryFilter.change(activateSearch);
 });

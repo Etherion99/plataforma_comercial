@@ -53,29 +53,49 @@ function search() {
   if (text !== '') {
     category = category === '0' ? group : category;
     $.get('/api/companies/' + category + '/search/' + text, function (data) {
-      inSearchResults.html('');
+      if (showingResults && data.length === 0) inSearchResults.html('Puto el q lo lea');else if (!showingResults && data.length !== 0) {
+        inSearchResults.html('');
 
-      var _iterator = _createForOfIteratorHelper(data),
-          _step;
+        var _iterator = _createForOfIteratorHelper(data),
+            _step;
 
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var result = _step.value;
-          fillResult(result);
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var result = _step.value;
+            fillResult(result);
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
         }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
 
-      if (showingResults && data.length === 0 || !showingResults && data.length !== 0) searchResults.slideToggle();
-      showingResults = data.length !== 0;
+        searchResults.slideToggle();
+      } else {
+        inSearchResults.html('');
+
+        var _iterator2 = _createForOfIteratorHelper(data),
+            _step2;
+
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var _result = _step2.value;
+            fillResult(_result);
+          }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
+        }
+      }
+      showingResults = true;
+      console.log("showing ", showingResults);
     });
   } else {
-    searchResults.slideUp();
+    searchResults.slideUp(function () {
+      inSearchResults.html('');
+    });
     showingResults = false;
-    inSearchResults.html('');
   }
 }
 
@@ -105,15 +125,12 @@ function activateSearch() {
 $(document).ready(function () {
   groupFilter.change(loadCategories);
   searchResults.hide();
-  searchBar.blur(function () {
-    searchResults.slideUp();
-    showingResults = false;
-  });
-  searchBar.focus(activateSearch);
   filters.change(function () {
     fillFilter($(this));
   });
   searchBar.keyup(activateSearch);
+  groupFilter.change(activateSearch);
+  categoryFilter.change(activateSearch);
 });
 /******/ })()
 ;
