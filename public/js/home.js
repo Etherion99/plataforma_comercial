@@ -69,16 +69,17 @@ function search() {
         _iterator.f();
       }
 
-      if (showingResults) {
+      if (showingResults && data.length === 0 || !showingResults && data.length !== 0) {
         if (data.length === 0) {
-          searchResults.slideToggle(false);
+          searchResults.slideToggle();
         }
       } else {
         if (data.length !== 0) {
-          searchResults.slideToggle(true);
+          searchResults.slideToggle();
         }
       }
 
+      searchResults.slideToggle(false);
       showingResults = data.length !== 0;
     });
   } else {

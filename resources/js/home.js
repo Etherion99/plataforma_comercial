@@ -43,18 +43,11 @@ function search() {
             inSearchResults.html('');
 
             for (let result of data)
-                fillResult(result)
+                fillResult(result);
 
-            if(showingResults){
-                if(data.length === 0){
-                    searchResults.slideToggle(false);
-                }
-            }else{
-                if(data.length !== 0){
-                    searchResults.slideToggle(true);
-                }
-            }
-
+            if(showingResults && data.length === 0 || !showingResults && data.length !== 0)
+                searchResults.slideToggle();
+            
             showingResults = data.length!==0;
         });
     } else {
