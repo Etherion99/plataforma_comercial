@@ -6,22 +6,20 @@
                 <div class="container-fluid">
                     <div class="row align-items-center">
                         <!-- Logo -->
-                        <div class="col-xl-2 col-lg-2 col-md-1">
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-4">
                             <div class="logo">
                                 <a href="index.html">
-                                    <img src="{{ asset('images/logo/logo.png') }}" class="img-fluid">
+                                    <img src="{{ asset('images/logo/logo.png') }}" class="img-fluid col-10">
                                 </a>
                             </div>
                         </div>
-                        <div class="col-xl-10 col-lg-10 col-md-8">
+                        <div class="col-xl-10 col-lg-9 col-md-8 col-8">
                             <!-- Main-menu -->
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="catagori.html">Catagories</a></li>
-                                        <li><a href="listing.html">Listing</a></li>
+                                        <li><a href="index.html">Inicio</a></li>
+                                        <li><a href="about.html">Nosotros</a></li>
                                         <li><a href="#">Page</a>
                                             <ul class="submenu">
                                                 <li><a href="blog.html">Blog</a></li>
