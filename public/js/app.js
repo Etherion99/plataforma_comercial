@@ -158,6 +158,277 @@ For e.g. 'http://blahblah.us1.list-manage.com/subscribe/post-json?u=5afsdhfuhdsi
 
 /***/ }),
 
+/***/ "./public/js/templates/jquery.slicknav.min.js":
+/*!****************************************************!*\
+  !*** ./public/js/templates/jquery.slicknav.min.js ***!
+  \****************************************************/
+/***/ (() => {
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/*!
+ * SlickNav Responsive Mobile Menu v1.0.10
+ * (c) 2016 Josh Cope
+ * licensed under MIT
+ */
+!function (e, t, n) {
+  function a(t, n) {
+    this.element = t, this.settings = e.extend({}, i, n), this.settings.duplicate || n.hasOwnProperty("removeIds") || (this.settings.removeIds = !1), this._defaults = i, this._name = s, this.init();
+  }
+
+  var i = {
+    label: "MENU",
+    duplicate: !0,
+    duration: 200,
+    easingOpen: "swing",
+    easingClose: "swing",
+    closedSymbol: "&#9658;",
+    openedSymbol: "&#9660;",
+    prependTo: "body",
+    appendTo: "",
+    parentTag: "a",
+    closeOnClick: !1,
+    allowParentLinks: !1,
+    nestedParentLinks: !0,
+    showChildren: !1,
+    removeIds: !0,
+    removeClasses: !1,
+    removeStyles: !1,
+    brand: "",
+    animations: "jquery",
+    init: function init() {},
+    beforeOpen: function beforeOpen() {},
+    beforeClose: function beforeClose() {},
+    afterOpen: function afterOpen() {},
+    afterClose: function afterClose() {}
+  },
+      s = "slicknav",
+      o = "slicknav",
+      l = {
+    DOWN: 40,
+    ENTER: 13,
+    ESCAPE: 27,
+    LEFT: 37,
+    RIGHT: 39,
+    SPACE: 32,
+    TAB: 9,
+    UP: 38
+  };
+  a.prototype.init = function () {
+    var n,
+        a,
+        i = this,
+        s = e(this.element),
+        r = this.settings;
+
+    if (r.duplicate ? i.mobileNav = s.clone() : i.mobileNav = s, r.removeIds && (i.mobileNav.removeAttr("id"), i.mobileNav.find("*").each(function (t, n) {
+      e(n).removeAttr("id");
+    })), r.removeClasses && (i.mobileNav.removeAttr("class"), i.mobileNav.find("*").each(function (t, n) {
+      e(n).removeAttr("class");
+    })), r.removeStyles && (i.mobileNav.removeAttr("style"), i.mobileNav.find("*").each(function (t, n) {
+      e(n).removeAttr("style");
+    })), n = o + "_icon", "" === r.label && (n += " " + o + "_no-text"), "a" == r.parentTag && (r.parentTag = 'a href="#"'), i.mobileNav.attr("class", o + "_nav"), a = e('<div class="' + o + '_menu"></div>'), "" !== r.brand) {
+      var c = e('<div class="' + o + '_brand">' + r.brand + "</div>");
+      e(a).append(c);
+    }
+
+    i.btn = e(["<" + r.parentTag + ' aria-haspopup="true" role="button" tabindex="0" class="' + o + "_btn " + o + '_collapsed">', '<span class="' + o + '_menutxt">' + r.label + "</span>", '<span class="' + n + '">', '<span class="' + o + '_icon-bar"></span>', '<span class="' + o + '_icon-bar"></span>', '<span class="' + o + '_icon-bar"></span>', "</span>", "</" + r.parentTag + ">"].join("")), e(a).append(i.btn), "" !== r.appendTo ? e(r.appendTo).append(a) : e(r.prependTo).prepend(a), a.append(i.mobileNav);
+    var p = i.mobileNav.find("li");
+    e(p).each(function () {
+      var t = e(this),
+          n = {};
+
+      if (n.children = t.children("ul").attr("role", "menu"), t.data("menu", n), n.children.length > 0) {
+        var a = t.contents(),
+            s = !1,
+            l = [];
+        e(a).each(function () {
+          return e(this).is("ul") ? !1 : (l.push(this), void (e(this).is("a") && (s = !0)));
+        });
+        var c = e("<" + r.parentTag + ' role="menuitem" aria-haspopup="true" tabindex="-1" class="' + o + '_item"/>');
+        if (r.allowParentLinks && !r.nestedParentLinks && s) e(l).wrapAll('<span class="' + o + "_parent-link " + o + '_row"/>').parent();else {
+          var p = e(l).wrapAll(c).parent();
+          p.addClass(o + "_row");
+        }
+        r.showChildren ? t.addClass(o + "_open") : t.addClass(o + "_collapsed"), t.addClass(o + "_parent");
+        var d = e('<span class="' + o + '_arrow">' + (r.showChildren ? r.openedSymbol : r.closedSymbol) + "</span>");
+        r.allowParentLinks && !r.nestedParentLinks && s && (d = d.wrap(c).parent()), e(l).last().after(d);
+      } else 0 === t.children().length && t.addClass(o + "_txtnode");
+
+      t.children("a").attr("role", "menuitem").click(function (t) {
+        r.closeOnClick && !e(t.target).parent().closest("li").hasClass(o + "_parent") && e(i.btn).click();
+      }), r.closeOnClick && r.allowParentLinks && (t.children("a").children("a").click(function (t) {
+        e(i.btn).click();
+      }), t.find("." + o + "_parent-link a:not(." + o + "_item)").click(function (t) {
+        e(i.btn).click();
+      }));
+    }), e(p).each(function () {
+      var t = e(this).data("menu");
+      r.showChildren || i._visibilityToggle(t.children, null, !1, null, !0);
+    }), i._visibilityToggle(i.mobileNav, null, !1, "init", !0), i.mobileNav.attr("role", "menu"), e(t).mousedown(function () {
+      i._outlines(!1);
+    }), e(t).keyup(function () {
+      i._outlines(!0);
+    }), e(i.btn).click(function (e) {
+      e.preventDefault(), i._menuToggle();
+    }), i.mobileNav.on("click", "." + o + "_item", function (t) {
+      t.preventDefault(), i._itemClick(e(this));
+    }), e(i.btn).keydown(function (t) {
+      var n = t || event;
+
+      switch (n.keyCode) {
+        case l.ENTER:
+        case l.SPACE:
+        case l.DOWN:
+          t.preventDefault(), n.keyCode === l.DOWN && e(i.btn).hasClass(o + "_open") || i._menuToggle(), e(i.btn).next().find('[role="menuitem"]').first().focus();
+      }
+    }), i.mobileNav.on("keydown", "." + o + "_item", function (t) {
+      var n = t || event;
+
+      switch (n.keyCode) {
+        case l.ENTER:
+          t.preventDefault(), i._itemClick(e(t.target));
+          break;
+
+        case l.RIGHT:
+          t.preventDefault(), e(t.target).parent().hasClass(o + "_collapsed") && i._itemClick(e(t.target)), e(t.target).next().find('[role="menuitem"]').first().focus();
+      }
+    }), i.mobileNav.on("keydown", '[role="menuitem"]', function (t) {
+      var n = t || event;
+
+      switch (n.keyCode) {
+        case l.DOWN:
+          t.preventDefault();
+          var a = e(t.target).parent().parent().children().children('[role="menuitem"]:visible'),
+              s = a.index(t.target),
+              r = s + 1;
+          a.length <= r && (r = 0);
+          var c = a.eq(r);
+          c.focus();
+          break;
+
+        case l.UP:
+          t.preventDefault();
+          var a = e(t.target).parent().parent().children().children('[role="menuitem"]:visible'),
+              s = a.index(t.target),
+              c = a.eq(s - 1);
+          c.focus();
+          break;
+
+        case l.LEFT:
+          if (t.preventDefault(), e(t.target).parent().parent().parent().hasClass(o + "_open")) {
+            var p = e(t.target).parent().parent().prev();
+            p.focus(), i._itemClick(p);
+          } else e(t.target).parent().parent().hasClass(o + "_nav") && (i._menuToggle(), e(i.btn).focus());
+
+          break;
+
+        case l.ESCAPE:
+          t.preventDefault(), i._menuToggle(), e(i.btn).focus();
+      }
+    }), r.allowParentLinks && r.nestedParentLinks && e("." + o + "_item a").click(function (e) {
+      e.stopImmediatePropagation();
+    });
+  }, a.prototype._menuToggle = function (e) {
+    var t = this,
+        n = t.btn,
+        a = t.mobileNav;
+    n.hasClass(o + "_collapsed") ? (n.removeClass(o + "_collapsed"), n.addClass(o + "_open")) : (n.removeClass(o + "_open"), n.addClass(o + "_collapsed")), n.addClass(o + "_animating"), t._visibilityToggle(a, n.parent(), !0, n);
+  }, a.prototype._itemClick = function (e) {
+    var t = this,
+        n = t.settings,
+        a = e.data("menu");
+    a || (a = {}, a.arrow = e.children("." + o + "_arrow"), a.ul = e.next("ul"), a.parent = e.parent(), a.parent.hasClass(o + "_parent-link") && (a.parent = e.parent().parent(), a.ul = e.parent().next("ul")), e.data("menu", a)), a.parent.hasClass(o + "_collapsed") ? (a.arrow.html(n.openedSymbol), a.parent.removeClass(o + "_collapsed"), a.parent.addClass(o + "_open"), a.parent.addClass(o + "_animating"), t._visibilityToggle(a.ul, a.parent, !0, e)) : (a.arrow.html(n.closedSymbol), a.parent.addClass(o + "_collapsed"), a.parent.removeClass(o + "_open"), a.parent.addClass(o + "_animating"), t._visibilityToggle(a.ul, a.parent, !0, e));
+  }, a.prototype._visibilityToggle = function (t, n, a, i, s) {
+    function l(t, n) {
+      e(t).removeClass(o + "_animating"), e(n).removeClass(o + "_animating"), s || p.afterOpen(t);
+    }
+
+    function r(n, a) {
+      t.attr("aria-hidden", "true"), d.attr("tabindex", "-1"), c._setVisAttr(t, !0), t.hide(), e(n).removeClass(o + "_animating"), e(a).removeClass(o + "_animating"), s ? "init" == n && p.init() : p.afterClose(n);
+    }
+
+    var c = this,
+        p = c.settings,
+        d = c._getActionItems(t),
+        u = 0;
+
+    a && (u = p.duration), t.hasClass(o + "_hidden") ? (t.removeClass(o + "_hidden"), s || p.beforeOpen(i), "jquery" === p.animations ? t.stop(!0, !0).slideDown(u, p.easingOpen, function () {
+      l(i, n);
+    }) : "velocity" === p.animations && t.velocity("finish").velocity("slideDown", {
+      duration: u,
+      easing: p.easingOpen,
+      complete: function complete() {
+        l(i, n);
+      }
+    }), t.attr("aria-hidden", "false"), d.attr("tabindex", "0"), c._setVisAttr(t, !1)) : (t.addClass(o + "_hidden"), s || p.beforeClose(i), "jquery" === p.animations ? t.stop(!0, !0).slideUp(u, this.settings.easingClose, function () {
+      r(i, n);
+    }) : "velocity" === p.animations && t.velocity("finish").velocity("slideUp", {
+      duration: u,
+      easing: p.easingClose,
+      complete: function complete() {
+        r(i, n);
+      }
+    }));
+  }, a.prototype._setVisAttr = function (t, n) {
+    var a = this,
+        i = t.children("li").children("ul").not("." + o + "_hidden");
+    n ? i.each(function () {
+      var t = e(this);
+      t.attr("aria-hidden", "true");
+
+      var i = a._getActionItems(t);
+
+      i.attr("tabindex", "-1"), a._setVisAttr(t, n);
+    }) : i.each(function () {
+      var t = e(this);
+      t.attr("aria-hidden", "false");
+
+      var i = a._getActionItems(t);
+
+      i.attr("tabindex", "0"), a._setVisAttr(t, n);
+    });
+  }, a.prototype._getActionItems = function (e) {
+    var t = e.data("menu");
+
+    if (!t) {
+      t = {};
+      var n = e.children("li"),
+          a = n.find("a");
+      t.links = a.add(n.find("." + o + "_item")), e.data("menu", t);
+    }
+
+    return t.links;
+  }, a.prototype._outlines = function (t) {
+    t ? e("." + o + "_item, ." + o + "_btn").css("outline", "") : e("." + o + "_item, ." + o + "_btn").css("outline", "none");
+  }, a.prototype.toggle = function () {
+    var e = this;
+
+    e._menuToggle();
+  }, a.prototype.open = function () {
+    var e = this;
+    e.btn.hasClass(o + "_collapsed") && e._menuToggle();
+  }, a.prototype.close = function () {
+    var e = this;
+    e.btn.hasClass(o + "_open") && e._menuToggle();
+  }, e.fn[s] = function (t) {
+    var n = arguments;
+    if (void 0 === t || "object" == _typeof(t)) return this.each(function () {
+      e.data(this, "plugin_" + s) || e.data(this, "plugin_" + s, new a(this, t));
+    });
+
+    if ("string" == typeof t && "_" !== t[0] && "init" !== t) {
+      var i;
+      return this.each(function () {
+        var o = e.data(this, "plugin_" + s);
+        o instanceof a && "function" == typeof o[t] && (i = o[t].apply(o, Array.prototype.slice.call(n, 1)));
+      }), void 0 !== i ? i : this;
+    }
+  };
+}(jQuery, document, window);
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -365,9 +636,10 @@ try {
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 } catch (e) {}
 
-__webpack_require__(/*! ajaxchimp */ "./node_modules/ajaxchimp/jquery.ajaxchimp.js");
+__webpack_require__(/*! ajaxchimp */ "./node_modules/ajaxchimp/jquery.ajaxchimp.js"); //require('slicknav/dist/jquery.slicknav.min.js');
 
-__webpack_require__(/*! slicknav/dist/jquery.slicknav.min.js */ "./node_modules/slicknav/dist/jquery.slicknav.min.js");
+
+__webpack_require__(/*! ../../public/js/templates/jquery.slicknav.min */ "./public/js/templates/jquery.slicknav.min.js");
 
 __webpack_require__(/*! slick-carousel */ "./node_modules/slick-carousel/slick/slick.js");
 
@@ -4827,61 +5099,7 @@ __webpack_require__(/*! jquery-nice-select */ "./node_modules/jquery-nice-select
 /*  jQuery Nice Select - v1.0
     https://github.com/hernansartorio/jquery-nice-select
     Made by Hernán Sartorio  */
-!function (e) {
-    e.fn.niceSelect = function (t) {
-        function s(t) {
-            t.after(e("<div></div>").addClass("nice-select").addClass(t.attr("class") || "").addClass(t.attr("disabled") ? "disabled" : "").attr("tabindex", t.attr("disabled") ? null : "0").html('<span class="current"></span><ul class="list"></ul>'));
-            var s = t.next(), n = t.find("option"), i = t.find("option:selected");
-            s.find(".current").html(i.data("display") || i.text()), n.each(function (t) {
-                var n = e(this), i = n.data("display");
-                s.find("ul").append(e("<li></li>").attr("data-value", n.val()).attr("data-display", i || null).addClass("option" + (n.is(":selected") ? " selected" : "") + (n.is(":disabled") ? " disabled" : "")).html(n.text()))
-            })
-        }
-
-        if ("string" == typeof t) return "update" == t ? this.each(function () {
-            var t = e(this), n = e(this).next(".nice-select"), i = n.hasClass("open");
-            n.length && (n.remove(), s(t), i && t.next().trigger("click"))
-        }) : "destroy" == t ? (this.each(function () {
-            var t = e(this), s = e(this).next(".nice-select");
-            s.length && (s.remove(), t.css("display", ""))
-        }), 0 == e(".nice-select").length && e(document).off(".nice_select")) : console.log('Method "' + t + '" does not exist.'), this;
-        this.hide(), this.each(function () {
-            var t = e(this);
-            t.next().hasClass("nice-select") || s(t)
-        }), e(document).off(".nice_select"), e(document).on("click.nice_select", ".nice-select", function (t) {
-            var s = e(this);
-            e(".nice-select").not(s).removeClass("open"), s.toggleClass("open"), s.hasClass("open") ? (s.find(".option"), s.find(".focus").removeClass("focus"), s.find(".selected").addClass("focus")) : s.focus()
-        }), e(document).on("click.nice_select", function (t) {
-            0 === e(t.target).closest(".nice-select").length && e(".nice-select").removeClass("open").find(".option")
-        }), e(document).on("click.nice_select", ".nice-select .option:not(.disabled)", function (t) {
-            var s = e(this), n = s.closest(".nice-select");
-            n.find(".selected").removeClass("selected"), s.addClass("selected");
-            var i = s.data("display") || s.text();
-            n.find(".current").text(i), n.prev("select").val(s.data("value")).trigger("change")
-        }), e(document).on("keydown.nice_select", ".nice-select", function (t) {
-            var s = e(this), n = e(s.find(".focus") || s.find(".list .option.selected"));
-            if (32 == t.keyCode || 13 == t.keyCode) return s.hasClass("open") ? n.trigger("click") : s.trigger("click"), !1;
-            if (40 == t.keyCode) {
-                if (s.hasClass("open")) {
-                    var i = n.nextAll(".option:not(.disabled)").first();
-                    i.length > 0 && (s.find(".focus").removeClass("focus"), i.addClass("focus"))
-                } else s.trigger("click");
-                return !1
-            }
-            if (38 == t.keyCode) {
-                if (s.hasClass("open")) {
-                    var l = n.prevAll(".option:not(.disabled)").first();
-                    l.length > 0 && (s.find(".focus").removeClass("focus"), l.addClass("focus"))
-                } else s.trigger("click");
-                return !1
-            }
-            if (27 == t.keyCode) s.hasClass("open") && s.trigger("click"); else if (9 == t.keyCode && s.hasClass("open")) return !1
-        });
-        var n = document.createElement("a").style;
-        return n.cssText = "pointer-events:auto", "auto" !== n.pointerEvents && e("html").addClass("no-csspointerevents"), this
-    }
-}(jQuery);
-
+!function(e){e.fn.niceSelect=function(t){function s(t){t.after(e("<div></div>").addClass("nice-select").addClass(t.attr("class")||"").addClass(t.attr("disabled")?"disabled":"").attr("tabindex",t.attr("disabled")?null:"0").html('<span class="current"></span><ul class="list"></ul>'));var s=t.next(),n=t.find("option"),i=t.find("option:selected");s.find(".current").html(i.data("display")||i.text()),n.each(function(t){var n=e(this),i=n.data("display");s.find("ul").append(e("<li></li>").attr("data-value",n.val()).attr("data-display",i||null).addClass("option"+(n.is(":selected")?" selected":"")+(n.is(":disabled")?" disabled":"")).html(n.text()))})}if("string"==typeof t)return"update"==t?this.each(function(){var t=e(this),n=e(this).next(".nice-select"),i=n.hasClass("open");n.length&&(n.remove(),s(t),i&&t.next().trigger("click"))}):"destroy"==t?(this.each(function(){var t=e(this),s=e(this).next(".nice-select");s.length&&(s.remove(),t.css("display",""))}),0==e(".nice-select").length&&e(document).off(".nice_select")):console.log('Method "'+t+'" does not exist.'),this;this.hide(),this.each(function(){var t=e(this);t.next().hasClass("nice-select")||s(t)}),e(document).off(".nice_select"),e(document).on("click.nice_select",".nice-select",function(t){var s=e(this);e(".nice-select").not(s).removeClass("open"),s.toggleClass("open"),s.hasClass("open")?(s.find(".option"),s.find(".focus").removeClass("focus"),s.find(".selected").addClass("focus")):s.focus()}),e(document).on("click.nice_select",function(t){0===e(t.target).closest(".nice-select").length&&e(".nice-select").removeClass("open").find(".option")}),e(document).on("click.nice_select",".nice-select .option:not(.disabled)",function(t){var s=e(this),n=s.closest(".nice-select");n.find(".selected").removeClass("selected"),s.addClass("selected");var i=s.data("display")||s.text();n.find(".current").text(i),n.prev("select").val(s.data("value")).trigger("change")}),e(document).on("keydown.nice_select",".nice-select",function(t){var s=e(this),n=e(s.find(".focus")||s.find(".list .option.selected"));if(32==t.keyCode||13==t.keyCode)return s.hasClass("open")?n.trigger("click"):s.trigger("click"),!1;if(40==t.keyCode){if(s.hasClass("open")){var i=n.nextAll(".option:not(.disabled)").first();i.length>0&&(s.find(".focus").removeClass("focus"),i.addClass("focus"))}else s.trigger("click");return!1}if(38==t.keyCode){if(s.hasClass("open")){var l=n.prevAll(".option:not(.disabled)").first();l.length>0&&(s.find(".focus").removeClass("focus"),l.addClass("focus"))}else s.trigger("click");return!1}if(27==t.keyCode)s.hasClass("open")&&s.trigger("click");else if(9==t.keyCode&&s.hasClass("open"))return!1});var n=document.createElement("a").style;return n.cssText="pointer-events:auto","auto"!==n.pointerEvents&&e("html").addClass("no-csspointerevents"),this}}(jQuery);
 
 /***/ }),
 
@@ -15803,6 +16021,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/home.sass":
+/*!**********************************!*\
+  !*** ./resources/sass/home.sass ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./node_modules/popper.js/dist/esm/popper.js":
 /*!***************************************************!*\
   !*** ./node_modules/popper.js/dist/esm/popper.js ***!
@@ -21454,21 +21685,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 /***/ }),
 
-/***/ "./node_modules/slicknav/dist/jquery.slicknav.min.js":
-/*!***********************************************************!*\
-  !*** ./node_modules/slicknav/dist/jquery.slicknav.min.js ***!
-  \***********************************************************/
-/***/ (() => {
-
-/*!
- * SlickNav Responsive Mobile Menu v1.0.8
- * (c) 2016 Josh Cope
- * licensed under MIT
- */
-!function(e,n,t){function a(n,t){this.element=n,this.settings=e.extend({},i,t),this.settings.duplicate||t.hasOwnProperty("removeIds")||(this.settings.removeIds=!1),this._defaults=i,this._name=s,this.init()}var i={label:"MENU",duplicate:!0,duration:200,easingOpen:"swing",easingClose:"swing",closedSymbol:"&#9658;",openedSymbol:"&#9660;",prependTo:"body",appendTo:"",parentTag:"a",closeOnClick:!1,allowParentLinks:!1,nestedParentLinks:!0,showChildren:!1,removeIds:!0,removeClasses:!1,removeStyles:!1,brand:"",animations:"jquery",init:function(){},beforeOpen:function(){},beforeClose:function(){},afterOpen:function(){},afterClose:function(){}},s="slicknav",o="slicknav";a.prototype.init=function(){var t,a,i=this,s=e(this.element),l=this.settings;if(l.duplicate?i.mobileNav=s.clone():i.mobileNav=s,l.removeIds&&(i.mobileNav.removeAttr("id"),i.mobileNav.find("*").each(function(n,t){e(t).removeAttr("id")})),l.removeClasses&&(i.mobileNav.removeAttr("class"),i.mobileNav.find("*").each(function(n,t){e(t).removeAttr("class")})),l.removeStyles&&(i.mobileNav.removeAttr("style"),i.mobileNav.find("*").each(function(n,t){e(t).removeAttr("style")})),t=o+"_icon",""===l.label&&(t+=" "+o+"_no-text"),"a"==l.parentTag&&(l.parentTag='a href="#"'),i.mobileNav.attr("class",o+"_nav"),a=e('<div class="'+o+'_menu"></div>'),""!==l.brand){var r=e('<div class="'+o+'_brand">'+l.brand+"</div>");e(a).append(r)}i.btn=e(["<"+l.parentTag+' aria-haspopup="true" tabindex="0" class="'+o+"_btn "+o+'_collapsed">','<span class="'+o+'_menutxt">'+l.label+"</span>",'<span class="'+t+'">','<span class="'+o+'_icon-bar"></span>','<span class="'+o+'_icon-bar"></span>','<span class="'+o+'_icon-bar"></span>',"</span>","</"+l.parentTag+">"].join("")),e(a).append(i.btn),""!==l.appendTo?e(l.appendTo).append(a):e(l.prependTo).prepend(a),a.append(i.mobileNav);var d=i.mobileNav.find("li");e(d).each(function(){var n=e(this),t={};if(t.children=n.children("ul").attr("role","menu"),n.data("menu",t),t.children.length>0){var a=n.contents(),s=!1,r=[];e(a).each(function(){return e(this).is("ul")?!1:(r.push(this),void(e(this).is("a")&&(s=!0)))});var d=e("<"+l.parentTag+' role="menuitem" aria-haspopup="true" tabindex="-1" class="'+o+'_item"/>');if(l.allowParentLinks&&!l.nestedParentLinks&&s)e(r).wrapAll('<span class="'+o+"_parent-link "+o+'_row"/>').parent();else{var c=e(r).wrapAll(d).parent();c.addClass(o+"_row")}l.showChildren?n.addClass(o+"_open"):n.addClass(o+"_collapsed"),n.addClass(o+"_parent");var p=e('<span class="'+o+'_arrow">'+(l.showChildren?l.openedSymbol:l.closedSymbol)+"</span>");l.allowParentLinks&&!l.nestedParentLinks&&s&&(p=p.wrap(d).parent()),e(r).last().after(p)}else 0===n.children().length&&n.addClass(o+"_txtnode");n.children("a").attr("role","menuitem").click(function(n){l.closeOnClick&&!e(n.target).parent().closest("li").hasClass(o+"_parent")&&e(i.btn).click()}),l.closeOnClick&&l.allowParentLinks&&(n.children("a").children("a").click(function(n){e(i.btn).click()}),n.find("."+o+"_parent-link a:not(."+o+"_item)").click(function(n){e(i.btn).click()}))}),e(d).each(function(){var n=e(this).data("menu");l.showChildren||i._visibilityToggle(n.children,null,!1,null,!0)}),i._visibilityToggle(i.mobileNav,null,!1,"init",!0),i.mobileNav.attr("role","menu"),e(n).mousedown(function(){i._outlines(!1)}),e(n).keyup(function(){i._outlines(!0)}),e(i.btn).click(function(e){e.preventDefault(),i._menuToggle()}),i.mobileNav.on("click","."+o+"_item",function(n){n.preventDefault(),i._itemClick(e(this))}),e(i.btn).keydown(function(e){var n=e||event;13==n.keyCode&&(e.preventDefault(),i._menuToggle())}),i.mobileNav.on("keydown","."+o+"_item",function(n){var t=n||event;13==t.keyCode&&(n.preventDefault(),i._itemClick(e(n.target)))}),l.allowParentLinks&&l.nestedParentLinks&&e("."+o+"_item a").click(function(e){e.stopImmediatePropagation()})},a.prototype._menuToggle=function(e){var n=this,t=n.btn,a=n.mobileNav;t.hasClass(o+"_collapsed")?(t.removeClass(o+"_collapsed"),t.addClass(o+"_open")):(t.removeClass(o+"_open"),t.addClass(o+"_collapsed")),t.addClass(o+"_animating"),n._visibilityToggle(a,t.parent(),!0,t)},a.prototype._itemClick=function(e){var n=this,t=n.settings,a=e.data("menu");a||(a={},a.arrow=e.children("."+o+"_arrow"),a.ul=e.next("ul"),a.parent=e.parent(),a.parent.hasClass(o+"_parent-link")&&(a.parent=e.parent().parent(),a.ul=e.parent().next("ul")),e.data("menu",a)),a.parent.hasClass(o+"_collapsed")?(a.arrow.html(t.openedSymbol),a.parent.removeClass(o+"_collapsed"),a.parent.addClass(o+"_open"),a.parent.addClass(o+"_animating"),n._visibilityToggle(a.ul,a.parent,!0,e)):(a.arrow.html(t.closedSymbol),a.parent.addClass(o+"_collapsed"),a.parent.removeClass(o+"_open"),a.parent.addClass(o+"_animating"),n._visibilityToggle(a.ul,a.parent,!0,e))},a.prototype._visibilityToggle=function(n,t,a,i,s){function l(n,t){e(n).removeClass(o+"_animating"),e(t).removeClass(o+"_animating"),s||c.afterOpen(n)}function r(t,a){n.attr("aria-hidden","true"),p.attr("tabindex","-1"),d._setVisAttr(n,!0),n.hide(),e(t).removeClass(o+"_animating"),e(a).removeClass(o+"_animating"),s?"init"==t&&c.init():c.afterClose(t)}var d=this,c=d.settings,p=d._getActionItems(n),u=0;a&&(u=c.duration),n.hasClass(o+"_hidden")?(n.removeClass(o+"_hidden"),s||c.beforeOpen(i),"jquery"===c.animations?n.stop(!0,!0).slideDown(u,c.easingOpen,function(){l(i,t)}):"velocity"===c.animations&&n.velocity("finish").velocity("slideDown",{duration:c.duration,easing:c.easingOpen,complete:function(){l(i,t)}}),n.attr("aria-hidden","false"),p.attr("tabindex","0"),d._setVisAttr(n,!1)):(n.addClass(o+"_hidden"),s||c.beforeClose(i),"jquery"===c.animations?n.stop(!0,!0).slideUp(u,this.settings.easingClose,function(){r(i,t)}):"velocity"===c.animations&&n.velocity("finish").velocity("slideUp",{duration:c.duration,easing:c.easingClose,complete:function(){r(i,t)}}))},a.prototype._setVisAttr=function(n,t){var a=this,i=n.children("li").children("ul").not("."+o+"_hidden");t?i.each(function(){var n=e(this);n.attr("aria-hidden","true");var i=a._getActionItems(n);i.attr("tabindex","-1"),a._setVisAttr(n,t)}):i.each(function(){var n=e(this);n.attr("aria-hidden","false");var i=a._getActionItems(n);i.attr("tabindex","0"),a._setVisAttr(n,t)})},a.prototype._getActionItems=function(e){var n=e.data("menu");if(!n){n={};var t=e.children("li"),a=t.find("a");n.links=a.add(t.find("."+o+"_item")),e.data("menu",n)}return n.links},a.prototype._outlines=function(n){n?e("."+o+"_item, ."+o+"_btn").css("outline",""):e("."+o+"_item, ."+o+"_btn").css("outline","none")},a.prototype.toggle=function(){var e=this;e._menuToggle()},a.prototype.open=function(){var e=this;e.btn.hasClass(o+"_collapsed")&&e._menuToggle()},a.prototype.close=function(){var e=this;e.btn.hasClass(o+"_open")&&e._menuToggle()},e.fn[s]=function(n){var t=arguments;if(void 0===n||"object"==typeof n)return this.each(function(){e.data(this,"plugin_"+s)||e.data(this,"plugin_"+s,new a(this,n))});if("string"==typeof n&&"_"!==n[0]&&"init"!==n){var i;return this.each(function(){var o=e.data(this,"plugin_"+s);o instanceof a&&"function"==typeof o[n]&&(i=o[n].apply(o,Array.prototype.slice.call(t,1)))}),void 0!==i?i:this}}}(jQuery,document,window);
-
-/***/ }),
-
 /***/ "./node_modules/wowjs/dist/wow.js":
 /*!****************************************!*\
   !*** ./node_modules/wowjs/dist/wow.js ***!
@@ -22149,9 +22365,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/header"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/header"], () => (__webpack_require__("./resources/sass/app.sass")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app","css/header"], () => (__webpack_require__("./resources/sass/components/header.sass")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/home","css/header"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/home","css/header"], () => (__webpack_require__("./resources/sass/app.sass")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/home","css/header"], () => (__webpack_require__("./resources/sass/components/header.sass")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app","css/home","css/header"], () => (__webpack_require__("./resources/sass/home.sass")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

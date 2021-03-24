@@ -4,10 +4,12 @@
 
 @section('styles')
     @parent
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 @endsection
 
 @section('scripts')
     @parent
+    <script src="{{ asset('js/home.js') }}"></script>
 @endsection
 
 @section('content')
@@ -30,21 +32,18 @@
                             </div>
                             <div class="select-form">
                                 <div class="select-itms">
-                                    <select name="select" id="select1">
-                                        <option value="">Servicios</option>
-                                        <option value="">Categorias</option>
-                                        <option value="">Etc</option>
+                                    <select name="select" class="filter" id="group-filter">
+                                        <option value="">Grupo</option>
+                                        @foreach($groups as $group)
+                                            <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="select-form">
                                 <div class="select-itms">
-                                    <select name="select" id="select2">
-                                        <option value="">All Catagories</option>
-                                        <option value="">Catagories One</option>
-                                        <option value="">Catagories Two</option>
-                                        <option value="">Catagories Three</option>
-                                        <option value="">Catagories Four</option>
+                                    <select name="select" class="filter" id="category-filter" disabled>
+                                        <option value=""></option>
                                     </select>
                                 </div>
                             </div>
