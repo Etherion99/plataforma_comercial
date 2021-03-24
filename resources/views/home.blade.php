@@ -28,12 +28,12 @@
                         <!--Hero form -->
                         <form action="#" class="search-box">
                             <div class="input-form">
-                                <input type="text" placeholder="What are you looking for?">
+                                <input type="text" placeholder="What are you looking for?" id="search-bar">
                             </div>
                             <div class="select-form">
                                 <div class="select-itms">
                                     <select name="select" class="filter" id="group-filter">
-                                        <option value="">Grupo</option>
+                                        <option value="0">Grupo</option>
                                         @foreach($groups as $group)
                                             <option value="{{ $group->id }}">{{ $group->name }}</option>
                                         @endforeach
@@ -43,7 +43,7 @@
                             <div class="select-form">
                                 <div class="select-itms">
                                     <select name="select" class="filter" id="category-filter" disabled>
-                                        <option value="">Categoría</option>
+                                        <option value="0">Categoría</option>
                                     </select>
                                 </div>
                             </div>
@@ -51,60 +51,9 @@
                                 <a href="#">Search</a>
                             </div>
                         </form>
-                        <div class="search-results container">
-                            <div class="row row-cols-1 row-cols-md-2 g-4 in-search-results">
-                                <div class="col">
-                                    <div class="row g-0 bg-light position-relative">
-                                        <div class="col-md-3 mb-md-0 p-md-4">
-                                            <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-social-logo.png"
-                                                 class="w-100 rounded-circle" alt="...">
-                                        </div>
-                                        <div class="col-md-6 p-4 ps-md-0">
-                                            <h5 class="mt-0">Company name</h5>
-                                            <p>Category....</p>
-                                            <a href="#" class="stretched-link">Go somewhere</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="row g-0 bg-light position-relative">
-                                        <div class="col-md-3 mb-md-0 p-md-4">
-                                            <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-social-logo.png"
-                                                 class="w-100 rounded-circle" alt="...">
-                                        </div>
-                                        <div class="col-md-6 p-4 ps-md-0">
-                                            <h5 class="mt-0">Company name</h5>
-                                            <p>Category....</p>
-                                            <a href="#" class="stretched-link">Go somewhere</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="row g-0 bg-light position-relative">
-                                        <div class="col-md-3 mb-md-0 p-md-4">
-                                            <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-social-logo.png"
-                                                 class="w-100 rounded-circle" alt="...">
-                                        </div>
-                                        <div class="col-md-6 p-4 ps-md-0">
-                                            <h5 class="mt-0">Company name</h5>
-                                            <p>Category....</p>
-                                            <a href="#" class="stretched-link">Go somewhere</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="row g-0 bg-light position-relative">
-                                        <div class="col-md-3 mb-md-0 p-md-4">
-                                            <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-social-logo.png"
-                                                 class="w-100 rounded-circle" alt="...">
-                                        </div>
-                                        <div class="col-md-6 p-4 ps-md-0">
-                                            <h5 class="mt-0">Company name</h5>
-                                            <p>Category....</p>
-                                            <a href="#" class="stretched-link">Go somewhere</a>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="container" id="search-results">
+                            <div class="row row-cols-1 row-cols-md-2 g-4" id="in-search-results">
+
                             </div>
                         </div>
                     </div>

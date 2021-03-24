@@ -3,9 +3,18 @@ var __webpack_exports__ = {};
 /*!******************************!*\
   !*** ./resources/js/home.js ***!
   \******************************/
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 var categoryFilter = $('#category-filter'),
     groupFilter = $('#group-filter'),
-    filters = $('.filter');
+    filters = $('.filter'),
+    searchBar = $('#search-bar');
+var inSearchResults = $('#in-search-results');
+var searchCompany;
 
 function fillFilter(filter) {
   if (filter.val() !== '') filter.addClass('filter-selected');else filter.removeClass('filter-selected');
@@ -15,10 +24,10 @@ function fillFilter(filter) {
 function loadCategories() {
   var group = $(this).val();
   categoryFilter.html($('<option>', {
-    value: '',
+    value: '0',
     text: 'Categoría'
   }));
-  if (group !== '') $.get('/api/categories/group/' + group, {}, function (data) {
+  if (group !== '0') $.get('/api/categories/group/' + group, {}, function (data) {
     data.map(function (option) {
       return categoryFilter.append($('<option>', {
         value: option.id,
@@ -34,10 +43,81 @@ function loadCategories() {
   }
 }
 
+function search() {
+  var text = searchBar.val();
+  var group = groupFilter.val();
+  var category = categoryFilter.val();
+
+  if (text !== '') {
+    category = category === '0' ? group : category;
+    $.get('/api/companies/' + category + '/search/' + text, function (data) {
+      console.log(data);
+      inSearchResults.html('');
+
+      var _iterator = _createForOfIteratorHelper(data),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var result = _step.value;
+          fillResult(result);
+        }
+        /*searchResults.html(data);
+         searchResult.click(function(){
+            window.location.href = '/empresa/' + $(this).attr('id').split('-')[2];
+        });*/
+
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    });
+  } else {
+    inSearchResults.html('');
+  }
+}
+/*<div class="col">
+                                    <div class="row g-0 bg-light position-relative">
+                                        <div class="col-md-3 mb-md-0 p-md-4">
+                                            <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-social-logo.png"
+                                                 class="w-100 rounded-circle" alt="...">
+                                        </div>
+                                        <div class="col-md-6 p-4 ps-md-0">
+                                            <h5 class="mt-0">Company name</h5>
+                                            <p>Category....</p>
+                                            <a href="#" class="stretched-link">Go somewhere</a>
+                                        </div>
+                                    </div>
+                                </div>*/
+
+
+function fillResult(result) {
+  var col = $('<div>', {
+    'class': 'col'
+  }).html($('<div>', {
+    'class': 'row g-0 bg-light position-relative'
+  }).append($('<div>', {
+    'class': 'col-md-3 mb-md-0 p-md-4'
+  }).html($('<img>', {
+    'class': 'w-100 rounded-circle',
+    'src': 'https://picsum.photos/200?q=' + parseInt(Math.random() * 10)
+  }))).append($('<div>', {
+    'class': 'col-md-6 p-4 ps-md-0'
+  }).append($('<h5>', {
+    'class': 'mt-0'
+  }).text(result.name)).append($('<p>').text(result.category.name))));
+  inSearchResults.append(col);
+}
+
 $(document).ready(function () {
   groupFilter.change(loadCategories);
   filters.change(function () {
     fillFilter($(this));
+  });
+  searchBar.keyup(function () {
+    clearTimeout(searchCompany);
+    searchCompany = setTimeout(search, 1000);
   });
 });
 /******/ })()
