@@ -1,3 +1,8 @@
+.slider-area {
+  background-position: center;
+  background-size: cover;
+}
+
 .filter-selected {
   color: #FF6600 !important;
   font-weight: bold !important;

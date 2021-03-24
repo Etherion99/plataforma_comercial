@@ -2,13 +2,15 @@
     <!-- Header Start -->
     <div class="header-area header-transparent">
         <div class="main-header">
-            <div class="header-bottom  header-sticky">
+            <div class="header-bottom header-sticky">
                 <div class="container-fluid">
                     <div class="row align-items-center">
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2 col-md-1">
                             <div class="logo">
-                                <a href="index.html"><img src="{{ asset('img/logo/logo.png') }}" alt=""></a>
+                                <a href="index.html">
+                                    <img src="{{ asset('images/logo/logo.png') }}" class="img-fluid">
+                                </a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10 col-md-8">

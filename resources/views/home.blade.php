@@ -15,7 +15,7 @@
 @section('content')
     @include('components.header')
     @include('components.loader')
-    <div class="slider-area hero-overly">
+    <div class="slider-area hero-overly" style="background-image: url({{ asset('images/hero/hero.jpg') }})">
         <div class="single-slider hero-overly  slider-height d-flex align-items-center">
             <div class="container">
                 <div class="row justify-content-center">
