@@ -15,7 +15,8 @@ var categoryFilter = $('#category-filter'),
     searchBar = $('#search-bar'),
     searchResults = $('#search-results');
 var inSearchResults = $('#in-search-results');
-var searchCompany;
+var searchCompany,
+    showingResults = false;
 
 function fillFilter(filter) {
   if (filter.val() !== '0') filter.addClass('filter-selected');else filter.removeClass('filter-selected');
@@ -52,7 +53,6 @@ function search() {
   if (text !== '') {
     category = category === '0' ? group : category;
     $.get('/api/companies/' + category + '/search/' + text, function (data) {
-      console.log(data);
       inSearchResults.html('');
 
       var _iterator = _createForOfIteratorHelper(data),
@@ -69,31 +69,23 @@ function search() {
         _iterator.f();
       }
 
-      searchResults.slideToggle(data.length !== 0);
-      /*searchResults.html(data);
-       searchResult.click(function(){
-          window.location.href = '/empresa/' + $(this).attr('id').split('-')[2];
-      });*/
+      if (showingResults) {
+        if (data.length === 0) {
+          searchResults.slideToggle(false);
+        }
+      } else {
+        if (data.length !== 0) {
+          searchResults.slideToggle(true);
+        }
+      }
+
+      showingResults = data.length !== 0;
     });
   } else {
-    searchResults.fadeOut();
+    searchResults.slideUp();
     inSearchResults.html('');
   }
 }
-/*<div class="col">
-                                    <div class="row g-0 bg-light position-relative">
-                                        <div class="col-md-3 mb-md-0 p-md-4">
-                                            <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-social-logo.png"
-                                                 class="w-100 rounded-circle" alt="...">
-                                        </div>
-                                        <div class="col-md-6 p-4 ps-md-0">
-                                            <h5 class="mt-0">Company name</h5>
-                                            <p>Category....</p>
-                                            <a href="#" class="stretched-link">Go somewhere</a>
-                                        </div>
-                                    </div>
-                                </div>*/
-
 
 function fillResult(result) {
   var col = $('<div>', {
