@@ -51,12 +51,70 @@
                                 <a href="#">Search</a>
                             </div>
                         </form>
+                        <div class="search-results container">
+                            <div class="row row-cols-1 row-cols-md-2 g-4 in-search-results">
+                                <div class="col">
+                                    <div class="row g-0 bg-light position-relative">
+                                        <div class="col-md-3 mb-md-0 p-md-4">
+                                            <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-social-logo.png"
+                                                 class="w-100 rounded-circle" alt="...">
+                                        </div>
+                                        <div class="col-md-6 p-4 ps-md-0">
+                                            <h5 class="mt-0">Company name</h5>
+                                            <p>Category....</p>
+                                            <a href="#" class="stretched-link">Go somewhere</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row g-0 bg-light position-relative">
+                                        <div class="col-md-3 mb-md-0 p-md-4">
+                                            <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-social-logo.png"
+                                                 class="w-100 rounded-circle" alt="...">
+                                        </div>
+                                        <div class="col-md-6 p-4 ps-md-0">
+                                            <h5 class="mt-0">Company name</h5>
+                                            <p>Category....</p>
+                                            <a href="#" class="stretched-link">Go somewhere</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row g-0 bg-light position-relative">
+                                        <div class="col-md-3 mb-md-0 p-md-4">
+                                            <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-social-logo.png"
+                                                 class="w-100 rounded-circle" alt="...">
+                                        </div>
+                                        <div class="col-md-6 p-4 ps-md-0">
+                                            <h5 class="mt-0">Company name</h5>
+                                            <p>Category....</p>
+                                            <a href="#" class="stretched-link">Go somewhere</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row g-0 bg-light position-relative">
+                                        <div class="col-md-3 mb-md-0 p-md-4">
+                                            <img src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-social-logo.png"
+                                                 class="w-100 rounded-circle" alt="...">
+                                        </div>
+                                        <div class="col-md-6 p-4 ps-md-0">
+                                            <h5 class="mt-0">Company name</h5>
+                                            <p>Category....</p>
+                                            <a href="#" class="stretched-link">Go somewhere</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
+
+
     <!--Hero Area End-->
     @include('components.footer')
     @include('components.scrollup')
