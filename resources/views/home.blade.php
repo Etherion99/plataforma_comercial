@@ -15,6 +15,7 @@
 @section('content')
     @include('components.header')
     @include('components.loader')
+    <!--Hero area start-->
     <div class="slider-area hero-overly" style="background-image: url({{ asset('images/hero/hero.jpg') }})">
         <div class="single-slider hero-overly  slider-height d-flex align-items-center">
             <div class="container">
@@ -62,9 +63,55 @@
 
         </div>
     </div>
-
-
     <!--Hero Area End-->
+
+    <!-- Categories Section Start -->
+    <div class="section-padding30">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Section Tittle -->
+                    <div class="section-tittle text-center mb-80">
+                        <span>Most visited places</span>
+                        <h2>Popular Locations</h2>
+                    </div>
+                </div>
+            </div>
+            <div id="category-accordion">
+                <div class="row d-flex justify-content-center">
+                    @foreach($categories as $category)
+                        <button class="btn btn-collapse mx-2 {{ $loop->index > 0 ? 'collapsed' : '' }}" data-toggle="collapse" data-target="#category-section-{{ $loop->index }}">{{ $category['name'] }}</button>
+                    @endforeach
+                </div>
+                @foreach($categories as $category)
+                    <div class="row mt-5 category-section collapse show" id="category-section-{{ $loop->index }}" data-parent="#category-accordion">
+                        <div class="glider-contain">
+                            <div class="glider">
+                                @foreach($category['categories'] as $subcategory)
+                                    <div class="p-4">
+                                        <div class="category-card card h-100">
+                                            <div class="card-body p-3">
+                                                <img src="{{ asset('images/categories/'.$subcategory['id'].'.jpg') }}" class="img-fluid">
+                                            </div>
+                                            <div class="card-body p-3">
+                                                <h5 class="text-center category-name">{{ $subcategory['name'] }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <button aria-label="Previous" class="glider-prev">«</button>
+                            <button aria-label="Next" class="glider-next">»</button>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    <!-- Categories Section End -->
+
+
     @include('components.footer')
     @include('components.scrollup')
 @endsection

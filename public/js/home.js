@@ -119,7 +119,7 @@ function fillResult(result) {
 
 function activateSearch() {
   clearTimeout(searchCompany);
-  searchCompany = setTimeout(search, 1000);
+  searchCompany = setTimeout(search, 800);
 }
 
 $(document).ready(function () {
@@ -130,7 +130,22 @@ $(document).ready(function () {
   });
   searchBar.keyup(activateSearch);
   groupFilter.change(activateSearch);
-  categoryFilter.change(activateSearch);
+  categoryFilter.change(activateSearch); //glider settings
+
+  $('.category-section').each(function (index) {
+    new Glider(document.querySelector('#' + $(this).prop('id') + ' .glider'), {
+      slidesToShow: 5,
+      slidesToScroll: 5,
+      arrows: {
+        prev: '#' + $(this).prop('id') + ' .glider-prev',
+        next: '#' + $(this).prop('id') + ' .glider-next'
+      }
+    });
+
+    if (index > 0) {
+      $(this).removeClass('show');
+    }
+  });
 });
 /******/ })()
 ;

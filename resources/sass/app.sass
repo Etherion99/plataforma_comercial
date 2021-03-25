@@ -6,6 +6,34 @@
 @import "~jquery-nice-select/css/nice-select.css"
 @import "~@fortawesome/fontawesome-free/css/all.min.css"
 @import "~@icon/themify-icons/themify-icons.css"
+
+@import "~glider-js/glider.min.css"
+@import "variables"
+
+.btn-main
+    color: white !important
+    background-color: $mainC !important
+    font-weight: bold !important
+
+    &:hover
+        color: white !important
+
+    &::before
+        background: none !important
+
+.btn-collapse
+    color: $mainC !important
+    background-color: white !important
+    border: 2px solid $mainC !important
+    font-weight: bold !important
+
+    &:not(.collapsed)
+        color: white !important
+        background-color: $mainC !important
+
+    &::before
+        background: none !important
+
 .doc
     color: red !important
 
