@@ -94,7 +94,7 @@
                                                 <img src="{{ asset('images/categories/'.$subcategory['id'].'.jpg') }}" class="img-fluid">
                                             </div>
                                             <div class="card-body p-3">
-                                                <h5 class="text-center category-name">{{ $subcategory['name'] }}</h5>
+                                                <h5 class="text-center category-name"><a href="{{ route('viewCategory', ['id' => $subcategory['id']]) }}">{{ $subcategory['name'] }}</a></h5>
                                             </div>
                                         </div>
                                     </div>
