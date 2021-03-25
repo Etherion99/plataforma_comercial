@@ -30,4 +30,8 @@ class WebController extends Controller
             'categories' => $categories
         ]);
     }
+
+    public function aboutUs(){
+        return view('aboutus');
+    }
 }

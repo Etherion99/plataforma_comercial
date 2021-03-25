@@ -18,8 +18,8 @@
                             <div class="main-menu f-right d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="index.html">Inicio</a></li>
-                                        <li><a href="about.html">Nosotros</a></li>
+                                        <li><a href="{{ route('home') }}">Inicio</a></li>
+                                        <li><a href="{{ route('aboutUs') }}">Nosotros</a></li>
                                         <li><a href="#">Page</a>
                                             <ul class="submenu">
                                                 <li><a href="blog.html">Blog</a></li>
