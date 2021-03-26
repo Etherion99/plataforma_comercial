@@ -41,10 +41,14 @@ class WebController extends Controller
     }
 
     public function viewCompany($id){
-        $company = Company::find($id)->first();
+        $company = Company::find($id)->with('category')->first();
 
         return view('view_company', [
             'company' => $company
         ]);
+    }
+
+    public function access(){
+        return view('access');
     }
 }
