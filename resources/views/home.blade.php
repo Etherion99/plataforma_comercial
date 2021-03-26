@@ -9,6 +9,8 @@
 
 @section('scripts')
     @parent
+    <script>var viewCompanyURL = '{{ route('viewCompany', ['id' => '0']) }}';</script>
+    <script>var viewCategoryURL = '{{ route('viewCategory', ['id' => '0']) }}';</script>
     <script src="{{ asset('js/home.js') }}" defer></script>
 @endsection
 

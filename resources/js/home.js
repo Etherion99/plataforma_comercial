@@ -75,20 +75,32 @@ function fillResult(result) {
             $('<div>', {
                 'class': 'col-md-3 mb-md-0 p-md-4'
             }).html(
-                $('<img>', {
-                    'class': 'w-100 rounded-circle',
-                    'src': 'https://picsum.photos/200?q=' + parseInt(Math.random() * 10)
-                })
+                $('<a>', {
+                    'href': viewCompanyURL.substr(0, viewCompanyURL.length-1) + result.id
+                }).append(
+                    $('<img>', {
+                        'class': 'w-100 rounded-circle',
+                        'src': 'https://picsum.photos/200?q=' + parseInt(Math.random() * 10)
+                    })
+                )
             )
         ).append(
             $('<div>', {
                 'class': 'col-md-6 p-4 ps-md-0'
             }).append(
                 $('<h5>', {
-                    'class': 'mt-0'
-                }).text(result.name)
+                    'class': 'mt-0 font-weight-bold'
+                }).append(
+                    $('<a>', {
+                        'href': viewCompanyURL.substr(0, viewCompanyURL.length-1) + result.id
+                    }).text(result.name)
+                )
             ).append(
-                $('<p>').text(result.category.name)
+                $('<p>').append(
+                    $('<a>', {
+                        'href': viewCategoryURL.substr(0, viewCategoryURL.length-1) + result.category.id
+                    }).text(result.category.name)
+                )
             )
         )
     )

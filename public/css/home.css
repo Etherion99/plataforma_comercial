@@ -18,6 +18,12 @@
   border-radius: 20px;
   justify-content: space-between;
 }
+#search-results a {
+  color: black;
+}
+#search-results a:hover {
+  color: #FF6600;
+}
 
 #in-search-results {
   border-radius: 18px;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Category;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
@@ -33,5 +34,17 @@ class WebController extends Controller
 
     public function aboutUs(){
         return view('aboutus');
+    }
+
+    public function viewCategory($id){
+
+    }
+
+    public function viewCompany($id){
+        $company = Company::find($id)->first();
+
+        return view('view_company', [
+            'company' => $company
+        ]);
     }
 }
