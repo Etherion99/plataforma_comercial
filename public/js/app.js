@@ -16078,6 +16078,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/access.sass":
+/*!************************************!*\
+  !*** ./resources/sass/access.sass ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./node_modules/popper.js/dist/esm/popper.js":
 /*!***************************************************!*\
   !*** ./node_modules/popper.js/dist/esm/popper.js ***!
@@ -22409,11 +22422,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/viewCompany","css/home","css/header"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/viewCompany","css/home","css/header"], () => (__webpack_require__("./resources/sass/app.sass")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/viewCompany","css/home","css/header"], () => (__webpack_require__("./resources/sass/components/header.sass")))
-/******/ 	__webpack_require__.O(undefined, ["css/app","css/viewCompany","css/home","css/header"], () => (__webpack_require__("./resources/sass/home.sass")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app","css/viewCompany","css/home","css/header"], () => (__webpack_require__("./resources/sass/viewCompany.sass")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/access","css/viewCompany","css/home","css/header"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/access","css/viewCompany","css/home","css/header"], () => (__webpack_require__("./resources/sass/app.sass")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/access","css/viewCompany","css/home","css/header"], () => (__webpack_require__("./resources/sass/components/header.sass")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/access","css/viewCompany","css/home","css/header"], () => (__webpack_require__("./resources/sass/home.sass")))
+/******/ 	__webpack_require__.O(undefined, ["css/app","css/access","css/viewCompany","css/home","css/header"], () => (__webpack_require__("./resources/sass/viewCompany.sass")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app","css/access","css/viewCompany","css/home","css/header"], () => (__webpack_require__("./resources/sass/access.sass")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

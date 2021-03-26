@@ -1963,6 +1963,10 @@ img.mfp-img {
   background: none !important;
 }
 
+.color-main {
+  color: #FF6600;
+}
+
 .doc {
   color: red !important;
 }

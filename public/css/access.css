@@ -1,0 +1,11 @@
+.form-step {
+  border: 2px solid #FF6600;
+  color: #FF6600;
+  width: 75px;
+  height: 75px;
+}
+
+.form-step.filled {
+  background-color: #FF6600;
+  color: white;
+}

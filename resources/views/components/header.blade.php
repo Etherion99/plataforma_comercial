@@ -8,7 +8,7 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-3 col-md-4 col-4">
                             <div class="logo">
-                                <a href="index.html">
+                                <a href="{{ route('home') }}">
                                     <img src="{{ asset('images/logo/logo.png') }}" class="img-fluid col-10">
                                 </a>
                             </div>
@@ -30,8 +30,8 @@
                                         </li>
                                         <li><a href="contact.html">Contact</a></li>
                                         <li class="add-list"><a href="listing_details.html"><i class="ti ti-plus"></i> add Listing</a></li>
-                                        <li class="login"><a href="#">
-                                                <i class="ti ti-user"></i> Sign in or Register</a>
+                                        <li class="login"><a href="{{ route('access') }}">
+                                                <i class="ti ti-user"></i> Regístrate o Ingresa</a>
                                         </li>
                                     </ul>
                                 </nav>
