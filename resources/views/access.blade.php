@@ -31,7 +31,7 @@
     <!--Hero End -->
 
     <!--Login Start-->
-    <div class="container my-5">
+    <!--<div class="container my-5">
         <div class="row d-flex justify-content-center">
             <div class="card p-5 col-4">
                 <form>
@@ -55,7 +55,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div>-->
     <!--Login End-->
     <!--Signup Start-->
     <div class="container my-5">
@@ -74,7 +74,77 @@
             </div>
         </div>
         <div class="row my-5 py-5">
-            gg
+            <div class="form-container col-8 offset-2 d-none" data-id="0">
+                <div class="row d-flex justify-content-center mt-3">
+                    <div class="form-group col">
+                        <label for="name" class="color-main"><strong>Nombre</strong></label>
+                        <input type="text" class="form-control" id="name">
+                        <small></small>
+                    </div>
+                    <div class="form-group col">
+                        <label for="group" class="color-main"><strong>Grupo</strong></label>
+                        <select id="group" class="wide">
+                            <option value="">Seleccione</option>
+                            <option value="">grupo 1</option>
+                            <option value="">grupo 2</option>
+                        </select>
+                        <small></small>
+                    </div>
+                    <div class="form-group col">
+                        <label for="category" class="color-main"><strong>Categoría</strong></label>
+                        <select id="category" class="wide">
+                            <option value="">Seleccione</option>
+                            <option value="">categoría 1</option>
+                            <option value="">categoría 2</option>
+                        </select>
+                        <small></small>
+                    </div>
+                </div>
+            </div>
+            <div class="form-container col-8 offset-2" data-id="1">
+                <div class="row d-flex align-items-center my-3">
+                    <h3 class="col-3 m-0">Lunes</h3>
+                    <button class="btn btn-main-square ml-3"><i class="fa fa-plus"></i> Agregar Horario</button>
+                </div>
+                <div class="row d-flex align-items-center my-3">
+                    <h3 class="col-3 m-0">Martes</h3>
+                    <button class="btn btn-main-square ml-3"><i class="fa fa-plus"></i> Agregar Horario</button>
+                </div>
+                <div class="row d-flex align-items-center my-3">
+                    <h3 class="col-3 m-0">Miércoles</h3>
+                    <button class="btn btn-main-square ml-3"><i class="fa fa-plus"></i> Agregar Horario</button>
+                </div>
+                <div class="row mt-5 pt-5">
+                    <div class="form-group col">
+                        <label class="color-main checkbox-inline control-label"><strong>Métodos de Pago</strong></label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox1">Efectivo</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                            <label class="form-check-label" for="inlineCheckbox2">Tarjeta</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                            <label class="form-check-label" for="inlineCheckbox2">Transferencia</label>
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label for="delivery" class="color-main"><strong>Domicilios</strong></label>
+                        <select id="delivery" class="wide">
+                            <option value="">Seleccione</option>
+                            <option value="">Sí</option>
+                            <option value="">No</option>
+                        </select>
+                        <small></small>
+                    </div>
+                </div>
+            </div>
+            <div class="form-container col-8 offset-2" data-id="2">
+
+            </div>
+            <div class="form-container col-8 offset-2" data-id="3"></div>
         </div>
         <div class="row d-flex justify-content-center">
             <button class="btn btn-main mx-3">Anterior</button>

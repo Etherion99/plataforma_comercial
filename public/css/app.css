@@ -1963,6 +1963,20 @@ img.mfp-img {
   background: none !important;
 }
 
+.btn-main-square {
+  color: white !important;
+  background-color: #FF6600 !important;
+  font-weight: bold !important;
+  border-radius: 5px !important;
+  padding: 15px 20px !important;
+}
+.btn-main-square:hover {
+  color: white !important;
+}
+.btn-main-square::before {
+  background: none !important;
+}
+
 .color-main {
   color: #FF6600;
 }
