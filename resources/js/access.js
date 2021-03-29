@@ -2,15 +2,13 @@ var navPrev = $('#nav-prev'), navNext = $('#nav-next'), navFinish = $('#nav-fini
 
 var page = 0;
 const lastPage = 3;
-<<<<<<< HEAD
 var schedules = $(".delete-hour");
 var hoursToSend = {
     horaInicio: '',
     horaFinal: ''
 }
-=======
 var validations = [];
->>>>>>> main
+
 
 function initValidations(){
     $.getJSON('../json/signup_validations.json', function (data){
