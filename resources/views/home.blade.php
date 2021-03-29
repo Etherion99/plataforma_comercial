@@ -132,14 +132,14 @@
                         </div>
                         <div class="cat-cap">
                             <h5><a href="catagori.html">Plan Básico</a></h5>
-                            <ul class="list-group">
-                                <li class="list-group-item">Nombre de la empresa</li>
-                                <li class="list-group-item">Categoría de la empresa</li>
-                                <li class="list-group-item">Adjuntar Logo o Imagen del negocio en buena calidad</li>
-                                <li class="list-group-item">Número(s) telefónico</li>
-                                <li class="list-group-item">Dirección y ciudad donde está ubicada la empresa</li>
-                                <li class="list-group-item">Horarios específicos de lunes a domingos y festivos</li>
-                            </ul>
+                            <div class="text-left" id="plans-char">
+                                <p>Nombre de la empresa</p>
+                                <p>Categoría de la empresa</p>
+                                <p>Adjuntar Logo o Imagen del negocio en buena calidad</p>
+                                <p>Número(s) telefónico</p>
+                                <p>Dirección y ciudad donde está ubicada la empresa</p>
+                                <p>Horarios específicos de lunes a domingos y festivos</p>
+                            </div>
                             <a href="catagori.html">View Details</a>
                         </div>
                     </div>

@@ -35,7 +35,6 @@
   font-weight: bold;
 }
 
-.categories-area .single-cat:hover .cat-cap .list-group-item {
-  color: #FFFFFF !important;
-  background-color: #FF6600 !important;
+#plans-char {
+  padding: 20px 20px;
 }
