@@ -2,28 +2,32 @@ var navPrev = $('#nav-prev'), navNext = $('#nav-next'), navFinish = $('#nav-fini
 
 var page = 0;
 const lastPage = 3;
+<<<<<<< HEAD
 var schedules = $(".delete-hour");
 var hoursToSend = {
     horaInicio: '',
     horaFinal: ''
 }
+=======
+var validations = [];
+>>>>>>> main
 
-function finish(){
-
-}
-
-function initNav(){
-
+function initValidations(){
+    $.getJSON('../json/signup_validations.json', function (data){
+        validations = data;
+    })
 }
 
 function navigate(change){
-    $('.form-container[data-id=' + page + ']').slideUp(function (){
-        page += change;
+    if(change > 0 && validatePage() || change <= 0){
+        $('.form-container[data-id=' + page + ']').slideUp(function (){
+            page += change;
 
-        $('.form-container[data-id=' + page + ']').slideDown();
+            $('.form-container[data-id=' + page + ']').slideDown();
 
-        validateNav();
-    });
+            validateNav();
+        });
+    }
 }
 
 function validateNav(){
@@ -51,6 +55,39 @@ function validateNav(){
 }
 
 function validatePage(){
+    let validation = validations[page];
+    console.log(validation);
+    let res = true;
+
+    for(let rule of validation){
+        let element = $('#'+rule['id']);
+
+        if(rule['required'] && !validateRequired(element, rule['type']))
+            res = false;
+    }
+
+    return res;
+}
+
+function validateRequired(element, type){
+    let res = true;
+
+    switch (type){
+        case 'text':
+        case 'dropdown':
+            res = element.val() !== '';
+            break;
+    }
+
+    let alert = element.closest('.form-group').find('.form-input-alert');
+
+    alert.text('Campo obligatorio');
+    alert.toggle(!res);
+
+    return res;
+}
+
+function finish(){
 
 }
 
@@ -83,7 +120,8 @@ function fillSchedule(result, day){
 }
 
 $(document).ready(function (){
-    navigate(1);
+    initValidations();
+    navigate(0);
 
     navNext.click(function (){
         navigate(1);

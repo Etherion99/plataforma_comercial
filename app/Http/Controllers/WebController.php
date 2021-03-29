@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
@@ -49,6 +50,10 @@ class WebController extends Controller
     }
 
     public function access(){
-        return view('access');
+        $payments = PaymentMethod::select('name')->get();
+
+        return view('access', [
+            'paymentMethods' => $payments
+        ]);
     }
 }
