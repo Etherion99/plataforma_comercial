@@ -105,22 +105,38 @@
                 </div>
             </div>
             <div class="form-container col-8 offset-2" data-id="1">
-                <div class="row d-flex align-items-center my-3">
+                <div class="row d-flex align-items-center">
+                    <div class="col text-center">
+                        <button class="btn btn-main-square ml-3" data-toggle="modal" data-target="#exampleModal"
+                                data-whatever="@getbootstrap"><i class="fa fa-plus"></i> Agregar Horario
+                        </button>
+                    </div>
+                </div>
+                <div class="row d-flex align-items-center my-3" id="day-0">
                     <h3 class="col-3 m-0">Lunes</h3>
-                    <button class="btn btn-main-square ml-3"><i class="fa fa-plus"></i> Agregar Horario</button>
                 </div>
-                <div class="row d-flex align-items-center my-3">
+                <div class="row d-flex align-items-center my-3" id="day-1">
                     <h3 class="col-3 m-0">Martes</h3>
-                    <button class="btn btn-main-square ml-3"><i class="fa fa-plus"></i> Agregar Horario</button>
                 </div>
-                <div class="row d-flex align-items-center my-3">
+                <div class="row d-flex align-items-center my-3" id="day-2">
                     <h3 class="col-3 m-0">Miércoles</h3>
-                    <button class="btn btn-main-square ml-3" data-toggle="modal" data-target="#exampleModal"
-                            data-whatever="@getbootstrap"><i class="fa fa-plus"></i> Agregar Horario
-                    </button>
+                </div>
+                <div class="row d-flex align-items-center my-3" id="day-3">
+                    <h3 class="col-3 m-0">Jueves</h3>
+                </div>
+                <div class="row d-flex align-items-center my-3" id="day-4">
+                    <h3 class="col-3 m-0">Viernes</h3>
+                </div>
+                <div class="row d-flex align-items-center my-3" id="day-5">
+                    <h3 class="col-3 m-0">Sábado</h3>
+                </div>
+                <div class="row d-flex align-items-center my-3" id="day-6">
+                    <h3 class="col-3 m-0">Domingo</h3>
                 </div>
 
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -131,19 +147,33 @@
                             </div>
                             <div class="modal-body">
                                 <form>
-                                    <div class="form-group">
-                                        <label for="recipient-name" class="col-form-label">Recipient:</label>
-                                        <input type="text" class="form-control" id="recipient-name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="message-text" class="col-form-label">Message:</label>
-                                        <textarea class="form-control" id="message-text"></textarea>
+                                    <div class="form-row" id="select-for-days">
+                                        <div class="form-group col-md-12">
+                                            <label for="select-days">Day</label> <br>
+                                            <select class="form-control" name="days" id="select-days">
+                                                <option value="0">Lunes</option>
+                                                <option value="1">Martes</option>
+                                                <option value="2">Miercoles</option>
+                                                <option value="3">Jueves</option>
+                                                <option value="4">Viernes</option>
+                                                <option value="5">Sábado</option>
+                                                <option value="6">Domingo</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="select-first-hour">Hora-Inicio</label>
+                                            <input type="time" class="form-control" id="select-first-hour">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="select-last-hour">Hora-Fin</label>
+                                            <input type="time" class="form-control" id="select-last-hour">
+                                        </div>
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn">Send message</button>
+                                <button type="button" class="btn" data-dismiss="modal" id="send-hour">Send message</button>
                             </div>
                         </div>
                     </div>

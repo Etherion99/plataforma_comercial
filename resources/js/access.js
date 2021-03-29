@@ -2,6 +2,11 @@ var navPrev = $('#nav-prev'), navNext = $('#nav-next'), navFinish = $('#nav-fini
 
 var page = 0;
 const lastPage = 3;
+var schedules = $(".delete-hour");
+var hoursToSend = {
+    horaInicio: '',
+    horaFinal: ''
+}
 
 function finish(){
 
@@ -49,6 +54,34 @@ function validatePage(){
 
 }
 
+function fillSchedule(result, day){
+    let horarios = $('<div>', {
+        'class':'horarios'
+    }).append(
+        $('<div>', {
+            'class':'badge-custom'
+        }).text(result.horaInicio)
+    ).append(
+        $('<div>', {
+            'class':'badge-custom'
+        }).text(result.horaFinal)
+    ).append(
+        $('<button>', {
+            'type': 'button',
+            'class': 'close ml-15 delete-hour'
+        }).html(
+            $('<i>', {
+                'class': 'fas fa-trash-alt'
+            })
+        )
+    )
+    $('#day-'+day).append(horarios);
+    schedules = $(".delete-hour");
+    schedules.click(function(){
+        $(this).parent().remove();
+    })
+}
+
 $(document).ready(function (){
     navigate(1);
 
@@ -61,13 +94,17 @@ $(document).ready(function (){
     });
 
     navFinish.click();
-    $('#exampleModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        var recipient = button.data('whatever') // Extract info from data-* attributes
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-        modal.find('.modal-title').text('New message to ' + recipient)
-        modal.find('.modal-body input').val(recipient)
+
+    $('#exampleModal #send-hour').click(function (){
+        var modal = $('#exampleModal');
+        modal.find('.modal-title').text('New message to ' + 'Hello World');
+        const day = modal.find('.modal-body #select-days').val()
+        hoursToSend.horaInicio = modal.find('.modal-body #select-first-hour').val();
+        hoursToSend.horaFinal = modal.find('.modal-body #select-last-hour').val();
+        fillSchedule(hoursToSend, day);
+    })
+
+    schedules.click(function(){
+        $(this).parent().remove();
     })
 });
