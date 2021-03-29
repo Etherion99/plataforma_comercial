@@ -17,7 +17,8 @@
     @include('components.loader')
 
     <!-- Hero Start-->
-    <div class="hero-area2 slider-height2 hero-overly2 d-flex align-items-center" style="background-image: url({{ asset('images/hero/hero2.jpg') }})">
+    <div class="hero-area2 slider-height2 hero-overly2 d-flex align-items-center"
+         style="background-image: url({{ asset('images/hero/hero2.jpg') }})">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
@@ -60,10 +61,12 @@
     <!--Signup Start-->
     <div class="container my-5">
         <div class="row d-flex justify-content-center" id="form-steps">
-            <div class="form-step rounded-circle d-flex justify-content-center align-items-center p-3 mx-4 filled" data-id="0">
+            <div class="form-step rounded-circle d-flex justify-content-center align-items-center p-3 mx-4 filled"
+                 data-id="0">
                 <i class="fas fa-clipboard-list fa-2x"></i>
             </div>
-            <div class="form-step rounded-circle d-flex justify-content-center align-items-center p-3 mx-4 filled" data-id="1">
+            <div class="form-step rounded-circle d-flex justify-content-center align-items-center p-3 mx-4 filled"
+                 data-id="1">
                 <i class="fas fa-concierge-bell fa-2x"></i>
             </div>
             <div class="form-step rounded-circle d-flex justify-content-center align-items-center p-3 mx-4" data-id="2">
@@ -112,8 +115,40 @@
                 </div>
                 <div class="row d-flex align-items-center my-3">
                     <h3 class="col-3 m-0">Miércoles</h3>
-                    <button class="btn btn-main-square ml-3"><i class="fa fa-plus"></i> Agregar Horario</button>
+                    <button class="btn btn-main-square ml-3" data-toggle="modal" data-target="#exampleModal"
+                            data-whatever="@getbootstrap"><i class="fa fa-plus"></i> Agregar Horario
+                    </button>
                 </div>
+
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">Recipient:</label>
+                                        <input type="text" class="form-control" id="recipient-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message-text" class="col-form-label">Message:</label>
+                                        <textarea class="form-control" id="message-text"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn">Send message</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row mt-5 pt-5">
                     <div class="form-group col">
                         <label class="color-main checkbox-inline control-label"><strong>Métodos de Pago</strong></label>
