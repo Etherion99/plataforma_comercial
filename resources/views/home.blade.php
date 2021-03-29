@@ -112,7 +112,66 @@
         </div>
     </div>
     <!-- Categories Section End -->
-
+    <!-- Plans Start -->
+    <div class="categories-area section-padding30">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Section Tittle -->
+                    <div class="section-tittle text-center mb-80">
+                        <span>We are offering for you</span>
+                        <h2>Nuestros planes</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-cat text-center mb-50">
+                        <div class="cat-icon">
+                            <span><ion-icon name="medal-outline"></ion-icon></span>
+                        </div>
+                        <div class="cat-cap">
+                            <h5><a href="catagori.html">Plan Básico</a></h5>
+                            <ul class="list-group">
+                                <li class="list-group-item">Nombre de la empresa</li>
+                                <li class="list-group-item">Categoría de la empresa</li>
+                                <li class="list-group-item">Adjuntar Logo o Imagen del negocio en buena calidad</li>
+                                <li class="list-group-item">Número(s) telefónico</li>
+                                <li class="list-group-item">Dirección y ciudad donde está ubicada la empresa</li>
+                                <li class="list-group-item">Horarios específicos de lunes a domingos y festivos</li>
+                            </ul>
+                            <a href="catagori.html">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-cat text-center mb-50">
+                        <div class="cat-icon">
+                            <span><ion-icon name="ribbon-outline"></ion-icon></span>
+                        </div>
+                        <div class="cat-cap">
+                            <h5><a href="catagori.html">Plan Plata</a></h5>
+                            <p>Must explain your how this keind denoun pleasure</p>
+                            <a href="catagori.html">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="single-cat text-center mb-50">
+                        <div class="cat-icon">
+                            <span><ion-icon name="diamond-outline"></ion-icon></span>
+                        </div>
+                        <div class="cat-cap">
+                            <h5><a href="catagori.html">Plan Premium</a></h5>
+                            <p>Must explain your how this keind denoun pleasure</p>
+                            <a href="catagori.html">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Plans End -->
 
     @include('components.footer')
     @include('components.scrollup')

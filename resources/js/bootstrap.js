@@ -11,7 +11,6 @@ require('slick-carousel');
 require('wowjs');
 require('jquery-nice-select');
 
-require('glider-js/glider.min')
-
+require('glider-js/glider.min');
 
 
