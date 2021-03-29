@@ -79,25 +79,25 @@
                     <div class="form-group col">
                         <label for="name" class="color-main"><strong>Nombre</strong></label>
                         <input type="text" class="form-control" id="name">
-                        <small></small>
+                        <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                     <div class="form-group col">
                         <label for="group" class="color-main"><strong>Grupo</strong></label>
                         <select id="group" class="wide">
                             <option value="">Seleccione</option>
-                            <option value="">grupo 1</option>
-                            <option value="">grupo 2</option>
+                            <option value="1">grupo 1</option>
+                            <option value="2">grupo 2</option>
                         </select>
-                        <small></small>
+                        <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                     <div class="form-group col">
                         <label for="category" class="color-main"><strong>Categoría</strong></label>
                         <select id="category" class="wide">
                             <option value="">Seleccione</option>
-                            <option value="">categoría 1</option>
-                            <option value="">categoría 2</option>
+                            <option value="1">categoría 1</option>
+                            <option value="2">categoría 2</option>
                         </select>
-                        <small></small>
+                        <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                 </div>
             </div>
@@ -117,18 +117,12 @@
                 <div class="row mt-5 pt-5">
                     <div class="form-group col">
                         <label class="color-main checkbox-inline control-label"><strong>Métodos de Pago</strong></label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                            <label class="form-check-label" for="inlineCheckbox1">Efectivo</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                            <label class="form-check-label" for="inlineCheckbox2">Tarjeta</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                            <label class="form-check-label" for="inlineCheckbox2">Transferencia</label>
-                        </div>
+                        @foreach($paymentMethods as $paymentMethod)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                <label class="form-check-label" for="inlineCheckbox1">{{ $paymentMethod->name }}</label>
+                            </div>
+                        @endforeach
                     </div>
                     <div class="form-group col">
                         <label for="delivery" class="color-main"><strong>Domicilios</strong></label>
