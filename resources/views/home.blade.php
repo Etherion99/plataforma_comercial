@@ -82,21 +82,27 @@
             <div id="category-accordion">
                 <div class="row d-flex justify-content-center">
                     @foreach($categories as $category)
-                        <button class="btn btn-collapse mx-2 {{ $loop->index > 0 ? 'collapsed' : '' }}" data-toggle="collapse" data-target="#category-section-{{ $loop->index }}">{{ $category['name'] }}</button>
+                        <button class="btn btn-collapse mx-2 {{ $loop->index > 0 ? 'collapsed' : '' }}"
+                                data-toggle="collapse"
+                                data-target="#category-section-{{ $loop->index }}">{{ $category['name'] }}</button>
                     @endforeach
                 </div>
                 @foreach($categories as $category)
-                    <div class="row mt-5 category-section collapse show" id="category-section-{{ $loop->index }}" data-parent="#category-accordion">
+                    <div class="row mt-5 category-section collapse show" id="category-section-{{ $loop->index }}"
+                         data-parent="#category-accordion">
                         <div class="glider-contain">
                             <div class="glider">
                                 @foreach($category['categories'] as $subcategory)
                                     <div class="p-4">
                                         <div class="category-card card h-100">
                                             <div class="card-body p-3">
-                                                <img src="{{ asset('images/categories/'.$subcategory['id'].'.jpg') }}" class="img-fluid">
+                                                <img src="{{ asset('images/categories/'.$subcategory['id'].'.jpg') }}"
+                                                     class="img-fluid">
                                             </div>
                                             <div class="card-body p-3">
-                                                <h5 class="text-center category-name"><a href="{{ route('viewCategory', ['id' => $subcategory['id']]) }}">{{ $subcategory['name'] }}</a></h5>
+                                                <h5 class="text-center category-name"><a
+                                                        href="{{ route('viewCategory', ['id' => $subcategory['id']]) }}">{{ $subcategory['name'] }}</a>
+                                                </h5>
                                             </div>
                                         </div>
                                     </div>
@@ -124,46 +130,166 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row d-flex align-items-stretch">
                 <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-cat text-center mb-50">
+                    <div class="single-cat h-100 text-center mb-50">
                         <div class="cat-icon">
                             <span><ion-icon name="medal-outline"></ion-icon></span>
                         </div>
                         <div class="cat-cap">
                             <h5><a href="catagori.html">Plan Básico</a></h5>
                             <div class="text-left" id="plans-char">
-                                <p>Nombre de la empresa</p>
-                                <p>Categoría de la empresa</p>
-                                <p>Adjuntar Logo o Imagen del negocio en buena calidad</p>
-                                <p>Número(s) telefónico</p>
-                                <p>Dirección y ciudad donde está ubicada la empresa</p>
-                                <p>Horarios específicos de lunes a domingos y festivos</p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Nombre de la empresa
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Categoría de la empresa
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Adjuntar Logo o Imagen del negocio en buena calidad
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Número(s) telefónico
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Dirección y ciudad donde está ubicada la empresa
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Horarios específicos de lunes a domingos y festivos
+                                </p>
                             </div>
                             <a href="catagori.html">View Details</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-cat text-center mb-50">
+                    <div class="single-cat h-100 text-center mb-50">
                         <div class="cat-icon">
                             <span><ion-icon name="ribbon-outline"></ion-icon></span>
                         </div>
                         <div class="cat-cap">
                             <h5><a href="catagori.html">Plan Plata</a></h5>
-                            <p>Must explain your how this keind denoun pleasure</p>
+                            <div class="text-left" id="plans-char">
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Nombre de la empresa
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Categoría de la empresa
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Adjuntar Logo o Imagen del negocio en buena calidad
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Número(s) telefónico
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Dirección y ciudad donde está ubicada la empresa
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Horarios específicos de lunes a domingos y festivos
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    ¿Hacen domicilios?
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Medios de pago
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Descripción de la empresa
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Adjuntar máximo 12 fotos (buena resolución) con su respectiva descripción
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Adjuntar el enlace de las páginas de su empresa; redes sociales y correo
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Observación: Enviar a nuestro correo logo de su empresa y fotos de buena calidad
+                                    para realizar su respectivo Banner, Post promocionales (3) y video promocional
+                                    (Especifica que realiza su empresa)
+                                </p>
+                            </div>
                             <a href="catagori.html">View Details</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-cat text-center mb-50">
+                    <div class="single-cat h-100 text-center mb-50">
                         <div class="cat-icon">
                             <span><ion-icon name="diamond-outline"></ion-icon></span>
                         </div>
                         <div class="cat-cap">
                             <h5><a href="catagori.html">Plan Premium</a></h5>
-                            <p>Must explain your how this keind denoun pleasure</p>
+                            <div class="text-left" id="plans-char">
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Nombre de la empresa
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Categoría de la empresa
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Adjuntar Logo o Imagen del negocio en buena calidad
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Número(s) telefónico
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Dirección y ciudad donde está ubicada la empresa
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Horarios específicos de lunes a domingos y festivos
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    ¿Hacen domicilios?
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Medios de pago
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Descripción de la empresa
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Adjuntar máximo 12 fotos (buena resolución) con su respectiva descripción
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Adjuntar el enlace de las páginas de su empresa; redes sociales y correo
+                                </p>
+                                <p>
+                                    <ion-icon name="checkmark-done"></ion-icon>
+                                    Observación: Enviar a nuestro correo logo de su empresa y fotos de buena calidad
+                                    para realizar su respectivo Banner, Post promocionales (3) y video promocional
+                                    (Especifica que realiza su empresa)
+                                </p>
+                            </div>
                             <a href="catagori.html">View Details</a>
                         </div>
                     </div>
