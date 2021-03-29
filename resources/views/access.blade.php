@@ -74,7 +74,7 @@
             </div>
         </div>
         <div class="row my-5 py-5">
-            <div class="form-container col-8 offset-2 d-none" data-id="0">
+            <div class="form-container col-8 offset-2" data-id="0">
                 <div class="row d-flex justify-content-center mt-3">
                     <div class="form-group col">
                         <label for="name" class="color-main"><strong>Nombre</strong></label>
@@ -101,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-container col-8 offset-2" data-id="1">
+            <div class="form-container col-8 offset-2 d-none" data-id="1">
                 <div class="row d-flex align-items-center my-3">
                     <h3 class="col-3 m-0">Lunes</h3>
                     <button class="btn btn-main-square ml-3"><i class="fa fa-plus"></i> Agregar Horario</button>
@@ -141,15 +141,17 @@
                     </div>
                 </div>
             </div>
-            <div class="form-container col-8 offset-2" data-id="2">
-
+            <div class="form-container col-8 offset-2 d-none" data-id="2">
+                contacto
             </div>
-            <div class="form-container col-8 offset-2" data-id="3"></div>
+            <div class="form-container col-8 offset-2 d-none" data-id="3">
+                fotos
+            </div>
         </div>
         <div class="row d-flex justify-content-center">
-            <button class="btn btn-main mx-3">Anterior</button>
-            <button class="btn btn-main mx-3">Siguiente</button>
-            <button class="btn btn-main mx-3">Terminar</button>
+            <button class="btn btn-main mx-3" id="nav-prev">Anterior</button>
+            <button class="btn btn-main mx-3" id="nav-next">Siguiente</button>
+            <button class="btn btn-main mx-3" id="nav-finish">Terminar</button>
         </div>
     </div>
     <!--Signup End-->
