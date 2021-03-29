@@ -101,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-container col-8 offset-2 d-none" data-id="1">
+            <div class="form-container col-8 offset-2" data-id="1">
                 <div class="row d-flex align-items-center my-3">
                     <h3 class="col-3 m-0">Lunes</h3>
                     <button class="btn btn-main-square ml-3"><i class="fa fa-plus"></i> Agregar Horario</button>
@@ -141,10 +141,10 @@
                     </div>
                 </div>
             </div>
-            <div class="form-container col-8 offset-2 d-none" data-id="2">
+            <div class="form-container col-8 offset-2" data-id="2">
                 contacto
             </div>
-            <div class="form-container col-8 offset-2 d-none" data-id="3">
+            <div class="form-container col-8 offset-2" data-id="3">
                 fotos
             </div>
         </div>
