@@ -177,6 +177,7 @@ function validateHours(day, hoursToSend) {
   }
 
   if (can) {
+    $('#alertScheduleModal').slideUp();
     $('#send-hour').attr('data-dismiss', 'modal');
     fillSchedule(hoursToSend, day);
   } else {

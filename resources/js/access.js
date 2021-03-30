@@ -164,6 +164,7 @@ function validateHours(day, hoursToSend) {
         message = 'Debe ingresar una hora final y una hora inicial';
     }
     if(can){
+        $('#alertScheduleModal').slideUp();
         $('#send-hour').attr('data-dismiss', 'modal');
         fillSchedule(hoursToSend, day);
     }else{
@@ -198,6 +199,6 @@ $(document).ready(function () {
     navFinish.click();
 
     $('#closeAlertScheduleModal').click(function(){$('#alertScheduleModal').slideUp()});
-    
+
     $('#exampleModal #send-hour').click(afterClickSendHour);
 });
