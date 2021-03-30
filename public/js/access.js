@@ -14,12 +14,12 @@ var navPrev = $('#nav-prev'),
     navFinish = $('#nav-finish');
 var page = 0;
 var lastPage = 3;
+var validations = [];
 var schedules = $(".delete-hour");
 var hoursToSend = {
   horaInicio: '',
   horaFinal: ''
 };
-var validations = [];
 
 function initValidations() {
   $.getJSON('../json/signup_validations.json', function (data) {

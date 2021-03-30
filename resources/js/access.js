@@ -2,13 +2,13 @@ var navPrev = $('#nav-prev'), navNext = $('#nav-next'), navFinish = $('#nav-fini
 
 var page = 0;
 const lastPage = 3;
+var validations = [];
+
 var schedules = $(".delete-hour");
 var hoursToSend = {
     horaInicio: '',
     horaFinal: ''
 }
-var validations = [];
-
 
 function initValidations(){
     $.getJSON('../json/signup_validations.json', function (data){
@@ -47,9 +47,8 @@ function validateNav(){
 
     $('.form-step').removeClass('filled');
 
-    for(let i = 0; i <= page; i++){
+    for(let i = 0; i <= page; i++)
         $('.form-step[data-id=' + i + ']').addClass('filled');
-    }
 }
 
 function validatePage(){
