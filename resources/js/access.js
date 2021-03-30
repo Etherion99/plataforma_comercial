@@ -116,6 +116,18 @@ function fillSchedule(result, day){
     })
 }
 
+function afterClickSendHour(){
+    var modal = $('#exampleModal');
+    modal.find('.modal-title').text('New message to ' + 'Hello World');
+    const day = modal.find('.modal-body #select-days').val()
+    hoursToSend.horaInicio = modal.find('.modal-body #select-first-hour').val();
+    hoursToSend.horaFinal = modal.find('.modal-body #select-last-hour').val();
+    const f = new Date('01/01/2020 '+hoursToSend.horaFinal).getTime();
+    const i = new Date('01/01/2020 '+hoursToSend.horaInicio).getTime();
+    console.log(f>i);
+    fillSchedule(hoursToSend, day);
+}
+
 $(document).ready(function (){
     initValidations();
     navigate(0);
@@ -130,16 +142,7 @@ $(document).ready(function (){
 
     navFinish.click();
 
-    $('#exampleModal #send-hour').click(function (){
-        var modal = $('#exampleModal');
-        modal.find('.modal-title').text('New message to ' + 'Hello World');
-        const day = modal.find('.modal-body #select-days').val()
-        hoursToSend.horaInicio = modal.find('.modal-body #select-first-hour').val();
-        hoursToSend.horaFinal = modal.find('.modal-body #select-last-hour').val();
-        fillSchedule(hoursToSend, day);
-    })
+    $('#exampleModal #send-hour').click(afterClickSendHour());
 
-    schedules.click(function(){
-        $(this).parent().remove();
-    })
+    schedules.click(function(){$(this).parent().remove();});
 });
