@@ -4,20 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSocialNetworksTable extends Migration
+class CreateSocialLinksTable extends Migration
 {
     public function up()
     {
-        Schema::create('social_networks', function (Blueprint $table) {
+        Schema::create('social_links', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 18);
-            $table->string('icon', 28);
+            $table->string('url', 88);
+            $table->foreignId('social_network_id')->constrained();
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('social_networks');
+        Schema::dropIfExists('social_links');
     }
 }

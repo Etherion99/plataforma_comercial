@@ -4,20 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSocialNetworksTable extends Migration
+class CreatePhonesTable extends Migration
 {
     public function up()
     {
-        Schema::create('social_networks', function (Blueprint $table) {
+        Schema::create('phones', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 18);
-            $table->string('icon', 28);
+            $table->string('number', 18);
+            
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('social_networks');
+        Schema::dropIfExists('phones');
     }
 }
