@@ -1,6 +1,11 @@
 [
     [
         {
+
+        }
+    ],
+    [
+        {
             "id": "name",
             "type": "text",
             "required": true
@@ -14,11 +19,6 @@
             "id": "category",
             "type": "dropdown",
             "required": true
-        }
-    ],
-    [
-        {
-
         }
     ]
 ]

@@ -16,6 +16,45 @@
     @include('components.header')
     @include('components.loader')
 
+    <!--Modal Add Phone Start-->
+    <div class="modal" tabindex="-1" id="add-phone-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nuevo Número Telefónico</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row d-flex justify-content-center mt-3">
+                        <div class="form-group col">
+                            <label for="phone-number" class="color-main"><strong>Número</strong></label>
+                            <input type="text" class="form-control" name="phone-number" id="phone-number">
+                            <small class="form-text text-danger font-weight-bold form-input-alert"></small>
+                        </div>
+                        <div class="form-group col">
+                            <label for="phone-type" class="color-main"><strong>Tipo</strong></label>
+                            <select name="phone-type" id="phone-type" class="wide">
+                                <option value="">Seleccione</option>
+                                <option value="1">Fijo</option>
+                                <option value="1">Celular</option>
+                                <option value="1">Whatsapp</option>
+                                <option value="1">Llamadas y Whatsapp</option>
+                            </select>
+                            <small class="form-text text-danger font-weight-bold form-input-alert"></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-main-square" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-main-square ml-3">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal Add Phone End-->
+
     <!-- Hero Start-->
     <div class="hero-area2 slider-height2 hero-overly2 d-flex align-items-center"
          style="background-image: url({{ asset('images/hero/hero2.jpg') }})">
@@ -58,6 +97,7 @@
         </div>
     </div>-->
     <!--Login End-->
+
     <!--Signup Start-->
     <div class="container my-5">
         <div class="row d-flex justify-content-center" id="form-steps">
@@ -77,7 +117,7 @@
             </div>
         </div>
         <div class="row my-5 py-5">
-            <div class="form-container col-8 offset-2" data-id="0">
+            <div class="form-container col-8 offset-2" data-id="2">
                 <div class="row d-flex justify-content-center mt-3">
                     <div class="form-group col">
                         <label for="name" class="color-main"><strong>Nombre</strong></label>
@@ -200,8 +240,37 @@
                     </div>
                 </div>
             </div>
-            <div class="form-container col-8 offset-2" data-id="2">
-                contacto
+            <div class="form-container col-8 offset-2" data-id="0">
+                <div class="row d-flex justify-content-center mt-3">
+                    <div class="form-group col">
+                        <label for="department" class="color-main"><strong>Departamento</strong></label>
+                        <select name="department" id="department" class="wide">
+                            <option value="">Seleccione</option>
+                            <option value="1">Huila</option>
+                        </select>
+                        <small class="form-text text-danger font-weight-bold form-input-alert"></small>
+                    </div>
+                    <div class="form-group col">
+                        <label for="municipality" class="color-main"><strong>Municipio</strong></label>
+                        <select name="municipality" id="municipality" class="wide">
+                            <option value="">Seleccione</option>
+                            <option value="1">La Plata</option>
+                        </select>
+                        <small class="form-text text-danger font-weight-bold form-input-alert"></small>
+                    </div>
+                    <div class="form-group col">
+                        <label for="address" class="color-main"><strong>Dirección</strong></label>
+                        <input type="text" class="form-control" name="address" id="address">
+                        <small class="form-text text-danger font-weight-bold form-input-alert"></small>
+                    </div>
+                </div>
+                <div class="row">
+
+                </div>
+                <div class="row d-flex justify-content-center my-5">
+                    <button class="btn btn-main-square" data-toggle="modal" data-target="#add-phone-modal">
+                        <i class="fas fa-plus"></i> Agregar teléfono</button>
+                </div>
             </div>
             <div class="form-container col-8 offset-2" data-id="3">
                 fotos
