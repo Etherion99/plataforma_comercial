@@ -150,7 +150,7 @@
                                     <div class="form-row" id="select-for-days">
                                         <div class="form-group col-md-12">
                                             <label for="select-days">Day</label> <br>
-                                            <select class="form-control" name="days" id="select-days">
+                                            <select class="form-control wide" name="days" id="select-days">
                                                 <option value="0">Lunes</option>
                                                 <option value="1">Martes</option>
                                                 <option value="2">Miercoles</option>
