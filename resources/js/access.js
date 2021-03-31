@@ -110,17 +110,16 @@ function removeSchedules(result){
 function fillSchedule(result, day) {
     let idToFill = 'horario-'+day+'-'+uniqueId;
     let horario = $('<div>', {
-        'class': 'badge',
+        'class': 'badge-custom d-flex align-items-center',
         'id': idToFill
     }).append(
-        $('<div>', {
-            'class': 'badge-custom',
+        $('<span>', {
             'id': 'horaInicio'
         }).text(result.horaInicio)
     ).append(
-        $('<div>', {
-            'class': 'badge-custom',
-            'id': 'horaFinal'
+        $('<span>', {
+            'id': 'horaFinal',
+            'class': 'ml-2'
         }).text(result.horaFinal)
     ).append(
         $('<button>', {
@@ -205,7 +204,7 @@ function addPhone(){
             }))
 
         let phoneHtml = $('<div>', {
-            class: 'badge d-flex align-items-center',
+            class: 'badge-custom d-flex align-items-center',
             id: idHtml
         }).append(
             iconsHtml
@@ -261,6 +260,10 @@ function clearAddPhonemodal(){
     $('#phone-type').niceSelect('update');
 }
 
+function pickPhoto(id){
+    $('#input-photo-'+id).click();
+}
+
 $(document).ready(function () {
     uniqueId = 0;
     initValidations();
@@ -282,4 +285,8 @@ $(document).ready(function () {
 
     //phones
     $('#add-phone').click(addPhone);
+
+    $('.photo').click(function (){
+        pickPhoto($(this).attr('data-id'));
+    });
 });

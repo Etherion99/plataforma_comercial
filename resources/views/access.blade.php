@@ -187,9 +187,11 @@
                             </div>
                             <div class="modal-body">
                                 <form>
-                                    <div class="alert alert-warning alert-dismissible fade show" id="alertScheduleModal" role="alert" style="display: none">
+                                    <div class="alert alert-warning alert-dismissible fade show" id="alertScheduleModal"
+                                         role="alert" style="display: none">
                                         <div id="messageSchedule">jajjajaja</div>
-                                        <button type="button" class="close" aria-label="Close" id="closeAlertScheduleModal">
+                                        <button type="button" class="close" aria-label="Close"
+                                                id="closeAlertScheduleModal">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
@@ -218,8 +220,11 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-main-square ml-3" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-main-square ml-3" data-dismiss="modal" id="send-hour">Send message</button>
+                                <button type="button" class="btn btn-main-square ml-3" data-dismiss="modal">Close
+                                </button>
+                                <button type="button" class="btn btn-main-square ml-3" data-dismiss="modal"
+                                        id="send-hour">Send message
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -246,7 +251,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-container col-8 offset-2" data-id="0">
+            <div class="form-container col-8 offset-2" data-id="3">
                 <div class="row d-flex justify-content-center mt-3">
                     <div class="form-group col">
                         <label for="department" class="color-main"><strong>Departamento</strong></label>
@@ -278,11 +283,41 @@
                 </div>
                 <div class="row d-flex justify-content-center my-5">
                     <button class="btn btn-main-square" data-toggle="modal" data-target="#add-phone-modal">
-                        <i class="fas fa-plus"></i> Agregar teléfono</button>
+                        <i class="fas fa-plus"></i> Agregar teléfono
+                    </button>
                 </div>
             </div>
-            <div class="form-container col-8 offset-2" data-id="3">
-                fotos
+            <div class="form-container col-8 offset-2" data-id="0">
+                <div class="row">
+                    <div class="col-4 p-3">
+                        <input type="file" class="d-none" id="input-photo-0">
+                        <div class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
+                            data-id="0">    
+                            <i class="fas fa-image"></i>
+                        </div>
+                    </div>
+                    <div class="col-4 p-3">
+                        <input type="file" class="d-none" id="input-photo-0">
+                        <div class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
+                             data-id="0">
+                            <i class="fas fa-image"></i>
+                        </div>
+                    </div>
+                    <div class="col-4 p-3">
+                        <input type="file" class="d-none" id="input-photo-0">
+                        <div class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
+                             data-id="0">
+                            <i class="fas fa-image"></i>
+                        </div>
+                    </div>
+                    <div class="col-4 p-3">
+                        <input type="file" class="d-none" id="input-photo-0">
+                        <div class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
+                             data-id="0">
+                            <i class="fas fa-image"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row d-flex justify-content-center">

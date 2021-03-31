@@ -136,14 +136,13 @@ function removeSchedules(result) {
 function fillSchedule(result, day) {
   var idToFill = 'horario-' + day + '-' + uniqueId;
   var horario = $('<div>', {
-    'class': 'badge',
+    'class': 'badge-custom d-flex align-items-center',
     'id': idToFill
-  }).append($('<div>', {
-    'class': 'badge-custom',
+  }).append($('<span>', {
     'id': 'horaInicio'
-  }).text(result.horaInicio)).append($('<div>', {
-    'class': 'badge-custom',
-    'id': 'horaFinal'
+  }).text(result.horaInicio)).append($('<span>', {
+    'id': 'horaFinal',
+    'class': 'ml-2'
   }).text(result.horaFinal)).append($('<button>', {
     'type': 'button',
     'class': 'close ml-15 delete-hour'
@@ -236,7 +235,7 @@ function addPhone() {
     }
 
     var phoneHtml = $('<div>', {
-      "class": 'badge d-flex align-items-center',
+      "class": 'badge-custom d-flex align-items-center',
       id: idHtml
     }).append(iconsHtml).append($('<span>', {
       "class": 'ml-3'
@@ -280,6 +279,10 @@ function clearAddPhonemodal() {
   $('#phone-type').niceSelect('update');
 }
 
+function pickPhoto(id) {
+  $('#input-photo-' + id).click();
+}
+
 $(document).ready(function () {
   uniqueId = 0;
   initValidations();
@@ -297,6 +300,9 @@ $(document).ready(function () {
   $('#exampleModal #send-hour').click(afterClickSendHour); //phones
 
   $('#add-phone').click(addPhone);
+  $('.photo').click(function () {
+    pickPhoto($(this).attr('data-id'));
+  });
 });
 /******/ })()
 ;

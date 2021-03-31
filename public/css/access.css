@@ -14,7 +14,7 @@
   display: none;
 }
 
-.badge {
+.badge-custom {
   color: black !important;
   border: #FF6600 solid 2px !important;
   font-weight: bold !important;
@@ -22,22 +22,40 @@
   padding: 10px 20px !important;
   margin: 10px 10px;
 }
-.badge:hover {
+.badge-custom:hover {
   color: black !important;
 }
-.badge::before {
+.badge-custom::before {
   background: none !important;
 }
-.badge span {
+.badge-custom span {
   font-size: 1.25rem;
 }
 
-.horario span {
-  margin: 0 3px !important;
-  display: inline-block !important;
+.photo {
+  border-radius: 5px;
+  background-color: #c5c5c5;
+  width: 100%;
+  cursor: pointer;
+  transition: 0.5s all;
+}
+.photo i {
+  font-size: 3rem;
 }
 
-.badge-custom {
-  display: inline-block;
-  margin: 0 5px;
+.photo:hover {
+  transform: scale(1.08);
+}
+
+#logo {
+  background-color: #c5c5c5;
+  cursor: pointer;
+  transition: 0.5s all;
+}
+#logo i {
+  font-size: 3rem;
+}
+
+#logo:hover {
+  transform: scale(1.08);
 }
