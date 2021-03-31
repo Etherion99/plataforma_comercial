@@ -177,7 +177,7 @@
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                      aria-hidden="true">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">New message</h5>
@@ -187,6 +187,12 @@
                             </div>
                             <div class="modal-body">
                                 <form>
+                                    <div class="alert alert-warning alert-dismissible fade show" id="alertScheduleModal" role="alert" style="display: none">
+                                        <div id="messageSchedule">jajjajaja</div>
+                                        <button type="button" class="close" aria-label="Close" id="closeAlertScheduleModal">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
                                     <div class="form-row" id="select-for-days">
                                         <div class="form-group col-md-12">
                                             <label for="select-days">Day</label> <br>
@@ -212,8 +218,8 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn" data-dismiss="modal" id="send-hour">Send message</button>
+                                <button type="button" class="btn btn-main-square ml-3" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-main-square ml-3" data-dismiss="modal" id="send-hour">Send message</button>
                             </div>
                         </div>
                     </div>

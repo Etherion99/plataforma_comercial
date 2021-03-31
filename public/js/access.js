@@ -14,12 +14,14 @@ var navPrev = $('#nav-prev'),
     navFinish = $('#nav-finish');
 var page = 0;
 var lastPage = 3;
-var validations = [];
-var schedules = $(".delete-hour");
 var hoursToSend = {
   horaInicio: '',
-  horaFinal: ''
+  horaFinal: '',
+  id: ''
 };
+var daySchedules = [[], [], [], [], [], [], []];
+var validations = [];
+var uniqueId = 0;
 
 function initValidations() {
   $.getJSON('../json/signup_validations.json', function (data) {
@@ -102,13 +104,31 @@ function validateRequired(element, type) {
 
 function finish() {}
 
+function removeSchedules(result) {
+  var resultSplit = result.split('-');
+  var day = parseInt(resultSplit[1]);
+  daySchedules[day].forEach(function (element) {
+    if (element.id === result) {
+      var i = daySchedules[day].indexOf(element);
+
+      if (i !== -1) {
+        daySchedules[day].splice(i, 1);
+      }
+    }
+  });
+}
+
 function fillSchedule(result, day) {
+  var idToFill = 'horario-' + day + '-' + uniqueId;
   var horarios = $('<div>', {
-    'class': 'horarios'
+    'class': 'horarios',
+    'id': idToFill
   }).append($('<div>', {
-    'class': 'badge-custom'
+    'class': 'badge-custom',
+    'id': 'horaInicio'
   }).text(result.horaInicio)).append($('<div>', {
-    'class': 'badge-custom'
+    'class': 'badge-custom',
+    'id': 'horaFinal'
   }).text(result.horaFinal)).append($('<button>', {
     'type': 'button',
     'class': 'close ml-15 delete-hour'
@@ -116,10 +136,55 @@ function fillSchedule(result, day) {
     'class': 'fas fa-trash-alt'
   })));
   $('#day-' + day).append(horarios);
-  schedules = $(".delete-hour");
-  schedules.click(function () {
-    $(this).parent().remove();
+  daySchedules[day].push({
+    horaInicio: result.horaInicio,
+    horaFinal: result.horaFinal,
+    id: idToFill
   });
+  $('#' + idToFill).click(function () {
+    removeSchedules(idToFill);
+    $(this).remove();
+  });
+  uniqueId++;
+}
+
+function validateHours(day, hoursToSend) {
+  var can = true;
+  var message;
+  var f2 = new Date('01/01/2020 ' + hoursToSend.horaFinal).getTime();
+  var i2 = new Date('01/01/2020 ' + hoursToSend.horaInicio).getTime();
+
+  if (hoursToSend.horaFinal !== '' && hoursToSend.horaInicio !== '') {
+    if (f2 > i2) {
+      if (daySchedules[day].length > 0) {
+        daySchedules[day].forEach(function (element) {
+          var f1 = new Date('01/01/2020 ' + element.horaFinal).getTime();
+          var i1 = new Date('01/01/2020 ' + element.horaInicio).getTime();
+
+          if (i2 < f1 && f2 > i1) {
+            can = false;
+            message = "Hay algún horario que se está cruzando";
+          }
+        });
+      }
+    } else {
+      can = false;
+      message = "La hora final debe ser mayor que la inicial";
+    }
+  } else {
+    can = false;
+    message = 'Debe ingresar una hora final y una hora inicial';
+  }
+
+  if (can) {
+    $('#alertScheduleModal').slideUp();
+    $('#send-hour').attr('data-dismiss', 'modal');
+    fillSchedule(hoursToSend, day);
+  } else {
+    $('#send-hour').attr('data-dismiss', '');
+    $('#alertScheduleModal #messageSchedule').text(message);
+    $('#alertScheduleModal').slideDown();
+  }
 }
 
 function afterClickSendHour() {
@@ -128,13 +193,11 @@ function afterClickSendHour() {
   var day = modal.find('.modal-body #select-days').val();
   hoursToSend.horaInicio = modal.find('.modal-body #select-first-hour').val();
   hoursToSend.horaFinal = modal.find('.modal-body #select-last-hour').val();
-  var f = new Date('01/01/2020 ' + hoursToSend.horaFinal).getTime();
-  var i = new Date('01/01/2020 ' + hoursToSend.horaInicio).getTime();
-  console.log(f > i);
-  fillSchedule(hoursToSend, day);
+  validateHours(day, hoursToSend);
 }
 
 $(document).ready(function () {
+  uniqueId = 0;
   initValidations();
   navigate(0);
   navNext.click(function () {
@@ -144,10 +207,10 @@ $(document).ready(function () {
     navigate(-1);
   });
   navFinish.click();
-  $('#exampleModal #send-hour').click(afterClickSendHour());
-  schedules.click(function () {
-    $(this).parent().remove();
+  $('#closeAlertScheduleModal').click(function () {
+    $('#alertScheduleModal').slideUp();
   });
+  $('#exampleModal #send-hour').click(afterClickSendHour);
 });
 /******/ })()
 ;
