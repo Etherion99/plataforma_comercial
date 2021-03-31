@@ -11,6 +11,15 @@ var daySchedules = [[], [], [], [], [], [], []];
 var validations = [];
 var uniqueId = 0;
 
+var phones = {};
+var phonesId = 0;
+var phoneTypes = {
+    1: { name: 'Fijo', icons: ['fas fa-phone'] },
+    2: { name: 'Celular', icons: ['fas fa-mobile-alt'] },
+    3: { name: 'Whatsapp', icons: ['fab fa-whatsapp'] },
+    4: { name: 'Llamadas y Whatsapp', icons: ['fas fa-mobile-alt', 'fab fa-whatsapp'] }
+}
+
 function initValidations() {
     $.getJSON('../json/signup_validations.json', function (data) {
         validations = data;
@@ -30,8 +39,6 @@ function navigate(change) {
 }
 
 function validateNav() {
-    console.log(page);
-
     if (page === 0) {
         navPrev.hide();
     } else {
@@ -102,8 +109,8 @@ function removeSchedules(result){
 
 function fillSchedule(result, day) {
     let idToFill = 'horario-'+day+'-'+uniqueId;
-    let horarios = $('<div>', {
-        'class': 'horario',
+    let horario = $('<div>', {
+        'class': 'badge',
         'id': idToFill
     }).append(
         $('<div>', {
@@ -124,13 +131,17 @@ function fillSchedule(result, day) {
                 'class': 'fas fa-trash-alt'
             })
         )
-    )
-    $('#day-' + day).append(horarios);
+    );
+
+    $('#day-' + day).append(horario);
+
     daySchedules[day].push({horaInicio: result.horaInicio, horaFinal: result.horaFinal, id: idToFill});
+
     $('#'+idToFill).find('.delete-hour').click(function(){
         removeSchedules(idToFill);
         $('#'+idToFill).remove();
-    })
+    });
+
     uniqueId++;
 }
 
@@ -177,6 +188,67 @@ function afterClickSendHour() {
     validateHours(day, hoursToSend);
 }
 
+function addPhone(){
+    let phone = {
+        number: $('#phone-number').val(),
+        type: $('#phone-type').val(),
+    };
+
+    if(addPhoneValidation(phone)){
+        let idHtml = 'phone-' + phonesId;
+
+        let iconsHtml = $('<span>', {
+            class: 'ml-2'
+        });
+
+        for(let icon of phoneTypes[phone.type].icons)
+            iconsHtml.append($('<i>', {
+                class: icon + ' ml-2'
+            }))
+
+        let phoneHtml = $('<div>', {
+            class: 'badge d-flex align-items-center',
+            id: idHtml
+        }).append(
+            $('<span>').text(phone.number)
+        ).append(
+            iconsHtml
+        ).append(
+            $('<button>', {
+                'type': 'button',
+                'class': 'close ml-4 delete-hour'
+            }).html(
+                $('<i>', {
+                    'class': 'fas fa-trash-alt'
+                })
+            )
+        );
+
+        $('#phones').append(phoneHtml);
+        phones[phonesId] = phone;
+
+        phonesId++;
+
+        clearAddPhonemodal();
+    }else{
+        console.log('invalid');
+    }
+}
+
+function addPhoneValidation(newPhone){
+    for(let phone of phones)
+        if(phone.number === newPhone.number) return false;
+
+    return true;
+}
+
+function clearAddPhonemodal(){
+    $('#add-phone-modal').modal('hide');
+
+    $('#phone-number').val('');
+    $('#phone-type').val('');
+}
+
 $(document).ready(function () {
     uniqueId = 0;
     initValidations();
@@ -194,5 +266,8 @@ $(document).ready(function () {
 
     $('#closeAlertScheduleModal').click(function(){$('#alertScheduleModal').slideUp()});
 
-    $('#exampleModal #send-hour').click(afterClickSendHour);
+    $('#exampleModal #send-hour').click(afterClickSendHour)
+
+    //phones
+    $('#add-phone').click(addPhone);
 });

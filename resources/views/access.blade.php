@@ -38,9 +38,9 @@
                             <select name="phone-type" id="phone-type" class="wide">
                                 <option value="">Seleccione</option>
                                 <option value="1">Fijo</option>
-                                <option value="1">Celular</option>
-                                <option value="1">Whatsapp</option>
-                                <option value="1">Llamadas y Whatsapp</option>
+                                <option value="2">Celular</option>
+                                <option value="3">Whatsapp</option>
+                                <option value="4">Llamadas y Whatsapp</option>
                             </select>
                             <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                         </div>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-main-square" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-main-square ml-3">Agregar</button>
+                    <button type="button" class="btn btn-main-square ml-3" id="add-phone">Agregar</button>
                 </div>
             </div>
         </div>
@@ -270,7 +270,10 @@
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mt-5 mb-3">
+                    <h4 class="color-main">Teléfonos</h4>
+                </div>
+                <div class="row" id="phones">
 
                 </div>
                 <div class="row d-flex justify-content-center my-5">

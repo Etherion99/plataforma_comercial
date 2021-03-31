@@ -14,7 +14,7 @@
   display: none;
 }
 
-.horario {
+.badge {
   color: black !important;
   border: #FF6600 solid 2px !important;
   font-weight: bold !important;
@@ -22,11 +22,14 @@
   padding: 10px 20px !important;
   margin: 10px 10px;
 }
-.horario:hover {
+.badge:hover {
   color: black !important;
 }
-.horario::before {
+.badge::before {
   background: none !important;
+}
+.badge span {
+  font-size: 1.25rem;
 }
 
 .horario span {
