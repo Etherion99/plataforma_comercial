@@ -95,9 +95,7 @@ function removeSchedules(result){
     daySchedules[day].forEach(element=>{
         if(element.id === result){
             const i = daySchedules[day].indexOf(element);
-            if ( i !== -1 ) {
-                daySchedules[day].splice( i, 1 );
-            }
+            daySchedules[day].splice( i, 1 );
         }
     })
 }
@@ -105,7 +103,7 @@ function removeSchedules(result){
 function fillSchedule(result, day) {
     let idToFill = 'horario-'+day+'-'+uniqueId;
     let horarios = $('<div>', {
-        'class': 'horarios',
+        'class': 'horario',
         'id': idToFill
     }).append(
         $('<div>', {
@@ -129,9 +127,9 @@ function fillSchedule(result, day) {
     )
     $('#day-' + day).append(horarios);
     daySchedules[day].push({horaInicio: result.horaInicio, horaFinal: result.horaFinal, id: idToFill});
-    $('#'+idToFill).click(function(){
+    $('#'+idToFill).find('.delete-hour').click(function(){
         removeSchedules(idToFill);
-        $(this).remove();
+        $('#'+idToFill).remove();
     })
     uniqueId++;
 }
@@ -143,16 +141,14 @@ function validateHours(day, hoursToSend) {
     const i2 = new Date('01/01/2020 ' + hoursToSend.horaInicio).getTime();
     if (hoursToSend.horaFinal!=='' && hoursToSend.horaInicio!==''){
         if (f2>i2){
-            if (daySchedules[day].length > 0){
-                daySchedules[day].forEach(element=>{
-                    const f1 = new Date('01/01/2020 ' + element.horaFinal).getTime();
-                    const i1 = new Date('01/01/2020 ' + element.horaInicio).getTime();
-                    if(i2<f1 && f2>i1){
-                        can = false;
-                        message="Hay algún horario que se está cruzando";
-                    }
-                });
-            }
+            daySchedules[day].forEach(element=>{
+                const f1 = new Date('01/01/2020 ' + element.horaFinal).getTime();
+                const i1 = new Date('01/01/2020 ' + element.horaInicio).getTime();
+                if(i2<f1 && f2>i1){
+                    can = false;
+                    message="Hay algún horario que se está cruzando";
+                }
+            });
         }else{
             can = false;
             message = "La hora final debe ser mayor que la inicial";

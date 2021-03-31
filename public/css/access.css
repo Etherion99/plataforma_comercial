@@ -14,7 +14,7 @@
   display: none;
 }
 
-.horarios {
+.horario {
   color: black !important;
   border: #FF6600 solid 2px !important;
   font-weight: bold !important;
@@ -22,14 +22,14 @@
   padding: 10px 20px !important;
   margin: 10px 10px;
 }
-.horarios:hover {
+.horario:hover {
   color: black !important;
 }
-.horarios::before {
+.horario::before {
   background: none !important;
 }
 
-.horarios span {
+.horario span {
   margin: 0 3px !important;
   display: inline-block !important;
 }

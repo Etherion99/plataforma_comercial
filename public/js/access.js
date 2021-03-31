@@ -110,10 +110,7 @@ function removeSchedules(result) {
   daySchedules[day].forEach(function (element) {
     if (element.id === result) {
       var i = daySchedules[day].indexOf(element);
-
-      if (i !== -1) {
-        daySchedules[day].splice(i, 1);
-      }
+      daySchedules[day].splice(i, 1);
     }
   });
 }
@@ -121,7 +118,7 @@ function removeSchedules(result) {
 function fillSchedule(result, day) {
   var idToFill = 'horario-' + day + '-' + uniqueId;
   var horarios = $('<div>', {
-    'class': 'horarios',
+    'class': 'horario',
     'id': idToFill
   }).append($('<div>', {
     'class': 'badge-custom',
@@ -141,9 +138,9 @@ function fillSchedule(result, day) {
     horaFinal: result.horaFinal,
     id: idToFill
   });
-  $('#' + idToFill).click(function () {
+  $('#' + idToFill).find('.delete-hour').click(function () {
     removeSchedules(idToFill);
-    $(this).remove();
+    $('#' + idToFill).remove();
   });
   uniqueId++;
 }
@@ -156,17 +153,15 @@ function validateHours(day, hoursToSend) {
 
   if (hoursToSend.horaFinal !== '' && hoursToSend.horaInicio !== '') {
     if (f2 > i2) {
-      if (daySchedules[day].length > 0) {
-        daySchedules[day].forEach(function (element) {
-          var f1 = new Date('01/01/2020 ' + element.horaFinal).getTime();
-          var i1 = new Date('01/01/2020 ' + element.horaInicio).getTime();
+      daySchedules[day].forEach(function (element) {
+        var f1 = new Date('01/01/2020 ' + element.horaFinal).getTime();
+        var i1 = new Date('01/01/2020 ' + element.horaInicio).getTime();
 
-          if (i2 < f1 && f2 > i1) {
-            can = false;
-            message = "Hay algún horario que se está cruzando";
-          }
-        });
-      }
+        if (i2 < f1 && f2 > i1) {
+          can = false;
+          message = "Hay algún horario que se está cruzando";
+        }
+      });
     } else {
       can = false;
       message = "La hora final debe ser mayor que la inicial";
