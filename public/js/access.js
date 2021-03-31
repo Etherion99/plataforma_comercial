@@ -280,7 +280,25 @@ function clearAddPhonemodal() {
 }
 
 function pickPhoto(id) {
-  $('#input-photo-' + id).click();
+  $('input[type=file][data-id=' + id + ']').click();
+}
+
+function updatePreview(input) {
+  var id = input.getAttribute('data-id');
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (event) {
+      $('.photo[data-id=' + id + ']').css('background-image', 'url(\"' + event.target.result + '\")');
+      $('.photo[data-id=' + id + '] i').hide();
+    };
+
+    reader.readAsDataURL(input.files[0]);
+  } else {
+    $('.photo[data-id=' + id + ']').css('background-image', 'none');
+    $('.photo[data-id=' + id + '] i').show();
+  }
 }
 
 $(document).ready(function () {
@@ -302,6 +320,9 @@ $(document).ready(function () {
   $('#add-phone').click(addPhone);
   $('.photo').click(function () {
     pickPhoto($(this).attr('data-id'));
+  });
+  $('.input-photo').change(function () {
+    updatePreview(this);
   });
 });
 /******/ })()

@@ -290,30 +290,30 @@
             <div class="form-container col-8 offset-2" data-id="0">
                 <div class="row">
                     <div class="col-4 p-3">
-                        <input type="file" class="d-none" id="input-photo-0">
+                        <input type="file" class="d-none input-photo" data-id="0">
                         <div class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
-                            data-id="0">    
+                            data-id="0">
                             <i class="fas fa-image"></i>
                         </div>
                     </div>
                     <div class="col-4 p-3">
-                        <input type="file" class="d-none" id="input-photo-0">
+                        <input type="file" class="d-none input-photo" data-id="1">
                         <div class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
-                             data-id="0">
+                             data-id="1">
                             <i class="fas fa-image"></i>
                         </div>
                     </div>
                     <div class="col-4 p-3">
-                        <input type="file" class="d-none" id="input-photo-0">
+                        <input type="file" class="d-none input-photo" data-id="2">
                         <div class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
-                             data-id="0">
+                             data-id="2">
                             <i class="fas fa-image"></i>
                         </div>
                     </div>
                     <div class="col-4 p-3">
-                        <input type="file" class="d-none" id="input-photo-0">
+                        <input type="file" class="d-none input-photo" data-id="3">
                         <div class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
-                             data-id="0">
+                             data-id="3">
                             <i class="fas fa-image"></i>
                         </div>
                     </div>
