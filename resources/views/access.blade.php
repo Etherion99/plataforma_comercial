@@ -30,7 +30,7 @@
                     <div class="row d-flex justify-content-center mt-3">
                         <div class="form-group col">
                             <label for="phone-number" class="color-main"><strong>Número</strong></label>
-                            <input type="text" class="form-control" name="phone-number" id="phone-number">
+                            <input type="number" class="form-control" name="phone-number" id="phone-number">
                             <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                         </div>
                         <div class="form-group col">

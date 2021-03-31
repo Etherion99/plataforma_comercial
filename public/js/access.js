@@ -217,9 +217,7 @@ function addPhone() {
 
   if (addPhoneValidation(phone)) {
     var idHtml = 'phone-' + phonesId;
-    var iconsHtml = $('<span>', {
-      "class": 'ml-2'
-    });
+    var iconsHtml = $('<span>');
 
     var _iterator2 = _createForOfIteratorHelper(phoneTypes[phone.type].icons),
         _step2;
@@ -240,15 +238,21 @@ function addPhone() {
     var phoneHtml = $('<div>', {
       "class": 'badge d-flex align-items-center',
       id: idHtml
-    }).append($('<span>').text(phone.number)).append(iconsHtml).append($('<button>', {
+    }).append(iconsHtml).append($('<span>', {
+      "class": 'ml-3'
+    }).text(phone.number)).append($('<button>', {
       'type': 'button',
-      'class': 'close ml-4 delete-hour'
+      'class': 'close ml-4 delete-phone'
     }).html($('<i>', {
       'class': 'fas fa-trash-alt'
     })));
     $('#phones').append(phoneHtml);
     phones[phonesId] = phone;
+    $('#' + idHtml).find('.delete-phone').click(function () {
+      removePhone(idHtml);
+    });
     phonesId++;
+    console.log(phones);
     clearAddPhonemodal();
   } else {
     console.log('invalid');
@@ -256,27 +260,24 @@ function addPhone() {
 }
 
 function addPhoneValidation(newPhone) {
-  var _iterator3 = _createForOfIteratorHelper(phones),
-      _step3;
-
-  try {
-    for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-      var phone = _step3.value;
-      if (phone.number === newPhone.number) return false;
-    }
-  } catch (err) {
-    _iterator3.e(err);
-  } finally {
-    _iterator3.f();
+  for (var _i = 0, _Object$keys = Object.keys(phones); _i < _Object$keys.length; _i++) {
+    var index = _Object$keys[_i];
+    if (phones[index].number === newPhone.number) return false;
   }
 
   return true;
+}
+
+function removePhone(id) {
+  $('#' + id).remove();
+  delete phones[id.split('-')[1]];
 }
 
 function clearAddPhonemodal() {
   $('#add-phone-modal').modal('hide');
   $('#phone-number').val('');
   $('#phone-type').val('');
+  $('#phone-type').niceSelect('update');
 }
 
 $(document).ready(function () {

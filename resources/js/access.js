@@ -197,9 +197,7 @@ function addPhone(){
     if(addPhoneValidation(phone)){
         let idHtml = 'phone-' + phonesId;
 
-        let iconsHtml = $('<span>', {
-            class: 'ml-2'
-        });
+        let iconsHtml = $('<span>');
 
         for(let icon of phoneTypes[phone.type].icons)
             iconsHtml.append($('<i>', {
@@ -210,13 +208,15 @@ function addPhone(){
             class: 'badge d-flex align-items-center',
             id: idHtml
         }).append(
-            $('<span>').text(phone.number)
-        ).append(
             iconsHtml
+        ).append(
+            $('<span>', {
+                class: 'ml-3'
+            }).text(phone.number)
         ).append(
             $('<button>', {
                 'type': 'button',
-                'class': 'close ml-4 delete-hour'
+                'class': 'close ml-4 delete-phone'
             }).html(
                 $('<i>', {
                     'class': 'fas fa-trash-alt'
@@ -227,7 +227,13 @@ function addPhone(){
         $('#phones').append(phoneHtml);
         phones[phonesId] = phone;
 
+        $('#' + idHtml).find('.delete-phone').click(function (){
+           removePhone(idHtml);
+        });
+
         phonesId++;
+
+        console.log(phones);
 
         clearAddPhonemodal();
     }else{
@@ -236,10 +242,15 @@ function addPhone(){
 }
 
 function addPhoneValidation(newPhone){
-    for(let phone of phones)
-        if(phone.number === newPhone.number) return false;
+    for(let index of Object.keys(phones))
+        if(phones[index].number === newPhone.number) return false;
 
     return true;
+}
+
+function removePhone(id){
+    $('#' + id).remove();
+    delete phones[id.split('-')[1]];
 }
 
 function clearAddPhonemodal(){
@@ -247,6 +258,7 @@ function clearAddPhonemodal(){
 
     $('#phone-number').val('');
     $('#phone-type').val('');
+    $('#phone-type').niceSelect('update');
 }
 
 $(document).ready(function () {
