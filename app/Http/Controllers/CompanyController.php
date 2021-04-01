@@ -28,8 +28,12 @@ class CompanyController extends Controller
     }
 
     public function signup(Request $request){
-        $file = $request->file('gallery')->getClientOriginalName();
-
-        return $file;
+        $files = $request->file('gallery');
+        $texto = json_decode($request->input('texto'));
+        $new_var = $texto->nombre;
+        foreach ($files as $file){
+            $new_var.= $file->getClientOriginalName();
+        }
+        return $new_var;
     }
 }
