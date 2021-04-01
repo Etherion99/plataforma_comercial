@@ -116,15 +116,29 @@ function validateRequired(element, type) {
 
 function finish() {
   var data = new FormData();
-  $('.input-photo').each(function () {
+  $('.photos-form .input-photo').each(function () {
     if ($(this)[0].files && $(this)[0].files[0]) {
       data.append('gallery[]', $(this)[0].files[0]);
     }
   });
-  data.append('texto', JSON.stringify({
-    nombre: 'Arley',
-    apellido: 'jaja'
-  }));
+  var fotoPerfil = $('#profile-photo');
+
+  if (fotoPerfil[0].files && fotoPerfil[0].files[0]) {
+    data.append('profile-photo', $('#profile-photo')[0].files[0]);
+  }
+
+  var objectToSend = {
+    name: $('#name').val(),
+    group: $('#group').val(),
+    category: $('#category').val(),
+    schedules: daySchedules,
+    paymentMethods: $('#paymentMethods').val(),
+    delivery: $('#delivery').val(),
+    department: $('#department').val(),
+    municipality: $('#municipality').val(),
+    address: $('#address').val(),
+    phones: phones
+  };
   $.ajax({
     url: signupURL,
     method: 'POST',
@@ -183,15 +197,16 @@ function validateHours() {
 
   if (hoursToSend.horaFinal !== '' && hoursToSend.horaInicio !== '') {
     if (f2 > i2) {
-      daySchedules[day].forEach(function (element) {
-        var f1 = new Date('01/01/2020 ' + element.horaFinal).getTime();
-        var i1 = new Date('01/01/2020 ' + element.horaInicio).getTime();
+      for (var _i = 0, _Object$keys = Object.keys(daySchedules[day]); _i < _Object$keys.length; _i++) {
+        var index = _Object$keys[_i];
+        var f1 = new Date('01/01/2020 ' + daySchedules[day][index].horaFinal).getTime();
+        var i1 = new Date('01/01/2020 ' + daySchedules[day][index].horaInicio).getTime();
 
         if (i2 < f1 && f2 > i1) {
           can = false;
           message = "Hay algún horario que se está cruzando";
         }
-      });
+      }
     } else {
       can = false;
       message = "La hora final debe ser mayor que la inicial";
@@ -263,8 +278,8 @@ function addPhone() {
 }
 
 function addPhoneValidation(newPhone) {
-  for (var _i = 0, _Object$keys = Object.keys(phones); _i < _Object$keys.length; _i++) {
-    var index = _Object$keys[_i];
+  for (var _i2 = 0, _Object$keys2 = Object.keys(phones); _i2 < _Object$keys2.length; _i2++) {
+    var index = _Object$keys2[_i2];
     if (phones[index].number === newPhone.number) return false;
   }
 

@@ -120,8 +120,20 @@
             </div>
         </div>
         <div class="row my-5 py-5">
-            <div class="form-container col-8 offset-2" data-id="2">
-                <div class="row d-flex justify-content-center mt-3">
+            <div class="form-container col-8 offset-2" data-id="0">
+
+                <div class="row d-flex justify-content-center">
+                    <div class="col-4">
+                        <p class="color-main text-center"><strong>Foto de perfil</strong></p>
+                        <input type="file" class="d-none input-photo" data-id="12" id="profile-photo">
+                        <div
+                            class="photo rounded-circle embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
+                            data-id="12">
+                            <i class="fas fa-portrait"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-center mt-5">
                     <div class="form-group col">
                         <label for="name" class="color-main"><strong>Nombre</strong></label>
                         <input type="text" class="form-control" id="name">
@@ -238,7 +250,7 @@
                         <label class="color-main checkbox-inline control-label"><strong>Métodos de Pago</strong></label>
                         @foreach($paymentMethods as $paymentMethod)
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                <input class="form-check-input" type="checkbox" id="paymentMethods" value="option1">
                                 <label class="form-check-label" for="inlineCheckbox1">{{ $paymentMethod->name }}</label>
                             </div>
                         @endforeach
@@ -254,7 +266,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-container col-8 offset-2" data-id="3">
+            <div class="form-container col-8 offset-2" data-id="2">
                 <div class="row d-flex justify-content-center mt-3">
                     <div class="form-group col">
                         <label for="department" class="color-main"><strong>Departamento</strong></label>
@@ -290,33 +302,37 @@
                     </button>
                 </div>
             </div>
-            <div class="form-container col-8 offset-2" data-id="0">
-                <div class="row">
+            <div class="form-container col-8 offset-2" data-id="3">
+                <div class="row photos-form">
                     <div class="col-4 p-3">
                         <input type="file" class="d-none input-photo" data-id="0">
-                        <div class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
+                        <div
+                            class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
                             data-id="0">
                             <i class="fas fa-image"></i>
                         </div>
                     </div>
                     <div class="col-4 p-3">
                         <input type="file" class="d-none input-photo" data-id="1">
-                        <div class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
-                             data-id="1">
+                        <div
+                            class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
+                            data-id="1">
                             <i class="fas fa-image"></i>
                         </div>
                     </div>
                     <div class="col-4 p-3">
                         <input type="file" class="d-none input-photo" data-id="2">
-                        <div class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
-                             data-id="2">
+                        <div
+                            class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
+                            data-id="2">
                             <i class="fas fa-image"></i>
                         </div>
                     </div>
                     <div class="col-4 p-3">
                         <input type="file" class="d-none input-photo" data-id="3">
-                        <div class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
-                             data-id="3">
+                        <div
+                            class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
+                            data-id="3">
                             <i class="fas fa-image"></i>
                         </div>
                     </div>
