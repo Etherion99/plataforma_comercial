@@ -19,7 +19,7 @@ var hoursToSend = {
   horaFinal: '',
   id: ''
 };
-var daySchedules = [[], [], [], [], [], [], []];
+var daySchedules = [{}, {}, {}, {}, {}, {}, {}];
 var validations = [];
 var uniqueId = 0;
 var phones = {};
@@ -121,7 +121,7 @@ function validateRequired(element, type) {
 
 function finish() {
   var data = new FormData();
-  data.append('gallery', $('.input-photo[data-id=0]')[0].files[0]);
+  console.log('vv');
   $.ajax({
     url: signupURL,
     method: 'POST',
@@ -135,12 +135,8 @@ function finish() {
 function removeSchedules(result) {
   var resultSplit = result.split('-');
   var day = parseInt(resultSplit[1]);
-  daySchedules[day].forEach(function (element) {
-    if (element.id === result) {
-      var i = daySchedules[day].indexOf(element);
-      daySchedules[day].splice(i, 1);
-    }
-  });
+  var id = parseInt(resultSplit[2]);
+  delete daySchedules[day][id];
 }
 
 function fillSchedule(result, day) {
@@ -160,11 +156,10 @@ function fillSchedule(result, day) {
     'class': 'fas fa-trash-alt'
   })));
   $('#day-' + day).append(horario);
-  daySchedules[day].push({
+  daySchedules[day][uniqueId] = {
     horaInicio: result.horaInicio,
-    horaFinal: result.horaFinal,
-    id: idToFill
-  });
+    horaFinal: result.horaFinal
+  };
   $('#' + idToFill).find('.delete-hour').click(function () {
     removeSchedules(idToFill);
     $('#' + idToFill).remove();

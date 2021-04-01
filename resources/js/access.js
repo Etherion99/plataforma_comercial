@@ -92,7 +92,7 @@ function validateRequired(element, type) {
 
 function finish() {
     let data = new FormData();
-    data.append('gallery', $('.input-photo[data-id=0]')[0].files[0]);
+    console.log('vv');
 
     $.ajax({
         url: signupURL,

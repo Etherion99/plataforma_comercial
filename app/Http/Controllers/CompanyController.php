@@ -28,7 +28,7 @@ class CompanyController extends Controller
     }
 
     public function signup(Request $request){
-        $file = $request->file('gallery')->getClientOriginalName();
+        $file = $request->file('gallery[]')->getClientOriginalName();
 
         return $file;
     }
