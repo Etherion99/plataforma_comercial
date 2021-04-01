@@ -70,8 +70,7 @@ function validateNav() {
     navNext.hide();
     navFinish.show();
   } else {
-    navNext.show();
-    navFinish.hide();
+    navNext.show(); //navFinish.hide();
   }
 
   $('.form-step').removeClass('filled');
@@ -120,7 +119,18 @@ function validateRequired(element, type) {
   return res;
 }
 
-function finish() {}
+function finish() {
+  var data = new FormData();
+  data.append('gallery', $('.input-photo[data-id=0]')[0].files[0]);
+  $.ajax({
+    url: signupURL,
+    method: 'POST',
+    data: data,
+    contentType: false,
+    cache: false,
+    processData: false
+  });
+}
 
 function removeSchedules(result) {
   var resultSplit = result.split('-');
@@ -311,7 +321,7 @@ $(document).ready(function () {
   navPrev.click(function () {
     navigate(-1);
   });
-  navFinish.click();
+  navFinish.click(finish);
   $('#closeAlertScheduleModal').click(function () {
     $('#alertScheduleModal').slideUp();
   });
