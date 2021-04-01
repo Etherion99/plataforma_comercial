@@ -7,7 +7,7 @@ var hoursToSend = {
     horaFinal: '',
     id:''
 }
-var daySchedules = [[], [], [], [], [], [], []];
+var daySchedules = [{}, {}, {}, {}, {}, {}, {}];
 var validations = [];
 var uniqueId = 0;
 
@@ -30,9 +30,7 @@ function navigate(change) {
     if (change > 0 && validatePage() || change <= 0) {
         $('.form-container[data-id=' + page + ']').slideUp(function () {
             page += change;
-
             $('.form-container[data-id=' + page + ']').slideDown();
-
             validateNav();
         });
     }
@@ -109,12 +107,8 @@ function finish() {
 function removeSchedules(result){
     const resultSplit = result.split('-');
     const day = parseInt(resultSplit[1]);
-    daySchedules[day].forEach(element=>{
-        if(element.id === result){
-            const i = daySchedules[day].indexOf(element);
-            daySchedules[day].splice( i, 1 );
-        }
-    })
+    const id = parseInt(resultSplit[2]);
+    delete daySchedules[day][id];
 }
 
 function fillSchedule(result, day) {
@@ -144,7 +138,7 @@ function fillSchedule(result, day) {
 
     $('#day-' + day).append(horario);
 
-    daySchedules[day].push({horaInicio: result.horaInicio, horaFinal: result.horaFinal, id: idToFill});
+    daySchedules[day][uniqueId] = {horaInicio: result.horaInicio, horaFinal: result.horaFinal};
 
     $('#'+idToFill).find('.delete-hour').click(function(){
         removeSchedules(idToFill);
