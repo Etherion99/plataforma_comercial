@@ -14,11 +14,6 @@ var navPrev = $('#nav-prev'),
     navFinish = $('#nav-finish');
 var page = 0;
 var lastPage = 3;
-var hoursToSend = {
-  horaInicio: '',
-  horaFinal: '',
-  id: ''
-};
 var daySchedules = [{}, {}, {}, {}, {}, {}, {}];
 var validations = [];
 var uniqueId = 0;
@@ -167,7 +162,12 @@ function fillSchedule(result, day) {
   uniqueId++;
 }
 
-function validateHours(day, hoursToSend) {
+function validateHours() {
+  var day = $('#select-days').val();
+  var hoursToSend = {
+    horaInicio: $('#select-first-hour').val(),
+    horaFinal: $('#select-last-hour').val()
+  };
   var can = true;
   var message;
   var f2 = new Date('01/01/2020 ' + hoursToSend.horaFinal).getTime();
@@ -202,15 +202,6 @@ function validateHours(day, hoursToSend) {
     $('#alertScheduleModal #messageSchedule').text(message);
     $('#alertScheduleModal').slideDown();
   }
-}
-
-function afterClickSendHour() {
-  var modal = $('#exampleModal');
-  modal.find('.modal-title').text('New message to ' + 'Hello World');
-  var day = modal.find('.modal-body #select-days').val();
-  hoursToSend.horaInicio = modal.find('.modal-body #select-first-hour').val();
-  hoursToSend.horaFinal = modal.find('.modal-body #select-last-hour').val();
-  validateHours(day, hoursToSend);
 }
 
 function addPhone() {
@@ -320,7 +311,7 @@ $(document).ready(function () {
   $('#closeAlertScheduleModal').click(function () {
     $('#alertScheduleModal').slideUp();
   });
-  $('#exampleModal #send-hour').click(afterClickSendHour); //phones
+  $('#exampleModal #send-hour').click(validateHours); //phones
 
   $('#add-phone').click(addPhone);
   $('.photo').click(function () {
