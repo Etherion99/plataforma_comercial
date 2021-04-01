@@ -116,15 +116,7 @@ function validateRequired(element, type) {
 
 function finish() {
   var data = new FormData();
-  $('.input-photo').each(function () {
-    if ($(this)[0].files && $(this)[0].files[0]) {
-      data.append('gallery[]', $(this)[0].files[0]);
-    }
-  });
-  data.append('texto', JSON.stringify({
-    nombre: 'Arley',
-    apellido: 'jaja'
-  }));
+  console.log('vv');
   $.ajax({
     url: signupURL,
     method: 'POST',
