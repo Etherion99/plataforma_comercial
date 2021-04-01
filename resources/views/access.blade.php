@@ -9,6 +9,9 @@
 
 @section('scripts')
     @parent
+    <script>
+        var signupURL = '{{ route('companySignup') }}';
+    </script>
     <script src="{{ asset('js/access.js') }}" defer></script>
 @endsection
 
