@@ -1,4 +1,5 @@
-var navPrev = $('#nav-prev'), navNext = $('#nav-next'), navFinish = $('#nav-finish');
+var navPrev = $('#nav-prev'), navNext = $('#nav-next'), navFinish = $('#nav-finish'), groupFilter=$('#group'),
+    categoryFilter = $('#category'), filters = $('.filter');
 
 var page = 0;
 const lastPage = 3;
@@ -13,6 +14,31 @@ var phoneTypes = {
     2: { name: 'Celular', icons: ['fas fa-mobile-alt'] },
     3: { name: 'Whatsapp', icons: ['fab fa-whatsapp'] },
     4: { name: 'Llamadas y Whatsapp', icons: ['fas fa-mobile-alt', 'fab fa-whatsapp'] }
+}
+
+function fillFilter(filter) {
+    if (filter.val() !== '0')
+        filter.addClass('filter-selected');
+    else
+        filter.removeClass('filter-selected');
+
+    filter.niceSelect('update');
+}
+
+function loadCategories(){
+    var group = $(this).val();
+    categoryFilter.html($('<option>', {value: '0', text: 'Categoría'}));
+    if (group !== '0')
+        $.get('/api/categories/group/' + group, {}, function (data) {
+            data.map((option) => categoryFilter.append($('<option>', {value: option.id, text: option.name})));
+            categoryFilter.prop('disabled', false);
+            fillFilter(categoryFilter);
+            categoryFilter.niceSelect('update');
+        });
+    else {
+        categoryFilter.prop('disabled', true);
+        fillFilter(categoryFilter);
+    }
 }
 
 function initValidations() {
@@ -101,7 +127,7 @@ function finish() {
 
     let companyData = {
         name: $('#name').val(),
-        category_id: $('#category').val(),
+        category_id: categoryFilter.val(),
         description: $('#description').val()/*,
         schedules: daySchedules,
         paymentMethods: $('#paymentMethods').val(),
@@ -316,6 +342,12 @@ $(document).ready(function () {
     });
 
     navFinish.click(finish);
+
+    groupFilter.change(loadCategories);
+    
+    filters.change(function () {
+        fillFilter($(this));
+    });
 
     $('#closeAlertScheduleModal').click(function(){$('#alertScheduleModal').slideUp()});
 

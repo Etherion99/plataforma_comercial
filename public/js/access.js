@@ -11,7 +11,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var navPrev = $('#nav-prev'),
     navNext = $('#nav-next'),
-    navFinish = $('#nav-finish');
+    navFinish = $('#nav-finish'),
+    groupFilter = $('#group'),
+    categoryFilter = $('#category'),
+    filters = $('.filter');
 var page = 0;
 var lastPage = 3;
 var daySchedules = [{}, {}, {}, {}, {}, {}, {}];
@@ -37,6 +40,33 @@ var phoneTypes = {
     icons: ['fas fa-mobile-alt', 'fab fa-whatsapp']
   }
 };
+
+function fillFilter(filter) {
+  if (filter.val() !== '0') filter.addClass('filter-selected');else filter.removeClass('filter-selected');
+  filter.niceSelect('update');
+}
+
+function loadCategories() {
+  var group = $(this).val();
+  categoryFilter.html($('<option>', {
+    value: '0',
+    text: 'Categoría'
+  }));
+  if (group !== '0') $.get('/api/categories/group/' + group, {}, function (data) {
+    data.map(function (option) {
+      return categoryFilter.append($('<option>', {
+        value: option.id,
+        text: option.name
+      }));
+    });
+    categoryFilter.prop('disabled', false);
+    fillFilter(categoryFilter);
+    categoryFilter.niceSelect('update');
+  });else {
+    categoryFilter.prop('disabled', true);
+    fillFilter(categoryFilter);
+  }
+}
 
 function initValidations() {
   $.getJSON('../json/signup_validations.json', function (data) {
@@ -125,7 +155,7 @@ function finish() {
   if (logo[0].files && logo[0].files[0]) data.append('logo', logo[0].files[0]);
   var companyData = {
     name: $('#name').val(),
-    category_id: $('#category').val(),
+    category_id: categoryFilter.val(),
     description: $('#description').val()
     /*,
     schedules: daySchedules,
@@ -330,6 +360,10 @@ $(document).ready(function () {
     navigate(-1);
   });
   navFinish.click(finish);
+  groupFilter.change(loadCategories);
+  filters.change(function () {
+    fillFilter($(this));
+  });
   $('#closeAlertScheduleModal').click(function () {
     $('#alertScheduleModal').slideUp();
   });

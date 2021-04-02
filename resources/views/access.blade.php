@@ -121,7 +121,6 @@
         </div>
         <div class="row my-5 py-5">
             <div class="form-container col-8 offset-2" data-id="0">
-
                 <div class="row d-flex justify-content-center">
                     <div class="col-4">
                         <p class="color-main text-center"><strong>Logo</strong></p>
@@ -139,19 +138,18 @@
                     </div>
                     <div class="form-group col">
                         <label for="group" class="color-main"><strong>Grupo</strong></label>
-                        <select id="group" class="wide">
-                            <option value="">Seleccione</option>
-                            <option value="1">grupo 1</option>
-                            <option value="2">grupo 2</option>
+                        <select id="group" class="wide filter">
+                            <option value="0">Seleccione</option>
+                            @foreach($groups as $group)
+                                <option value="{{ $group->id }}">{{ $group->name }}</option>
+                            @endforeach
                         </select>
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                     <div class="form-group col">
                         <label for="category" class="color-main"><strong>Categoría</strong></label>
-                        <select id="category" class="wide">
-                            <option value="">Seleccione</option>
-                            <option value="1" selected>categoría 1</option>
-                            <option value="2">categoría 2</option>
+                        <select id="category" class="wide filter" disabled>
+                            <option value="0">Seleccione</option>
                         </select>
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
