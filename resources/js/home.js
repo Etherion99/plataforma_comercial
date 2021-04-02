@@ -18,15 +18,13 @@ function loadCategories() {
 
     categoryFilter.html($('<option>', {value: '0', text: 'Categoría'}));
 
-    if (group !== '0')
-        $.get('/api/categories/group/' + group, {}, function (data) {
-            data.map((option) => categoryFilter.append($('<option>', {value: option.id, text: option.name})));
+    if (group !== '0'){
+        categoryFilter.append($('#categories-optgroup-' + group).clone());
 
-            categoryFilter.prop('disabled', false);
-            fillFilter(categoryFilter);
-            categoryFilter.niceSelect('update');
-        });
-    else {
+        categoryFilter.prop('disabled', false);
+        fillFilter(categoryFilter);
+        categoryFilter.niceSelect('update');
+    }else {
         categoryFilter.prop('disabled', true);
         fillFilter(categoryFilter);
     }

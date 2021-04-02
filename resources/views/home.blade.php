@@ -29,6 +29,15 @@
                             <h1>Discover Great Places</h1>
                         </div>
                         <!--Hero form -->
+                        <div class="d-none" id="categories-optgroups">
+                            @foreach($categories as $category)
+                                <optgroup id="categories-optgroup-{{ $category['id'] }}">
+                                    @foreach($category['categories'] as $subcategory)
+                                        <option value="{{ $subcategory['id'] }}">{{ $subcategory['name'] }}</option>
+                                    @endforeach
+                                </optgroup>
+                            @endforeach
+                        </div>
                         <form action="#" class="search-box">
                             <div class="input-form">
                                 <input type="text" placeholder="What are you looking for?" id="search-bar">
@@ -37,8 +46,8 @@
                                 <div class="select-itms">
                                     <select name="select" class="filter" id="group-filter">
                                         <option value="0">Grupo</option>
-                                        @foreach($groups as $group)
-                                            <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -55,9 +64,7 @@
                             </div>
                         </form>
                         <div class="container" id="search-results">
-                            <div class="row row-cols-1 row-cols-md-2 g-4" id="in-search-results">
-
-                            </div>
+                            <div class="row row-cols-1 row-cols-md-2 g-4" id="in-search-results"></div>
                         </div>
                     </div>
                 </div>

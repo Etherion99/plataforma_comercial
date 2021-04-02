@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 class WebController extends Controller
 {
     public function home(){
-        $groups = Category::select(['id', 'name'])->where('category_id', null)->get();
         $categories = Category::select(['id', 'name'])
             ->whereNull('category_id')
             ->with(['categories' => function($q){ return $q->select(['id', 'name', 'category_id']); }])
@@ -17,6 +16,7 @@ class WebController extends Controller
 
         $categories = array_map(function($category){
             return array(
+                'id' => $category['id'],
                 'name' => $category['name'],
                 'categories' => array_map(function($subcategory) {
                     return array(
@@ -28,7 +28,6 @@ class WebController extends Controller
         }, $categories);
 
         return view('home', [
-            'groups' => $groups,
             'categories' => $categories
         ]);
     }
