@@ -2,7 +2,7 @@ var navPrev = $('#nav-prev'), navNext = $('#nav-next'), navFinish = $('#nav-fini
 
 var page = 0;
 const lastPage = 3;
-var daySchedules = [{}, {}, {}, {}, {}, {}, {}];
+var daySchedules = [{}, {}, {}, {}, {}, {}, {}]; //JSON.parse("[{\"0\":{\"horaInicio\":\"08:00\",\"horaFinal\":\"10:00\"}},{},{\"1\":{\"horaInicio\":\"12:00\",\"horaFinal\":\"15:00\"},\"2\":{\"horaInicio\":\"16:00\",\"horaFinal\":\"18:30\"}},{},{},{},{}]");// [{}, {}, {}, {}, {}, {}, {}];
 var validations = [];
 var uniqueId = 0;
 
@@ -54,20 +54,18 @@ function validateNav() {
 
 function validatePage() {
     let validation = validations[page];
-    console.log(validation);
     let res = true;
 
     for (let rule of validation) {
-        let element = $('#' + rule['id']);
-
-        if (rule['required'] && !validateRequired(element, rule['type']))
+        if (rule['required'] && !validateRequired(rule['id'], rule['type']))
             res = false;
     }
 
     return res;
 }
 
-function validateRequired(element, type) {
+function validateRequired(id, type) {
+    let element = $('#' + id);
     let res = true;
 
     switch (type) {
@@ -75,7 +73,35 @@ function validateRequired(element, type) {
         case 'dropdown':
             res = element.val() !== '';
             break;
+        case 'file':
+            res = element[0].files && element[0].files[0]
+            break;
+        case 'checkbox':
+            res = false;
+
+            element.find('input[type=checkbox').each(function(){
+                if($(this).prop('checked')){
+                    res = true;
+                    return false;
+                }
+            });
+            break;
+        case 'special':
+            switch (id){
+                case 'schedules':
+                    res = false;
+                    for(let schedule of daySchedules)
+                        if(Object.keys(schedule).length > 0){
+                            res = true;
+                            break;
+                        }
+                    break;
+            }
+            break;
     }
+
+    console.log(type);
+    console.log(res);
 
     let alert = element.closest('.form-group').find('.form-input-alert');
 
@@ -99,13 +125,19 @@ function finish() {
     if(logo[0].files && logo[0].files[0])
         data.append('logo', logo[0].files[0]);
 
+    let paymentMethods = [];
+
+    $('.payment-method').each(function(){
+        if($(this).prop('checked'))
+            paymentMethods.push($(this).val());
+    });
+
     let companyData = {
         name: $('#name').val(),
         category_id: $('#category').val(),
-        description: $('#description').val()/*,
+        description: $('#description').val(),
+        delivery: $('#delivery').val(), /*,
         schedules: daySchedules,
-        paymentMethods: $('#paymentMethods').val(),
-        delivery: $('#delivery').val(),
         department: $('#department').val(),
         municipality: $('#municipality').val(),
         address: $('#address').val(),
@@ -113,6 +145,11 @@ function finish() {
     }
 
     data.append('company_data', JSON.stringify(companyData));
+
+    let otherData = {
+        payment_methods: paymentMethods,
+
+    }
 
     $.ajax({
         url: signupURL,
@@ -159,6 +196,7 @@ function fillSchedule(result, day) {
     $('#day-' + day).append(horario);
 
     daySchedules[day][uniqueId] = {horaInicio: result.horaInicio, horaFinal: result.horaFinal};
+    console.log(JSON.stringify(daySchedules));
 
     $('#'+idToFill).find('.delete-hour').click(function(){
         removeSchedules(idToFill);
@@ -307,6 +345,12 @@ $(document).ready(function () {
     initValidations();
     navigate(0);
 
+    $('.form-container[data-id=' + 0 + ']').slideUp(function () {
+        $('.form-container[data-id=' + 1 + ']').slideDown();
+    });
+
+    page = 1;
+
     navNext.click(function () {
         navigate(1);
     });
@@ -324,6 +368,7 @@ $(document).ready(function () {
     //phones
     $('#add-phone').click(addPhone);
 
+    //photos
     $('.photo').click(function (){
         pickPhoto($(this).attr('data-id'));
     });

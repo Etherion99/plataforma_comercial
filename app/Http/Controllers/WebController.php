@@ -42,7 +42,7 @@ class WebController extends Controller
     }
 
     public function viewCompany($id){
-        $company = Company::find($id)->with('category')->first();
+        $company = Company::where('id', $id)->with('category')->first();
 
         return view('view_company', [
             'company' => $company
@@ -50,7 +50,7 @@ class WebController extends Controller
     }
 
     public function access(){
-        $payments = PaymentMethod::select('name')->get();
+        $payments = PaymentMethod::select('id', 'name')->get();
 
         return view('access', [
             'paymentMethods' => $payments

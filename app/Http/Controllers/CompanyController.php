@@ -40,10 +40,12 @@ class CompanyController extends Controller
         $companyData = json_decode($request->input('company_data'), true);
         $company = Company::create($companyData);
 
-        $logo = $request->file('logo');
-        $save = $logo->storeAs('', 'prueba'.$logo->extension());
+        /*$logo = $request->file('logo');
+        $logo->storeAs('public/company_logo', $company->id.'.'.$logo->extension());*/
 
-        var_dump($save);
+
+
+        var_dump('dd');
 
     }
 }

@@ -14,7 +14,8 @@ var navPrev = $('#nav-prev'),
     navFinish = $('#nav-finish');
 var page = 0;
 var lastPage = 3;
-var daySchedules = [{}, {}, {}, {}, {}, {}, {}];
+var daySchedules = [{}, {}, {}, {}, {}, {}, {}]; //JSON.parse("[{\"0\":{\"horaInicio\":\"08:00\",\"horaFinal\":\"10:00\"}},{},{\"1\":{\"horaInicio\":\"12:00\",\"horaFinal\":\"15:00\"},\"2\":{\"horaInicio\":\"16:00\",\"horaFinal\":\"18:30\"}},{},{},{},{}]");// [{}, {}, {}, {}, {}, {}, {}];
+
 var validations = [];
 var uniqueId = 0;
 var phones = {};
@@ -77,7 +78,6 @@ function validateNav() {
 
 function validatePage() {
   var validation = validations[page];
-  console.log(validation);
   var res = true;
 
   var _iterator = _createForOfIteratorHelper(validation),
@@ -86,8 +86,7 @@ function validatePage() {
   try {
     for (_iterator.s(); !(_step = _iterator.n()).done;) {
       var rule = _step.value;
-      var element = $('#' + rule['id']);
-      if (rule['required'] && !validateRequired(element, rule['type'])) res = false;
+      if (rule['required'] && !validateRequired(rule['id'], rule['type'])) res = false;
     }
   } catch (err) {
     _iterator.e(err);
@@ -98,7 +97,8 @@ function validatePage() {
   return res;
 }
 
-function validateRequired(element, type) {
+function validateRequired(id, type) {
+  var element = $('#' + id);
   var res = true;
 
   switch (type) {
@@ -106,8 +106,52 @@ function validateRequired(element, type) {
     case 'dropdown':
       res = element.val() !== '';
       break;
+
+    case 'file':
+      res = element[0].files && element[0].files[0];
+      break;
+
+    case 'checkbox':
+      res = false;
+      element.find('input[type=checkbox').each(function () {
+        if ($(this).prop('checked')) {
+          res = true;
+          return false;
+        }
+      });
+      break;
+
+    case 'special':
+      switch (id) {
+        case 'schedules':
+          res = false;
+
+          var _iterator2 = _createForOfIteratorHelper(daySchedules),
+              _step2;
+
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var schedule = _step2.value;
+
+              if (Object.keys(schedule).length > 0) {
+                res = true;
+                break;
+              }
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
+          }
+
+          break;
+      }
+
+      break;
   }
 
+  console.log(type);
+  console.log(res);
   var alert = element.closest('.form-group').find('.form-input-alert');
   alert.text('Campo obligatorio');
   alert.toggle(!res);
@@ -123,14 +167,17 @@ function finish() {
   });
   var logo = $('#logo');
   if (logo[0].files && logo[0].files[0]) data.append('logo', logo[0].files[0]);
+  var paymentMethods = [];
+  $('.payment-method').each(function () {
+    if ($(this).prop('checked')) paymentMethods.push($(this).val());
+  });
   var companyData = {
     name: $('#name').val(),
     category_id: $('#category').val(),
-    description: $('#description').val()
+    description: $('#description').val(),
+    delivery: $('#delivery').val()
     /*,
     schedules: daySchedules,
-    paymentMethods: $('#paymentMethods').val(),
-    delivery: $('#delivery').val(),
     department: $('#department').val(),
     municipality: $('#municipality').val(),
     address: $('#address').val(),
@@ -138,6 +185,9 @@ function finish() {
 
   };
   data.append('company_data', JSON.stringify(companyData));
+  var otherData = {
+    payment_methods: paymentMethods
+  };
   $.ajax({
     url: signupURL,
     method: 'POST',
@@ -176,6 +226,7 @@ function fillSchedule(result, day) {
     horaInicio: result.horaInicio,
     horaFinal: result.horaFinal
   };
+  console.log(JSON.stringify(daySchedules));
   $('#' + idToFill).find('.delete-hour').click(function () {
     removeSchedules(idToFill);
     $('#' + idToFill).remove();
@@ -236,20 +287,20 @@ function addPhone() {
     var idHtml = 'phone-' + phonesId;
     var iconsHtml = $('<span>');
 
-    var _iterator2 = _createForOfIteratorHelper(phoneTypes[phone.type].icons),
-        _step2;
+    var _iterator3 = _createForOfIteratorHelper(phoneTypes[phone.type].icons),
+        _step3;
 
     try {
-      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-        var icon = _step2.value;
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var icon = _step3.value;
         iconsHtml.append($('<i>', {
           "class": icon + ' ml-2'
         }));
       }
     } catch (err) {
-      _iterator2.e(err);
+      _iterator3.e(err);
     } finally {
-      _iterator2.f();
+      _iterator3.f();
     }
 
     var phoneHtml = $('<div>', {
@@ -323,6 +374,10 @@ $(document).ready(function () {
   uniqueId = 0;
   initValidations();
   navigate(0);
+  $('.form-container[data-id=' + 0 + ']').slideUp(function () {
+    $('.form-container[data-id=' + 1 + ']').slideDown();
+  });
+  page = 1;
   navNext.click(function () {
     navigate(1);
   });
@@ -335,7 +390,8 @@ $(document).ready(function () {
   });
   $('#exampleModal #send-hour').click(validateHours); //phones
 
-  $('#add-phone').click(addPhone);
+  $('#add-phone').click(addPhone); //photos
+
   $('.photo').click(function () {
     pickPhoto($(this).attr('data-id'));
   });

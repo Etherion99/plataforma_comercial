@@ -1,22 +1,39 @@
 [
     [
         {
-
-        }
-    ],
-    [
-        {
             "id": "name",
             "type": "text",
             "required": true
         },
         {
-            "id": "group",
-            "type": "dropdown",
+            "id": "logo",
+            "type": "file",
             "required": true
         },
         {
             "id": "category",
+            "type": "dropdown",
+            "required": true
+        },
+        {
+            "id": "description",
+            "type": "text",
+            "required": true
+        }
+    ],
+    [
+        {
+            "id": "schedules",
+            "type": "special",
+            "required": true
+        },
+        {
+            "id": "payment_methods",
+            "type": "checkbox",
+            "required": true
+        },
+        {
+            "id": "delivery",
             "type": "dropdown",
             "required": true
         }
