@@ -87,27 +87,33 @@ function validateRequired(element, type) {
 
 function finish() {
     let data = new FormData();
+
     $('.photos-form .input-photo').each(function (){
         if ($(this)[0].files && $(this)[0].files[0]){
             data.append('gallery[]', $(this)[0].files[0]);
         }
     });
-    let fotoPerfil = $('#profile-photo');
-    if(fotoPerfil[0].files && fotoPerfil[0].files[0]){
-        data.append('profile-photo', $('#profile-photo')[0].files[0]);
-    }
-    let objectToSend = {
+
+    let logo = $('#logo');
+
+    if(logo[0].files && logo[0].files[0])
+        data.append('logo', logo[0].files[0]);
+
+    let companyData = {
         name: $('#name').val(),
-        group: $('#group').val(),
-        category: $('#category').val(),
+        category_id: $('#category').val(),
+        description: $('#description').val()/*,
         schedules: daySchedules,
         paymentMethods: $('#paymentMethods').val(),
         delivery: $('#delivery').val(),
         department: $('#department').val(),
         municipality: $('#municipality').val(),
         address: $('#address').val(),
-        phones: phones
+        phones: phones*/
     }
+
+    data.append('company_data', JSON.stringify(companyData));
+
     $.ajax({
         url: signupURL,
         method: 'POST',

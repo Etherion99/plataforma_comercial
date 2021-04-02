@@ -124,11 +124,9 @@
 
                 <div class="row d-flex justify-content-center">
                     <div class="col-4">
-                        <p class="color-main text-center"><strong>Foto de perfil</strong></p>
-                        <input type="file" class="d-none input-photo" data-id="12" id="profile-photo">
-                        <div
-                            class="photo rounded-circle embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
-                            data-id="12">
+                        <p class="color-main text-center"><strong>Logo</strong></p>
+                        <input type="file" class="d-none input-photo" data-id="0" id="logo">
+                        <div class="photo rounded-circle embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center" data-id="0">
                             <i class="fas fa-portrait"></i>
                         </div>
                     </div>
@@ -136,7 +134,7 @@
                 <div class="row d-flex justify-content-center mt-5">
                     <div class="form-group col">
                         <label for="name" class="color-main"><strong>Nombre</strong></label>
-                        <input type="text" class="form-control" id="name">
+                        <input type="text" class="form-control" name="name" id="name" value="prueba">
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                     <div class="form-group col">
@@ -152,9 +150,16 @@
                         <label for="category" class="color-main"><strong>Categoría</strong></label>
                         <select id="category" class="wide">
                             <option value="">Seleccione</option>
-                            <option value="1">categoría 1</option>
+                            <option value="1" selected>categoría 1</option>
                             <option value="2">categoría 2</option>
                         </select>
+                        <small class="form-text text-danger font-weight-bold form-input-alert"></small>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="form-group col">
+                        <label for="description" class="color-main"><strong>Descripción</strong></label>
+                        <textarea name="description" class="form-control" id="description" rows="5" placeholder="Descríbenos brevemente tu empresa, los productos que vende o servicios que presta...">descripcion</textarea>
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                 </div>
@@ -305,7 +310,7 @@
             <div class="form-container col-8 offset-2" data-id="3">
                 <div class="row photos-form">
                     <div class="col-4 p-3">
-                        <input type="file" class="d-none input-photo" data-id="0">
+                        <input type="file" class="d-none input-photo" data-id="1">
                         <div
                             class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
                             data-id="0">
@@ -313,7 +318,7 @@
                         </div>
                     </div>
                     <div class="col-4 p-3">
-                        <input type="file" class="d-none input-photo" data-id="1">
+                        <input type="file" class="d-none input-photo" data-id="2">
                         <div
                             class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
                             data-id="1">
@@ -321,7 +326,7 @@
                         </div>
                     </div>
                     <div class="col-4 p-3">
-                        <input type="file" class="d-none input-photo" data-id="2">
+                        <input type="file" class="d-none input-photo" data-id="3">
                         <div
                             class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
                             data-id="2">
@@ -329,7 +334,7 @@
                         </div>
                     </div>
                     <div class="col-4 p-3">
-                        <input type="file" class="d-none input-photo" data-id="3">
+                        <input type="file" class="d-none input-photo" data-id="4">
                         <div
                             class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
                             data-id="3">

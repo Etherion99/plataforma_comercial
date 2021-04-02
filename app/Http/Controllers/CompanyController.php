@@ -28,13 +28,22 @@ class CompanyController extends Controller
     }
 
     public function signup(Request $request){
-        $files = $request->file('gallery');
-        //$texto = json_decode($request->input('texto'));
+        /*$files = $request->file('gallery');
+        $texto = json_decode($request->input('texto'));
         $profilePhoto = $request->file('profile-photo');
         $new_var = $profilePhoto->getClientOriginalName() . '-';
 //        foreach ($files as $file){
 //            $new_var.= $file->getClientOriginalName();
 //        }
-        return $new_var;
+        return $new_var;*/
+
+        $companyData = json_decode($request->input('company_data'), true);
+        $company = Company::create($companyData);
+
+        $logo = $request->file('logo');
+        $save = $logo->storeAs('', 'prueba'.$logo->extension());
+
+        var_dump($save);
+
     }
 }
