@@ -1,5 +1,5 @@
-var navPrev = $('#nav-prev'), navNext = $('#nav-next'), navFinish = $('#nav-finish'), groupFilter=$('#group'),
-    categoryFilter = $('#category'), filters = $('.filter');
+var navPrev = $('#nav-prev'), navNext = $('#nav-next'), navFinish = $('#nav-finish'), group = $('#group'),
+    category = $('#category'), department = $('#department'), municipality = $('#municipality');
 
 var page = 0;
 const lastPage = 3;
@@ -7,7 +7,7 @@ var daySchedules = JSON.parse("[{\"0\":{\"start\":\"08:00\",\"end\":\"10:00\"}},
 var validations = [];
 var uniqueId = 0;
 
-var phones = {};
+var phonesModel = JSON.parse("{\"0\":{\"number\":\"3104778865\",\"type\":\"1\"},\"1\":{\"number\":\"3134153786\",\"type\":\"4\"}}"); //{};
 var phonesId = 0;
 var phoneTypes = {
     1: { name: 'Fijo', icons: ['fas fa-phone'] },
@@ -16,28 +16,35 @@ var phoneTypes = {
     4: { name: 'Llamadas y Whatsapp', icons: ['fas fa-mobile-alt', 'fab fa-whatsapp'] }
 }
 
-function fillFilter(filter) {
-    if (filter.val() !== '0')
-        filter.addClass('filter-selected');
-    else
-        filter.removeClass('filter-selected');
+function loadCategories(){
+    let groupId = $(this).val();
 
-    filter.niceSelect('update');
+    category.html($('<option>', {value: '', text: 'Seleccione'}));
+
+    if (groupId !== ''){
+        category.append($('#categories-optgroup-' + groupId).clone());
+
+        category.prop('disabled', false);
+        category.niceSelect('update');
+    }else {
+        category.prop('disabled', true);
+        category.niceSelect('update');
+    }
 }
 
-function loadCategories(){
-    var group = $(this).val();
-    categoryFilter.html($('<option>', {value: '0', text: 'Categoría'}));
-    if (group !== '0')
-        $.get('/api/categories/group/' + group, {}, function (data) {
-            data.map((option) => categoryFilter.append($('<option>', {value: option.id, text: option.name})));
-            categoryFilter.prop('disabled', false);
-            fillFilter(categoryFilter);
-            categoryFilter.niceSelect('update');
-        });
-    else {
-        categoryFilter.prop('disabled', true);
-        fillFilter(categoryFilter);
+function loadMunicipalities(){
+    let departmentId = $(this).val();
+
+    municipality.html($('<option>', {value: '', text: 'Seleccione'}));
+
+    if (departmentId !== ''){
+        municipality.append($('#municipalities-optgroup-' + departmentId).clone());
+
+        municipality.prop('disabled', false);
+        municipality.niceSelect('update');
+    }else {
+        municipality.prop('disabled', true);
+        municipality.niceSelect('update');
     }
 }
 
@@ -122,11 +129,14 @@ function validateRequired(id, type) {
                             break;
                         }
                     break;
+                case 'phones':
+                    res = Object.keys(phonesModel).length > 0;
+                    break;
             }
             break;
     }
 
-    console.log(type);
+    console.log(id);
     console.log(res);
 
     let alert = element.closest('.form-group').find('.form-input-alert');
@@ -152,8 +162,11 @@ function finish() {
         name: $('#name').val(),
         category_id: $('#category').val(),
         description: $('#description').val(),
-        delivery: $('#delivery').val()
+        delivery: $('#delivery').val(),
+        pack_id: $('#pack').val()
     }
+
+    console.log(companyData);
 
     data.append('company_data', JSON.stringify(companyData));
 
@@ -179,9 +192,20 @@ function finish() {
         }
     }
 
+    let phones = [];
+
+    for(let phoneKey of Object.keys(phonesModel))
+        phones.push(phonesModel[phoneKey]);
+
+    console.log(phones);
+
+    let addresses = [];
+
     let otherData = {
         payment_methods: paymentMethods,
-        schedules: schedules
+        schedules: schedules,
+        phones: phones,
+        addresses: addresses
     }
 
     data.append('other_data', JSON.stringify(otherData));
@@ -317,15 +341,13 @@ function addPhone(){
         );
 
         $('#phones').append(phoneHtml);
-        phones[phonesId] = phone;
+        phonesModel[phonesId] = phone;
 
         $('#' + idHtml).find('.delete-phone').click(function (){
            removePhone(idHtml);
         });
 
         phonesId++;
-
-        console.log(phones);
 
         clearAddPhonemodal();
     }else{
@@ -334,15 +356,15 @@ function addPhone(){
 }
 
 function addPhoneValidation(newPhone){
-    for(let index of Object.keys(phones))
-        if(phones[index].number === newPhone.number) return false;
+    for(let index of Object.keys(phonesModel))
+        if(phonesModel[index].number === newPhone.number) return false;
 
     return true;
 }
 
 function removePhone(id){
     $('#' + id).remove();
-    delete phones[id.split('-')[1]];
+    delete phonesModel[id.split('-')[1]];
 }
 
 function clearAddPhonemodal(){
@@ -381,10 +403,10 @@ $(document).ready(function () {
     navigate(0);
 
     /*$('.form-container[data-id=' + 0 + ']').slideUp(function () {
-        $('.form-container[data-id=' + 1 + ']').slideDown();
+        $('.form-container[data-id=' + 2 + ']').slideDown();
     });
 
-    page = 1;*/
+    page = 2;*/
 
     navNext.click(function () {
         navigate(1);
@@ -396,11 +418,8 @@ $(document).ready(function () {
 
     navFinish.click(finish);
 
-    groupFilter.change(loadCategories);
-
-    filters.change(function () {
-        fillFilter($(this));
-    });
+    group.change(loadCategories);
+    department.change(loadMunicipalities);
 
     $('#closeAlertScheduleModal').click(function(){$('#alertScheduleModal').slideUp()});
 

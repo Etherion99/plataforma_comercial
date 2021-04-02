@@ -178,6 +178,15 @@
         </div>
         <div class="row my-5 py-5">
             <div class="form-container col-8 offset-2" data-id="0">
+                <div class="d-none" id="categories-optgroups">
+                    @foreach($categories as $category)
+                        <optgroup id="categories-optgroup-{{ $category['id'] }}">
+                            @foreach($category['categories'] as $subcategory)
+                                <option value="{{ $subcategory['id'] }}">{{ $subcategory['name'] }}</option>
+                            @endforeach
+                        </optgroup>
+                    @endforeach
+                </div>
                 <div class="row d-flex justify-content-center">
                     <div class="form-group col-4">
                         <p class="color-main text-center"><strong>Logo</strong></p>
@@ -195,19 +204,31 @@
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                     <div class="form-group col">
+                        <label for="pack" class="color-main"><strong>Plan</strong></label>
+                        <select id="pack" class="wide">
+                            <option value="">Seleccione</option>
+                            @foreach($packs as $pack)
+                                <option value="{{ $pack->id }}" {{ $pack->id == 1 ? 'selected' : '' }}>{{ $pack->name }}</option>
+                            @endforeach
+                        </select>
+                        <small class="form-text text-danger font-weight-bold form-input-alert"></small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
                         <label for="group" class="color-main"><strong>Grupo</strong></label>
-                        <select id="group" class="wide filter">
-                            <option value="0">Seleccione</option>
-                            @foreach($groups as $group)
-                                <option value="{{ $group->id }}">{{ $group->name }}</option>
+                        <select id="group" class="wide">
+                            <option value="">Seleccione</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
                             @endforeach
                         </select>
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                     <div class="form-group col">
                         <label for="category" class="color-main"><strong>Categoría</strong></label>
-                        <select id="category" class="wide filter" disabled>
-                            <option value="2">Seleccione</option>
+                        <select id="category" class="wide" disabled>
+                            <option value="4">Seleccione</option>
                         </select>
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
@@ -270,8 +291,8 @@
                     <div class="form-group col">
                         <label for="delivery" class="color-main"><strong>Domicilios</strong></label>
                         <select id="delivery" class="wide">
-                            <option value="" selected>Seleccione</option>
-                            <option value="1">Sí</option>
+                            <option value="">Seleccione</option>
+                            <option value="1" selected>Sí</option>
                             <option value="0">No</option>
                         </select>
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
@@ -279,35 +300,43 @@
                 </div>
             </div>
             <div class="form-container col-8 offset-2" data-id="2">
+                <div class="d-none" id="municipalities-optgroups">
+                    @foreach($departments as $department)
+                        <optgroup id="municipalities-optgroup-{{ $loop->index }}">
+                            @foreach($department['municipalities'] as $municipality)
+                                <option value="{{ $municipality['id'] }}">{{ $municipality['name'] }}</option>
+                            @endforeach
+                        </optgroup>
+                    @endforeach
+                </div>
                 <div class="row d-flex justify-content-center mt-3">
                     <div class="form-group col">
                         <label for="department" class="color-main"><strong>Departamento</strong></label>
                         <select name="department" id="department" class="wide">
                             <option value="">Seleccione</option>
-                            <option value="1">Huila</option>
+                            @foreach($departments as $department)
+                                <option value="{{ $loop->index }}">{{ $department['name'] }}</option>
+                            @endforeach
                         </select>
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                     <div class="form-group col">
                         <label for="municipality" class="color-main"><strong>Municipio</strong></label>
-                        <select name="municipality" id="municipality" class="wide">
-                            <option value="">Seleccione</option>
-                            <option value="1">La Plata</option>
+                        <select name="municipality" id="municipality" class="wide" disabled>
+                            <option value="4">Seleccione</option>
                         </select>
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                     <div class="form-group col">
                         <label for="address" class="color-main"><strong>Dirección</strong></label>
-                        <input type="text" class="form-control" name="address" id="address">
+                        <input type="text" class="form-control" name="address" id="address" value="calle 1 # 3-53">
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                 </div>
                 <div class="row mt-5 mb-3">
                     <h4 class="color-main">Teléfonos</h4>
                 </div>
-                <div class="row" id="phones">
-
-                </div>
+                <div class="row" id="phones"></div>
                 <div class="row d-flex justify-content-center my-5">
                     <button class="btn btn-main-square" data-toggle="modal" data-target="#add-phone-modal">
                         <i class="fas fa-plus"></i> Agregar teléfono

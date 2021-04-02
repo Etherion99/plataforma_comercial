@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Company;
+use App\Models\Department;
+use App\Models\Pack;
 use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
 
@@ -20,8 +22,8 @@ class WebController extends Controller
                 'name' => $category['name'],
                 'categories' => array_map(function($subcategory) {
                     return array(
-                       'id' => $subcategory['id'],
-                       'name' =>  $subcategory['name']
+                        'id' => $subcategory['id'],
+                        'name' =>  $subcategory['name']
                     );
                 }, $category['categories'])
             );
@@ -49,11 +51,49 @@ class WebController extends Controller
     }
 
     public function access(){
-        $groups = Category::select(['id', 'name'])->where('category_id', null)->get();
+        $categories = Category::select(['id', 'name'])
+            ->whereNull('category_id')
+            ->with(['categories' => function($q){ return $q->select(['id', 'name', 'category_id']); }])
+            ->get()->toArray();
+
+        $categories = array_map(function($category){
+            return array(
+                'id' => $category['id'],
+                'name' => $category['name'],
+                'categories' => array_map(function($subcategory) {
+                    return array(
+                        'id' => $subcategory['id'],
+                        'name' =>  $subcategory['name']
+                    );
+                }, $category['categories'])
+            );
+        }, $categories);
+
         $payments = PaymentMethod::select(['id', 'name'])->get();
+
+        $departments = Department::select(['id', 'name'])
+            ->with(['municipalities' => function($q){ return $q->select(['id', 'name', 'department_id']); }])
+            ->get()->toArray();
+
+        $departments = array_map(function($department){
+            return array(
+                'name' => $department['name'],
+                'municipalities' => array_map(function($municipality) {
+                    return array(
+                        'id' => $municipality['id'],
+                        'name' =>  $municipality['name']
+                    );
+                }, $department['municipalities'])
+            );
+        }, $departments);
+
+        $packs = Pack::select(['id', 'name'])->get();
+
         return view('access', [
             'paymentMethods' => $payments,
-            'groups' => $groups
+            'categories' => $categories,
+            'departments' => $departments,
+            'packs' => $packs
         ]);
     }
 }

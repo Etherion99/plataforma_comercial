@@ -13,6 +13,7 @@ class CreateCompaniesTable extends Migration
             $table->string('name', 80);
             $table->string('description', 400);
             $table->foreignId('category_id')->constrained();
+            $table->foreignId('pack_id')->constrained();
             $table->boolean('delivery');
             $table->string('logo_ext', 4);
             $table->timestamps();

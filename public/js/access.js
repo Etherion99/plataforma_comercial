@@ -12,16 +12,18 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 var navPrev = $('#nav-prev'),
     navNext = $('#nav-next'),
     navFinish = $('#nav-finish'),
-    groupFilter = $('#group'),
-    categoryFilter = $('#category'),
-    filters = $('.filter');
+    group = $('#group'),
+    category = $('#category'),
+    department = $('#department'),
+    municipality = $('#municipality');
 var page = 0;
 var lastPage = 3;
 var daySchedules = JSON.parse("[{\"0\":{\"start\":\"08:00\",\"end\":\"10:00\"}},{},{\"1\":{\"start\":\"12:00\",\"end\":\"15:00\"},\"2\":{\"start\":\"16:00\",\"end\":\"18:30\"}},{},{},{},{}]"); // [{}, {}, {}, {}, {}, {}, {}];
 
 var validations = [];
 var uniqueId = 0;
-var phones = {};
+var phonesModel = JSON.parse("{\"0\":{\"number\":\"3104778865\",\"type\":\"1\"},\"1\":{\"number\":\"3134153786\",\"type\":\"4\"}}"); //{};
+
 var phonesId = 0;
 var phoneTypes = {
   1: {
@@ -42,30 +44,37 @@ var phoneTypes = {
   }
 };
 
-function fillFilter(filter) {
-  if (filter.val() !== '0') filter.addClass('filter-selected');else filter.removeClass('filter-selected');
-  filter.niceSelect('update');
+function loadCategories() {
+  var groupId = $(this).val();
+  category.html($('<option>', {
+    value: '',
+    text: 'Seleccione'
+  }));
+
+  if (groupId !== '') {
+    category.append($('#categories-optgroup-' + groupId).clone());
+    category.prop('disabled', false);
+    category.niceSelect('update');
+  } else {
+    category.prop('disabled', true);
+    category.niceSelect('update');
+  }
 }
 
-function loadCategories() {
-  var group = $(this).val();
-  categoryFilter.html($('<option>', {
-    value: '0',
-    text: 'Categoría'
+function loadMunicipalities() {
+  var departmentId = $(this).val();
+  municipality.html($('<option>', {
+    value: '',
+    text: 'Seleccione'
   }));
-  if (group !== '0') $.get('/api/categories/group/' + group, {}, function (data) {
-    data.map(function (option) {
-      return categoryFilter.append($('<option>', {
-        value: option.id,
-        text: option.name
-      }));
-    });
-    categoryFilter.prop('disabled', false);
-    fillFilter(categoryFilter);
-    categoryFilter.niceSelect('update');
-  });else {
-    categoryFilter.prop('disabled', true);
-    fillFilter(categoryFilter);
+
+  if (departmentId !== '') {
+    municipality.append($('#municipalities-optgroup-' + departmentId).clone());
+    municipality.prop('disabled', false);
+    municipality.niceSelect('update');
+  } else {
+    municipality.prop('disabled', true);
+    municipality.niceSelect('update');
   }
 }
 
@@ -175,12 +184,16 @@ function validateRequired(id, type) {
           }
 
           break;
+
+        case 'phones':
+          res = Object.keys(phonesModel).length > 0;
+          break;
       }
 
       break;
   }
 
-  console.log(type);
+  console.log(id);
   console.log(res);
   var alert = element.closest('.form-group').find('.form-input-alert');
   alert.text('Campo obligatorio');
@@ -201,8 +214,10 @@ function finish() {
     name: $('#name').val(),
     category_id: $('#category').val(),
     description: $('#description').val(),
-    delivery: $('#delivery').val()
+    delivery: $('#delivery').val(),
+    pack_id: $('#pack').val()
   };
+  console.log(companyData);
   data.append('company_data', JSON.stringify(companyData));
   var paymentMethods = [];
   $('.payment-method').each(function () {
@@ -222,9 +237,20 @@ function finish() {
     }
   }
 
+  var phones = [];
+
+  for (var _i2 = 0, _Object$keys = Object.keys(phonesModel); _i2 < _Object$keys.length; _i2++) {
+    var phoneKey = _Object$keys[_i2];
+    phones.push(phonesModel[phoneKey]);
+  }
+
+  console.log(phones);
+  var addresses = [];
   var otherData = {
     payment_methods: paymentMethods,
-    schedules: schedules
+    schedules: schedules,
+    phones: phones,
+    addresses: addresses
   };
   data.append('other_data', JSON.stringify(otherData));
   $.ajax({
@@ -286,8 +312,8 @@ function validateHours() {
 
   if (hoursToSend.end !== '' && hoursToSend.start !== '') {
     if (f2 > i2) {
-      for (var _i2 = 0, _Object$keys = Object.keys(daySchedules[day]); _i2 < _Object$keys.length; _i2++) {
-        var index = _Object$keys[_i2];
+      for (var _i3 = 0, _Object$keys2 = Object.keys(daySchedules[day]); _i3 < _Object$keys2.length; _i3++) {
+        var index = _Object$keys2[_i3];
         var f1 = new Date('01/01/2020 ' + daySchedules[day][index].end).getTime();
         var i1 = new Date('01/01/2020 ' + daySchedules[day][index].start).getTime();
 
@@ -354,12 +380,11 @@ function addPhone() {
       'class': 'fas fa-trash-alt'
     })));
     $('#phones').append(phoneHtml);
-    phones[phonesId] = phone;
+    phonesModel[phonesId] = phone;
     $('#' + idHtml).find('.delete-phone').click(function () {
       removePhone(idHtml);
     });
     phonesId++;
-    console.log(phones);
     clearAddPhonemodal();
   } else {
     console.log('invalid');
@@ -367,9 +392,9 @@ function addPhone() {
 }
 
 function addPhoneValidation(newPhone) {
-  for (var _i3 = 0, _Object$keys2 = Object.keys(phones); _i3 < _Object$keys2.length; _i3++) {
-    var index = _Object$keys2[_i3];
-    if (phones[index].number === newPhone.number) return false;
+  for (var _i4 = 0, _Object$keys3 = Object.keys(phonesModel); _i4 < _Object$keys3.length; _i4++) {
+    var index = _Object$keys3[_i4];
+    if (phonesModel[index].number === newPhone.number) return false;
   }
 
   return true;
@@ -377,7 +402,7 @@ function addPhoneValidation(newPhone) {
 
 function removePhone(id) {
   $('#' + id).remove();
-  delete phones[id.split('-')[1]];
+  delete phonesModel[id.split('-')[1]];
 }
 
 function clearAddPhonemodal() {
@@ -414,9 +439,9 @@ $(document).ready(function () {
   initValidations();
   navigate(0);
   /*$('.form-container[data-id=' + 0 + ']').slideUp(function () {
-      $('.form-container[data-id=' + 1 + ']').slideDown();
+      $('.form-container[data-id=' + 2 + ']').slideDown();
   });
-   page = 1;*/
+   page = 2;*/
 
   navNext.click(function () {
     navigate(1);
@@ -425,10 +450,8 @@ $(document).ready(function () {
     navigate(-1);
   });
   navFinish.click(finish);
-  groupFilter.change(loadCategories);
-  filters.change(function () {
-    fillFilter($(this));
-  });
+  group.change(loadCategories);
+  department.change(loadMunicipalities);
   $('#closeAlertScheduleModal').click(function () {
     $('#alertScheduleModal').slideUp();
   });

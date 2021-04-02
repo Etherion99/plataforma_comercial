@@ -81,8 +81,8 @@
                 <div class="col-lg-12">
                     <!-- Section Tittle -->
                     <div class="section-tittle text-center mb-80">
-                        <span>Most visited places</span>
-                        <h2>Popular Locations</h2>
+                        <span>We are offering for you</span>
+                        <h2>Nuestras Categorías</h2>
                     </div>
                 </div>
             </div>

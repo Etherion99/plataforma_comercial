@@ -38,13 +38,13 @@ class CompanyController extends Controller
 //        }
         return $new_var;*/
 
-        $logo = $request->file('logo');
+        //$logo = $request->file('logo');
 
         $companyData = json_decode($request->input('company_data'), true);
-        $companyData['logo_ext'] = $logo->extension();
+        $companyData['logo_ext'] = 'jpg'; //$logo->extension();
         $company = Company::create($companyData);
 
-        $logo->storeAs('public/company_logo', $company->id.'.'.$logo->extension());
+        //$logo->storeAs('public/company_logo', $company->id.'.'.$logo->extension());
 
 
         $otherData = json_decode($request->input('other_data'), true);
@@ -52,6 +52,10 @@ class CompanyController extends Controller
         foreach ($otherData['schedules'] as $schedule){
             $schedule['company_id'] = $company->id;
             Schedule::create($schedule);
+        }
+
+        foreach ($otherData['payment_methods'] as $paymentmethod){
+            $company->paymentMethods()->save($paymentmethod);
         }
 
         var_dump('dd');

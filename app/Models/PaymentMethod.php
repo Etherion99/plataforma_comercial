@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class PaymentMethod extends Model
 {
     protected $fillable = ['name'];
+
+    public function companies(){
+        return $this->belongsToMany(Company::class);
+    }
 }

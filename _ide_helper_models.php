@@ -12,6 +12,23 @@
 
 namespace App\Models{
 /**
+ * App\Models\Address
+ *
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Address newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Address newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Address query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Address whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Address whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Address whereUpdatedAt($value)
+ */
+	class Address extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Category
  *
  * @property int $id
@@ -45,18 +62,26 @@ namespace App\Models{
  * @property string $name
  * @property string $description
  * @property int $category_id
+ * @property int $pack_id
+ * @property int $delivery
+ * @property string $logo_ext
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Category $category
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PaymentMethod[] $paymentMethods
+ * @property-read int|null $payment_methods_count
  * @method static \Database\Factories\CompanyFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Company newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Company newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Company query()
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereCategoryId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereDelivery($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company whereLogoExt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Company wherePackId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Company whereUpdatedAt($value)
  */
 	class Company extends \Eloquent {}
@@ -107,12 +132,33 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Pack
+ *
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Pack newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Pack newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Pack query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Pack whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pack whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pack whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Pack whereUpdatedAt($value)
+ */
+	class Pack extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\PaymentMethod
  *
  * @property int $id
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Company[] $companies
+ * @property-read int|null $companies_count
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentMethod newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentMethod newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentMethod query()
@@ -128,9 +174,17 @@ namespace App\Models{
 /**
  * App\Models\Phone
  *
+ * @property int $id
+ * @property string $number
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Phone newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Phone newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Phone query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Phone whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Phone whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Phone whereNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Phone whereUpdatedAt($value)
  */
 	class Phone extends \Eloquent {}
 }
@@ -139,9 +193,23 @@ namespace App\Models{
 /**
  * App\Models\Schedule
  *
+ * @property int $id
+ * @property int $day
+ * @property int $company_id
+ * @property string $start
+ * @property string $end
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Schedule newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Schedule newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Schedule query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Schedule whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Schedule whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Schedule whereDay($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Schedule whereEnd($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Schedule whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Schedule whereStart($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Schedule whereUpdatedAt($value)
  */
 	class Schedule extends \Eloquent {}
 }
@@ -150,9 +218,19 @@ namespace App\Models{
 /**
  * App\Models\SocialLink
  *
+ * @property int $id
+ * @property string $url
+ * @property int $social_network_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|SocialLink newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SocialLink newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SocialLink query()
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink whereSocialNetworkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink whereUrl($value)
  */
 	class SocialLink extends \Eloquent {}
 }
@@ -161,9 +239,19 @@ namespace App\Models{
 /**
  * App\Models\SocialNetwork
  *
+ * @property int $id
+ * @property string $name
+ * @property string $icon
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|SocialNetwork newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SocialNetwork newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SocialNetwork query()
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialNetwork whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialNetwork whereIcon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialNetwork whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialNetwork whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialNetwork whereUpdatedAt($value)
  */
 	class SocialNetwork extends \Eloquent {}
 }

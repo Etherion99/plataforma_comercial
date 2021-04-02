@@ -6,9 +6,14 @@
             "required": true
         },
         {
+            "id": "pack",
+            "type": "dropdown",
+            "required": true
+        },
+        {
             "id": "logo",
             "type": "file",
-            "required": true
+            "required": false
         },
         {
             "id": "category",
@@ -35,6 +40,23 @@
         {
             "id": "delivery",
             "type": "dropdown",
+            "required": true
+        }
+    ],
+    [
+        {
+            "id": "municipality",
+            "type": "dropdown",
+            "required": true
+        },
+        {
+            "id": "address",
+            "type": "text",
+            "required": true
+        },
+        {
+            "id": "phones",
+            "type": "special",
             "required": true
         }
     ]
