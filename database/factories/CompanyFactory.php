@@ -17,7 +17,9 @@ class CompanyFactory extends Factory
         return [
             'name' => $this->faker->word(),
             'description' => $this->faker->sentence(10),
-            'category_id' => $this->faker->randomElement($categories)
+            'category_id' => $this->faker->randomElement($categories),
+            'delivery' => $this->faker->randomElement([0, 1]),
+            'logo_ext' => 'jpg'
         ];
     }
 }

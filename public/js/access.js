@@ -17,7 +17,7 @@ var navPrev = $('#nav-prev'),
     filters = $('.filter');
 var page = 0;
 var lastPage = 3;
-var daySchedules = [{}, {}, {}, {}, {}, {}, {}]; //JSON.parse("[{\"0\":{\"horaInicio\":\"08:00\",\"horaFinal\":\"10:00\"}},{},{\"1\":{\"horaInicio\":\"12:00\",\"horaFinal\":\"15:00\"},\"2\":{\"horaInicio\":\"16:00\",\"horaFinal\":\"18:30\"}},{},{},{},{}]");// [{}, {}, {}, {}, {}, {}, {}];
+var daySchedules = JSON.parse("[{\"0\":{\"start\":\"08:00\",\"end\":\"10:00\"}},{},{\"1\":{\"start\":\"12:00\",\"end\":\"15:00\"},\"2\":{\"start\":\"16:00\",\"end\":\"18:30\"}},{},{},{},{}]"); // [{}, {}, {}, {}, {}, {}, {}];
 
 var validations = [];
 var uniqueId = 0;
@@ -190,34 +190,43 @@ function validateRequired(id, type) {
 
 function finish() {
   var data = new FormData();
-  $('.photos-form .input-photo').each(function () {
-    if ($(this)[0].files && $(this)[0].files[0]) {
-      data.append('gallery[]', $(this)[0].files[0]);
-    }
-  });
-  var logo = $('#logo');
-  if (logo[0].files && logo[0].files[0]) data.append('logo', logo[0].files[0]);
-  var paymentMethods = [];
-  $('.payment-method').each(function () {
-    if ($(this).prop('checked')) paymentMethods.push($(this).val());
-  });
+  /*$('.photos-form .input-photo').each(function (){
+      if ($(this)[0].files && $(this)[0].files[0]){
+          data.append('gallery[]', $(this)[0].files[0]);
+      }
+  });*/
+
+  data.append('logo', $('#logo')[0].files[0]);
   var companyData = {
     name: $('#name').val(),
     category_id: $('#category').val(),
     description: $('#description').val(),
     delivery: $('#delivery').val()
-    /*,
-    schedules: daySchedules,
-    department: $('#department').val(),
-    municipality: $('#municipality').val(),
-    address: $('#address').val(),
-    phones: phones*/
-
   };
   data.append('company_data', JSON.stringify(companyData));
+  var paymentMethods = [];
+  $('.payment-method').each(function () {
+    if ($(this).prop('checked')) paymentMethods.push($(this).val());
+  });
+  var schedules = [];
+
+  for (var dayKey in daySchedules) {
+    var day = daySchedules[dayKey];
+    var keys = Object.keys(day);
+
+    for (var _i = 0, _keys = keys; _i < _keys.length; _i++) {
+      var key = _keys[_i];
+      var schedule = day[key];
+      schedule['day'] = dayKey;
+      schedules.push(schedule);
+    }
+  }
+
   var otherData = {
-    payment_methods: paymentMethods
+    payment_methods: paymentMethods,
+    schedules: schedules
   };
+  data.append('other_data', JSON.stringify(otherData));
   $.ajax({
     url: signupURL,
     method: 'POST',
@@ -241,11 +250,11 @@ function fillSchedule(result, day) {
     'class': 'badge-custom d-flex align-items-center',
     'id': idToFill
   }).append($('<span>', {
-    'id': 'horaInicio'
-  }).text(result.horaInicio)).append($('<span>', {
-    'id': 'horaFinal',
+    'id': 'start'
+  }).text(result.start)).append($('<span>', {
+    'id': 'end',
     'class': 'ml-2'
-  }).text(result.horaFinal)).append($('<button>', {
+  }).text(result.end)).append($('<button>', {
     'type': 'button',
     'class': 'close ml-15 delete-hour'
   }).html($('<i>', {
@@ -253,8 +262,8 @@ function fillSchedule(result, day) {
   })));
   $('#day-' + day).append(horario);
   daySchedules[day][uniqueId] = {
-    horaInicio: result.horaInicio,
-    horaFinal: result.horaFinal
+    start: result.start,
+    end: result.end
   };
   console.log(JSON.stringify(daySchedules));
   $('#' + idToFill).find('.delete-hour').click(function () {
@@ -267,20 +276,20 @@ function fillSchedule(result, day) {
 function validateHours() {
   var day = $('#select-days').val();
   var hoursToSend = {
-    horaInicio: $('#select-first-hour').val(),
-    horaFinal: $('#select-last-hour').val()
+    start: $('#select-first-hour').val(),
+    end: $('#select-last-hour').val()
   };
   var can = true;
   var message;
-  var f2 = new Date('01/01/2020 ' + hoursToSend.horaFinal).getTime();
-  var i2 = new Date('01/01/2020 ' + hoursToSend.horaInicio).getTime();
+  var f2 = new Date('01/01/2020 ' + hoursToSend.end).getTime();
+  var i2 = new Date('01/01/2020 ' + hoursToSend.start).getTime();
 
-  if (hoursToSend.horaFinal !== '' && hoursToSend.horaInicio !== '') {
+  if (hoursToSend.end !== '' && hoursToSend.start !== '') {
     if (f2 > i2) {
-      for (var _i = 0, _Object$keys = Object.keys(daySchedules[day]); _i < _Object$keys.length; _i++) {
-        var index = _Object$keys[_i];
-        var f1 = new Date('01/01/2020 ' + daySchedules[day][index].horaFinal).getTime();
-        var i1 = new Date('01/01/2020 ' + daySchedules[day][index].horaInicio).getTime();
+      for (var _i2 = 0, _Object$keys = Object.keys(daySchedules[day]); _i2 < _Object$keys.length; _i2++) {
+        var index = _Object$keys[_i2];
+        var f1 = new Date('01/01/2020 ' + daySchedules[day][index].end).getTime();
+        var i1 = new Date('01/01/2020 ' + daySchedules[day][index].start).getTime();
 
         if (i2 < f1 && f2 > i1) {
           can = false;
@@ -358,8 +367,8 @@ function addPhone() {
 }
 
 function addPhoneValidation(newPhone) {
-  for (var _i2 = 0, _Object$keys2 = Object.keys(phones); _i2 < _Object$keys2.length; _i2++) {
-    var index = _Object$keys2[_i2];
+  for (var _i3 = 0, _Object$keys2 = Object.keys(phones); _i3 < _Object$keys2.length; _i3++) {
+    var index = _Object$keys2[_i3];
     if (phones[index].number === newPhone.number) return false;
   }
 
@@ -404,10 +413,11 @@ $(document).ready(function () {
   uniqueId = 0;
   initValidations();
   navigate(0);
-  $('.form-container[data-id=' + 0 + ']').slideUp(function () {
-    $('.form-container[data-id=' + 1 + ']').slideDown();
+  /*$('.form-container[data-id=' + 0 + ']').slideUp(function () {
+      $('.form-container[data-id=' + 1 + ']').slideDown();
   });
-  page = 1;
+   page = 1;*/
+
   navNext.click(function () {
     navigate(1);
   });

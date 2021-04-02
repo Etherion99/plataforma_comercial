@@ -3,7 +3,7 @@ var navPrev = $('#nav-prev'), navNext = $('#nav-next'), navFinish = $('#nav-fini
 
 var page = 0;
 const lastPage = 3;
-var daySchedules = [{}, {}, {}, {}, {}, {}, {}]; //JSON.parse("[{\"0\":{\"horaInicio\":\"08:00\",\"horaFinal\":\"10:00\"}},{},{\"1\":{\"horaInicio\":\"12:00\",\"horaFinal\":\"15:00\"},\"2\":{\"horaInicio\":\"16:00\",\"horaFinal\":\"18:30\"}},{},{},{},{}]");// [{}, {}, {}, {}, {}, {}, {}];
+var daySchedules = JSON.parse("[{\"0\":{\"start\":\"08:00\",\"end\":\"10:00\"}},{},{\"1\":{\"start\":\"12:00\",\"end\":\"15:00\"},\"2\":{\"start\":\"16:00\",\"end\":\"18:30\"}},{},{},{},{}]");// [{}, {}, {}, {}, {}, {}, {}];
 var validations = [];
 var uniqueId = 0;
 
@@ -140,16 +140,22 @@ function validateRequired(id, type) {
 function finish() {
     let data = new FormData();
 
-    $('.photos-form .input-photo').each(function (){
+    /*$('.photos-form .input-photo').each(function (){
         if ($(this)[0].files && $(this)[0].files[0]){
             data.append('gallery[]', $(this)[0].files[0]);
         }
-    });
+    });*/
 
-    let logo = $('#logo');
+    data.append('logo', $('#logo')[0].files[0]);
 
-    if(logo[0].files && logo[0].files[0])
-        data.append('logo', logo[0].files[0]);
+    let companyData = {
+        name: $('#name').val(),
+        category_id: $('#category').val(),
+        description: $('#description').val(),
+        delivery: $('#delivery').val()
+    }
+
+    data.append('company_data', JSON.stringify(companyData));
 
     let paymentMethods = [];
 
@@ -158,24 +164,27 @@ function finish() {
             paymentMethods.push($(this).val());
     });
 
-    let companyData = {
-        name: $('#name').val(),
-        category_id: $('#category').val(),
-        description: $('#description').val(),
-        delivery: $('#delivery').val(), /*,
-        schedules: daySchedules,
-        department: $('#department').val(),
-        municipality: $('#municipality').val(),
-        address: $('#address').val(),
-        phones: phones*/
-    }
+    let schedules = [];
 
-    data.append('company_data', JSON.stringify(companyData));
+    for(let dayKey in daySchedules){
+        let day = daySchedules[dayKey];
+        let keys = Object.keys(day);
+
+        for(let key of keys){
+            let schedule = day[key];
+
+            schedule['day'] = dayKey;
+
+            schedules.push(schedule);
+        }
+    }
 
     let otherData = {
         payment_methods: paymentMethods,
-
+        schedules: schedules
     }
+
+    data.append('other_data', JSON.stringify(otherData));
 
     $.ajax({
         url: signupURL,
@@ -201,13 +210,13 @@ function fillSchedule(result, day) {
         'id': idToFill
     }).append(
         $('<span>', {
-            'id': 'horaInicio'
-        }).text(result.horaInicio)
+            'id': 'start'
+        }).text(result.start)
     ).append(
         $('<span>', {
-            'id': 'horaFinal',
+            'id': 'end',
             'class': 'ml-2'
-        }).text(result.horaFinal)
+        }).text(result.end)
     ).append(
         $('<button>', {
             'type': 'button',
@@ -221,7 +230,7 @@ function fillSchedule(result, day) {
 
     $('#day-' + day).append(horario);
 
-    daySchedules[day][uniqueId] = {horaInicio: result.horaInicio, horaFinal: result.horaFinal};
+    daySchedules[day][uniqueId] = {start: result.start, end: result.end};
     console.log(JSON.stringify(daySchedules));
 
     $('#'+idToFill).find('.delete-hour').click(function(){
@@ -235,18 +244,18 @@ function fillSchedule(result, day) {
 function validateHours() {
     const day = $('#select-days').val();
     let hoursToSend = {
-        horaInicio: $('#select-first-hour').val(),
-        horaFinal: $('#select-last-hour').val()
+        start: $('#select-first-hour').val(),
+        end: $('#select-last-hour').val()
     }
     let can = true;
     let message;
-    const f2 = new Date('01/01/2020 ' + hoursToSend.horaFinal).getTime();
-    const i2 = new Date('01/01/2020 ' + hoursToSend.horaInicio).getTime();
-    if (hoursToSend.horaFinal!=='' && hoursToSend.horaInicio!==''){
+    const f2 = new Date('01/01/2020 ' + hoursToSend.end).getTime();
+    const i2 = new Date('01/01/2020 ' + hoursToSend.start).getTime();
+    if (hoursToSend.end!=='' && hoursToSend.start!==''){
         if (f2>i2){
             for(let index of Object.keys(daySchedules[day])){
-                const f1 = new Date('01/01/2020 ' + daySchedules[day][index].horaFinal).getTime();
-                const i1 = new Date('01/01/2020 ' + daySchedules[day][index].horaInicio).getTime();
+                const f1 = new Date('01/01/2020 ' + daySchedules[day][index].end).getTime();
+                const i1 = new Date('01/01/2020 ' + daySchedules[day][index].start).getTime();
                 if(i2<f1 && f2>i1){
                     can = false;
                     message="Hay algún horario que se está cruzando";
@@ -371,11 +380,11 @@ $(document).ready(function () {
     initValidations();
     navigate(0);
 
-    $('.form-container[data-id=' + 0 + ']').slideUp(function () {
+    /*$('.form-container[data-id=' + 0 + ']').slideUp(function () {
         $('.form-container[data-id=' + 1 + ']').slideDown();
     });
 
-    page = 1;
+    page = 1;*/
 
     navNext.click(function () {
         navigate(1);
@@ -388,7 +397,7 @@ $(document).ready(function () {
     navFinish.click(finish);
 
     groupFilter.change(loadCategories);
-    
+
     filters.change(function () {
         fillFilter($(this));
     });

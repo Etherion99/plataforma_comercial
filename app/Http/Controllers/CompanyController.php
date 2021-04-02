@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\Category;
@@ -37,13 +38,21 @@ class CompanyController extends Controller
 //        }
         return $new_var;*/
 
+        $logo = $request->file('logo');
+
         $companyData = json_decode($request->input('company_data'), true);
+        $companyData['logo_ext'] = $logo->extension();
         $company = Company::create($companyData);
 
-        /*$logo = $request->file('logo');
-        $logo->storeAs('public/company_logo', $company->id.'.'.$logo->extension());*/
+        $logo->storeAs('public/company_logo', $company->id.'.'.$logo->extension());
 
 
+        $otherData = json_decode($request->input('other_data'), true);
+
+        foreach ($otherData['schedules'] as $schedule){
+            $schedule['company_id'] = $company->id;
+            Schedule::create($schedule);
+        }
 
         var_dump('dd');
 

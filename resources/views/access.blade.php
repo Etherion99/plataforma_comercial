@@ -207,7 +207,7 @@
                     <div class="form-group col">
                         <label for="category" class="color-main"><strong>Categoría</strong></label>
                         <select id="category" class="wide filter" disabled>
-                            <option value="0">Seleccione</option>
+                            <option value="2">Seleccione</option>
                         </select>
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>

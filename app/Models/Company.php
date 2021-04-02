@@ -10,7 +10,7 @@ class Company extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'category_id'
+        'name', 'description', 'category_id', 'delivery', 'logo_ext'
     ];
 
     public function category(){

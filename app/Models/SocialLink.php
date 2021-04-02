@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class SocialLink extends Model
 {
-    use HasFactory;
+
 }

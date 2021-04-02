@@ -64,6 +64,49 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Department
+ *
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Municipality[] $municipalities
+ * @property-read int|null $municipalities_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Department newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Department newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Department query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Department whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Department whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Department whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Department whereUpdatedAt($value)
+ */
+	class Department extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Municipality
+ *
+ * @property int $id
+ * @property string $name
+ * @property int $department_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Department $department
+ * @method static \Illuminate\Database\Eloquent\Builder|Municipality newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Municipality newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Municipality query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Municipality whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Municipality whereDepartmentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Municipality whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Municipality whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Municipality whereUpdatedAt($value)
+ */
+	class Municipality extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\PaymentMethod
  *
  * @property int $id
@@ -79,6 +122,50 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PaymentMethod whereUpdatedAt($value)
  */
 	class PaymentMethod extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Phone
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Phone newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Phone newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Phone query()
+ */
+	class Phone extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Schedule
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Schedule newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Schedule newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Schedule query()
+ */
+	class Schedule extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\SocialLink
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink query()
+ */
+	class SocialLink extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\SocialNetwork
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialNetwork newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialNetwork newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialNetwork query()
+ */
+	class SocialNetwork extends \Eloquent {}
 }
 
 namespace App\Models{
