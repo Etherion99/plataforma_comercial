@@ -38,8 +38,10 @@ function search() {
     if (text !== '') {
         category = category === '0' ? group : category;
         $.get('/api/companies/' + category + '/search/' + text, function (data) {
-            if (showingResults && data.length === 0)
-                inSearchResults.html('Puto el q lo lea');
+            if (data.length === 0){
+                inSearchResults.html('No hay coincidencias con la búsqueda');
+                searchResults.slideDown();
+            }
             else if(!showingResults && data.length !== 0){
                 inSearchResults.html('');
                 for (let result of data)

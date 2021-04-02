@@ -49,7 +49,10 @@ function search() {
   if (text !== '') {
     category = category === '0' ? group : category;
     $.get('/api/companies/' + category + '/search/' + text, function (data) {
-      if (showingResults && data.length === 0) inSearchResults.html('Puto el q lo lea');else if (!showingResults && data.length !== 0) {
+      if (data.length === 0) {
+        inSearchResults.html('No hay coincidencias con la búsqueda');
+        searchResults.slideDown();
+      } else if (!showingResults && data.length !== 0) {
         inSearchResults.html('');
 
         var _iterator = _createForOfIteratorHelper(data),
@@ -84,6 +87,7 @@ function search() {
           _iterator2.f();
         }
       }
+
       showingResults = true;
       console.log("showing ", showingResults);
     });

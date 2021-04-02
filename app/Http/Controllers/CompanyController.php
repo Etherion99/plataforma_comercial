@@ -11,7 +11,7 @@ class CompanyController extends Controller
 {
     public function search($category, $text){
         if(count(explode(' ', $text)) > 1)
-            $companies = Company::select('id', 'name', 'category_id')->whereRaw("MATCH(name) AGAINST('$text*' IN BOOLEAN MODE)");
+            $companies = Company::select('id', 'name', 'category_id')->whereRaw("MATCH(name, description) AGAINST('$text*' IN BOOLEAN MODE)");
         else
             $companies = Company::select('id', 'name', 'category_id')->where('name', 'LIKE', '%' . $text . '%');
 

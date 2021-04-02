@@ -17,6 +17,7 @@ class CreateCompaniesTable extends Migration
             $table->string('logo_ext', 4);
             $table->timestamps();
         });
+        DB::statement('ALTER TABLE companies ADD FULLTEXT search(name, description)');
     }
 
     public function down()
