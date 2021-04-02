@@ -50,10 +50,11 @@ class WebController extends Controller
     }
 
     public function access(){
-        $payments = PaymentMethod::select('id', 'name')->get();
-
+        $groups = Category::select(['id', 'name'])->where('category_id', null)->get();
+        $payments = PaymentMethod::select(['id', 'name'])->get();
         return view('access', [
-            'paymentMethods' => $payments
+            'paymentMethods' => $payments,
+            'groups' => $groups
         ]);
     }
 }
