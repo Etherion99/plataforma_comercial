@@ -113,9 +113,9 @@
     <div id="main-content" class="accordion">
         <!-- Information Area Start -->
         <div class="container collapse show" data-parent="#main-content" id="information">
-            <div class="row">
+            <div class="row d-flex align-items-lg-stretch">
                 <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 p-0">
-                    <div class="text-information">
+                    <div class="text-information h100">
                         <h3>Detalles</h3>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item border-0 pl-0"><i class="fa fa-map-marker-alt"></i>

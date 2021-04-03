@@ -101,18 +101,18 @@ function search() {
 
 function fillResult(result) {
   var col = $('<div>', {
-    'class': 'col'
+    'class': 'col p-1'
   }).html($('<div>', {
-    'class': 'row g-0 bg-light position-relative'
+    'class': 'row g-0 position-relative'
   }).append($('<div>', {
-    'class': 'col-md-3 mb-md-0 p-md-4'
+    'class': 'col-3 col-md-4 col-lg-3 mb-md-0'
   }).html($('<a>', {
     'href': viewCompanyURL.substr(0, viewCompanyURL.length - 1) + result.id
   }).append($('<img>', {
     'class': 'w-100 rounded-circle',
     'src': 'https://picsum.photos/200?q=' + parseInt(Math.random() * 10)
   })))).append($('<div>', {
-    'class': 'col-md-6 p-4 ps-md-0'
+    'class': 'col-9 col-md-8 col-lg-9 ps-md-0'
   }).append($('<h5>', {
     'class': 'mt-0 font-weight-bold'
   }).append($('<a>', {

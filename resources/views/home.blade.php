@@ -64,7 +64,7 @@
                             </div>
                         </form>
                         <div class="container" id="search-results">
-                            <div class="row row-cols-1 row-cols-md-2 g-4" id="in-search-results"></div>
+                            <div class="row row-cols-1 row-cols-md-2 g-4 p-3" id="in-search-results"></div>
                         </div>
                     </div>
                 </div>
@@ -141,7 +141,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="single-cat h-100 text-center mb-50">
                         <div class="cat-icon">
-                            <span><ion-icon name="medal-outline"></ion-icon></span>
+                            <span><i class="fas fa-medal"></i></span>
                         </div>
                         <div class="cat-cap">
                             <h5><a href="catagori.html">Plan Básico</a></h5>
@@ -178,7 +178,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="single-cat h-100 text-center mb-50">
                         <div class="cat-icon">
-                            <span><ion-icon name="ribbon-outline"></ion-icon></span>
+                            <span><i class="fas fa-trophy"></i></span>
                         </div>
                         <div class="cat-cap">
                             <h5><a href="catagori.html">Plan Plata</a></h5>
@@ -241,7 +241,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="single-cat h-100 text-center mb-50">
                         <div class="cat-icon">
-                            <span><ion-icon name="diamond-outline"></ion-icon></span>
+                            <span><i class="far fa-gem"></i></span>
                         </div>
                         <div class="cat-cap">
                             <h5><a href="catagori.html">Plan Premium</a></h5>
