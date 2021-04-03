@@ -4,10 +4,85 @@
 }
 
 #profile {
-  position: absolute;
   bottom: -25px;
-  left: 25px;
+  position: absolute;
 }
 #profile img {
   border: 5px solid rgba(255, 255, 255, 0.5);
+  max-width: 250px;
+}
+
+#phones {
+  bottom: 10px;
+  right: 2em;
+  border: 5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 9px !important;
+  border-bottom-left-radius: 9px !important;
+}
+
+.whatsapp {
+  background-color: #25d366;
+  color: #FFFFFF;
+  padding: 0.3em;
+}
+
+#main-content {
+  background-color: #f0f2f5;
+}
+
+.border-top-line {
+  border-top: 1px solid #d9dbde;
+}
+
+.text-information {
+  padding: 2em;
+  border-radius: 8px;
+  background-color: white;
+  margin: 1em 0.5em !important;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.btn-menu {
+  color: #FF6600 !important;
+  font-weight: bold !important;
+  padding: 10px 20px !important;
+  margin: 0 0 !important;
+  border: none !important;
+  background-color: #FFFFFF;
+  border-bottom: #FF6600 solid 2px !important;
+}
+.btn-menu:hover {
+  color: #FF6600 !important;
+}
+.btn-menu::before {
+  background: none !important;
+}
+.btn-menu span {
+  font-size: 1.25rem;
+}
+
+.collapsed {
+  border-bottom: none !important;
+  color: black !important;
+}
+.collapsed:hover {
+  color: black !important;
+}
+
+.photo {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 5px;
+  background-color: #c5c5c5;
+  cursor: pointer;
+  transition: 0.5s all;
+  max-height: 20em;
+}
+.photo:hover {
+  transform: scale(1.02);
+}
+
+#modal-xxl {
+  max-width: 98%;
 }
