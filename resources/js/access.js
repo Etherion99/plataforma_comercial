@@ -160,8 +160,6 @@ function finish() {
         pack_id: $('#pack').val()
     }
 
-    console.log(companyData);
-
     data.append('company_data', JSON.stringify(companyData));
 
     let paymentMethods = [];
@@ -409,11 +407,11 @@ $(document).ready(function () {
     initValidations();
     navigate(0);
 
-    $('.form-container[data-id=' + 0 + ']').slideUp(function () {
+    /*$('.form-container[data-id=' + 0 + ']').slideUp(function () {
         $('.form-container[data-id=' + 3 + ']').slideDown();
     });
 
-    page = 3;
+    page = 3;*/
 
     navNext.click(function () {
         navigate(1);

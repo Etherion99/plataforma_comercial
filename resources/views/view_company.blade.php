@@ -22,7 +22,7 @@
                 <div
                     class="col-sm-auto col-md-5 ml-md-auto d-flex align-items-end justify-content-center justify-content-lg-start">
                     <div>
-                        <img src="{{ asset('storage/company_logo/27.jpg') }}" class="rounded-circle w-100">
+                        <img src="{{ asset('storage/company_logo/'.$company->id.'.jpg') }}" class="rounded-circle w-100">
                     </div>
                 </div>
                 <!-- Phones area start -->

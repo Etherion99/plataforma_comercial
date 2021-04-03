@@ -211,7 +211,6 @@ function finish() {
     delivery: $('#delivery').val(),
     pack_id: $('#pack').val()
   };
-  console.log(companyData);
   data.append('company_data', JSON.stringify(companyData));
   var paymentMethods = [];
   $('.payment-method').each(function () {
@@ -446,10 +445,11 @@ $(document).ready(function () {
   uniqueId = 0;
   initValidations();
   navigate(0);
-  $('.form-container[data-id=' + 0 + ']').slideUp(function () {
-    $('.form-container[data-id=' + 3 + ']').slideDown();
+  /*$('.form-container[data-id=' + 0 + ']').slideUp(function () {
+      $('.form-container[data-id=' + 3 + ']').slideDown();
   });
-  page = 3;
+   page = 3;*/
+
   navNext.click(function () {
     navigate(1);
   });
