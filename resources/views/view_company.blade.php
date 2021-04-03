@@ -74,7 +74,7 @@
     </div>
     <!-- Modal to view photos start -->
     <div class="modal" tabindex="-1" id="viewPhotosModal">
-        <div class="modal-dialog" id="modal-xxl">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" id="modal-xxl">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
