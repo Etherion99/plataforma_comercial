@@ -183,6 +183,7 @@ function finish() {
             schedules.push(schedule);
         }
     }
+    console.log(schedules);
 
     let phones = [];
 

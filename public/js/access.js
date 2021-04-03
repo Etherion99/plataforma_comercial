@@ -230,6 +230,7 @@ function finish() {
     }
   }
 
+  console.log(schedules);
   var phones = [];
 
   for (var _i2 = 0, _Object$keys = Object.keys(phonesModel); _i2 < _Object$keys.length; _i2++) {

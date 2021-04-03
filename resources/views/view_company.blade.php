@@ -9,6 +9,19 @@
 
 @section('scripts')
     @parent
+    <script>
+        // Estructura que van a tener los horarios al ser recibidos por el backend
+        // Ordenados pls (si puede)
+        let schedules = [
+            [{start: '08:00', end: '10:00'}, {start: '12:00', end: '14:00'}], // day-0
+            [], // ....
+            [{start: '08:00', end: '10:00'}],
+            [],
+            [],
+            [],
+            [{start: '08:00', end: '10:00'}, {start: '12:09', end: '14:00'}] // day-6
+        ];
+    </script>
     <script src="{{ asset('js/viewCompany.js') }}" defer></script>
 @endsection
 
@@ -22,7 +35,8 @@
                 <div
                     class="col-sm-auto col-md-5 ml-md-auto d-flex align-items-end justify-content-center justify-content-lg-start">
                     <div>
-                        <img src="{{ asset('storage/company_logo/'.$company->id.'.jpg') }}" class="rounded-circle w-100">
+                        <img src="{{ asset('storage/company_logo/'.$company->id.'.jpg') }}"
+                             class="rounded-circle w-100">
                     </div>
                 </div>
                 <!-- Phones area start -->
@@ -65,7 +79,7 @@
         <h3>{{ $company->category->name }}</h3>
     </div>
     <div class="container border-top-line">
-        <button class="btn-menu btn-menu-selected text-left" type="button" data-toggle="collapse"
+        <button class="btn-menu text-left" type="button" data-toggle="collapse"
                 data-target="#information"
                 aria-expanded="true" aria-controls="information">
             Información
@@ -87,10 +101,10 @@
                 <div class="modal-body">
                     <img src="" alt="" id="imgInModal" style="max-width: 100%;">
                 </div>
-{{--                <div class="modal-footer">--}}
-{{--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
-{{--                    <button type="button" class="btn btn-primary">Save changes</button>--}}
-{{--                </div>--}}
+                {{--                <div class="modal-footer">--}}
+                {{--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
+                {{--                    <button type="button" class="btn btn-primary">Save changes</button>--}}
+                {{--                </div>--}}
             </div>
         </div>
     </div>
@@ -147,6 +161,50 @@
                     </div>
                     <div class="text-information">
                         <h3>Horarios</h3>
+                        <div class="border-top-line">
+                            <button class="btn-menu btn-block text-left collapsed" type="button" data-toggle="collapse"
+                                    data-target="#collapseSchedule" aria-expanded="true" aria-controls="collapseOne"
+                                    id="todaySchedule">
+                                <span>Hoy </span>
+                                <div class="d-inline-block viewUniqueSchedule text-success">Abierto</div>
+                            </button>
+                        </div>
+                        <div class="collapse" id="collapseSchedule">
+                            <div class="card card-body">
+                                <table class="table table-borderless">
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row">Domingo</th>
+                                        <td id="day-0"><div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Lunes</th>
+                                        <td id="day-1"><div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Martes</th>
+                                        <td id="day-2"><div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Miércoles</th>
+                                        <td id="day-3"><div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Jueves</th>
+                                        <td id="day-4"><div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Viernes</th>
+                                        <td id="day-5"><div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">Sábado</th>
+                                        <td id="day-6"><div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

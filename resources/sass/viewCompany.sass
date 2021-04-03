@@ -1,4 +1,6 @@
 @import "variables"
+.main-color
+    color: $mainC !important
 #cover
     height: 600px
     position: relative
@@ -22,29 +24,32 @@
     background-color: #25d366
     color: #FFFFFF
     padding: 0 5px
+
 .whatsapp-icon
     padding-top: 1px
+
 #main-content
     background-color: #f0f2f5
 
 .border-top-line
-    border-top: 1px solid #d9dbde
+    border-top: 1px solid #d9dbde !important
 
 .text-information
     padding: 2em
     border-radius: 8px
     background-color: white
     margin: 1em .5em !important
-    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important
 
 .btn-menu
-    color: $mainC!important
+    color: $mainC !important
     font-weight: bold !important
     padding: 10px 20px !important
     margin: 0 0 !important
     border: none !important
     background-color: #FFFFFF
     border-bottom: $mainC solid 2px !important
+
     &:hover
         color: $mainC !important
 
@@ -57,8 +62,10 @@
 .collapsed
     border-bottom: none !important
     color: black !important
+
     &:hover
         color: black !important
+
 .photo
     background-position: center
     background-repeat: no-repeat
@@ -68,8 +75,27 @@
     cursor: pointer
     transition: .5s all
     max-height: 20em
+
     &:hover
         transform: scale(1.02)
 
 #modal-xxl
     max-width: 98%
+
+.viewUniqueSchedule
+    color: black
+    padding: .375rem .75rem
+    border-color: #f8f9fa !important
+    background-color: #f8f9fa
+    border-radius: .25rem
+    font-size: 1rem
+    font-weight: 400
+    text-align: center
+    vertical-align: middle
+    line-height: 1.5
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
+    &:hover
+        color: #212529
+        background-color: #e2e6ea
+        border-color: #dae0e5
+        cursor: default

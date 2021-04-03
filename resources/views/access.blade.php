@@ -82,13 +82,13 @@
                             <div class="form-group col-md-12">
                                 <label for="select-days">Day</label> <br>
                                 <select class="form-control wide" name="days" id="select-days">
-                                    <option value="0">Lunes</option>
-                                    <option value="1">Martes</option>
-                                    <option value="2">Miercoles</option>
-                                    <option value="3">Jueves</option>
-                                    <option value="4">Viernes</option>
-                                    <option value="5">Sábado</option>
-                                    <option value="6">Domingo</option>
+                                    <option value="0">Domingo</option>
+                                    <option value="1">Lunes</option>
+                                    <option value="2">Martes</option>
+                                    <option value="3">Miércoles</option>
+                                    <option value="4">Jueves</option>
+                                    <option value="5">Viernes</option>
+                                    <option value="6">Sábado</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
@@ -251,25 +251,25 @@
                             </div>
                         </div>
                         <div class="row d-flex align-items-center my-4" id="day-0">
-                            <h3 class="col-3 m-0">Lunes</h3>
+                            <h3 class="col-3 m-0">Domingo</h3>
                         </div>
                         <div class="row d-flex align-items-center my-4" id="day-1">
-                            <h3 class="col-3 m-0">Martes</h3>
+                            <h3 class="col-3 m-0">Lunes</h3>
                         </div>
                         <div class="row d-flex align-items-center my-4" id="day-2">
-                            <h3 class="col-3 m-0">Miércoles</h3>
+                            <h3 class="col-3 m-0">Martes</h3>
                         </div>
                         <div class="row d-flex align-items-center my-4" id="day-3">
-                            <h3 class="col-3 m-0">Jueves</h3>
+                            <h3 class="col-3 m-0">Miércoles</h3>
                         </div>
                         <div class="row d-flex align-items-center my-4" id="day-4">
-                            <h3 class="col-3 m-0">Viernes</h3>
+                            <h3 class="col-3 m-0">Jueves</h3>
                         </div>
                         <div class="row d-flex align-items-center my-4" id="day-5">
-                            <h3 class="col-3 m-0">Sábado</h3>
+                            <h3 class="col-3 m-0">Viernes</h3>
                         </div>
                         <div class="row d-flex align-items-center my-4" id="day-6">
-                            <h3 class="col-3 m-0">Domingo</h3>
+                            <h3 class="col-3 m-0">Sábado</h3>
                         </div>
                     </div>
                     <small class="form-text text-danger text-center mt-3 font-weight-bold form-input-alert"></small>
