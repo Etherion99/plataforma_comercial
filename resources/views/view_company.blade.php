@@ -32,9 +32,12 @@
                         <ul class="list-group list-group-horizontal-xl">
                             <li class="list-group-item">
                                 <span>3165865658</span>
-                                <a href="https://wa.me/5211234567890?text=me%20gustaría%20saber%20el%20precio%20del%20coche"
-                                   class="whatsapp rounded-circle">
-                                    <i class="fab fa-whatsapp"></i>
+                                <a href="https://wa.me/5211234567890?text=me%20gustaría%20saber%20el%20precio%20del%20coche">
+                                    <div class="rounded-circle whatsapp d-inline-block">
+                                        <div class="d-inline-block whatsapp-icon">
+                                            <i class="fab fa-whatsapp"></i>
+                                        </div>
+                                    </div>
                                 </a>
                             </li>
                             <li class="list-group-item">
