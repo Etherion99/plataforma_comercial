@@ -40,10 +40,9 @@
                             <label for="phone-type" class="color-main"><strong>Tipo</strong></label>
                             <select name="phone-type" id="phone-type" class="wide">
                                 <option value="">Seleccione</option>
-                                <option value="1">Fijo</option>
-                                <option value="2">Celular</option>
-                                <option value="3">Whatsapp</option>
-                                <option value="4">Llamadas y Whatsapp</option>
+                                @foreach($phoneTypes as $phoneType)
+                                    <option value="{{ $phoneType->id }}">{{ $phoneType->name }}</option>
+                                @endforeach
                             </select>
                             <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                         </div>
@@ -323,7 +322,7 @@
                     <div class="form-group col">
                         <label for="municipality" class="color-main"><strong>Municipio</strong></label>
                         <select name="municipality" id="municipality" class="wide" disabled>
-                            <option value="4">Seleccione</option>
+                            <option value="1">Seleccione</option>
                         </select>
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
@@ -345,38 +344,14 @@
             </div>
             <div class="form-container col-8 offset-2" data-id="3">
                 <div class="row photos-form">
-                    <div class="col-4 p-3">
-                        <input type="file" class="d-none input-photo" data-id="1">
-                        <div
-                            class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
-                            data-id="0">
-                            <i class="fas fa-image"></i>
+                    @for($i = 0; $i < 12; $i++)
+                        <div class="col-4 p-3">
+                            <input type="file" class="d-none input-photo" data-id="{{ $i }}">
+                            <div class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center" data-id="{{ $i }}">
+                                <i class="fas fa-image"></i>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-4 p-3">
-                        <input type="file" class="d-none input-photo" data-id="2">
-                        <div
-                            class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
-                            data-id="1">
-                            <i class="fas fa-image"></i>
-                        </div>
-                    </div>
-                    <div class="col-4 p-3">
-                        <input type="file" class="d-none input-photo" data-id="3">
-                        <div
-                            class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
-                            data-id="2">
-                            <i class="fas fa-image"></i>
-                        </div>
-                    </div>
-                    <div class="col-4 p-3">
-                        <input type="file" class="d-none input-photo" data-id="4">
-                        <div
-                            class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center"
-                            data-id="3">
-                            <i class="fas fa-image"></i>
-                        </div>
-                    </div>
+                    @endfor
                 </div>
             </div>
         </div>

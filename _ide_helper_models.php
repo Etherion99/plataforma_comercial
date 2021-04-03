@@ -70,6 +70,8 @@ namespace App\Models{
  * @property-read \App\Models\Category $category
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\PaymentMethod[] $paymentMethods
  * @property-read int|null $payment_methods_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Phone[] $phones
+ * @property-read int|null $phones_count
  * @method static \Database\Factories\CompanyFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Company newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Company newQuery()
@@ -178,6 +180,7 @@ namespace App\Models{
  * @property string $number
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Company $company
  * @method static \Illuminate\Database\Eloquent\Builder|Phone newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Phone newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Phone query()
@@ -187,6 +190,19 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Phone whereUpdatedAt($value)
  */
 	class Phone extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\PhoneType
+ *
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Phone[] $phones
+ * @property-read int|null $phones_count
+ * @method static \Illuminate\Database\Eloquent\Builder|PhoneType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PhoneType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PhoneType query()
+ */
+	class PhoneType extends \Eloquent {}
 }
 
 namespace App\Models{

@@ -150,12 +150,6 @@ function validateRequired(id, type) {
 function finish() {
     let data = new FormData();
 
-    /*$('.photos-form .input-photo').each(function (){
-        if ($(this)[0].files && $(this)[0].files[0]){
-            data.append('gallery[]', $(this)[0].files[0]);
-        }
-    });*/
-
     data.append('logo', $('#logo')[0].files[0]);
 
     let companyData = {
@@ -194,12 +188,17 @@ function finish() {
 
     let phones = [];
 
-    for(let phoneKey of Object.keys(phonesModel))
-        phones.push(phonesModel[phoneKey]);
-
-    console.log(phones);
+    for(let phoneKey of Object.keys(phonesModel)){
+        let phone = phonesModel[phoneKey];
+        phones.push({ number: phone.number, phone_type_id: phone.type });
+    }
 
     let addresses = [];
+
+    addresses.push({
+        municipality_id: $('#municipality').val(),
+        text: $('#address').val()
+    });
 
     let otherData = {
         payment_methods: paymentMethods,
@@ -208,7 +207,13 @@ function finish() {
         addresses: addresses
     }
 
-    data.append('other_data', JSON.stringify(otherData));
+    data.append('other_data', JSON.stringify(otherData))
+
+    $('.photos-form .input-photo').each(function (){
+        if ($(this)[0].files && $(this)[0].files[0]){
+            data.append('gallery[]', $(this)[0].files[0]);
+        }
+    });
 
     $.ajax({
         url: signupURL,
@@ -377,10 +382,12 @@ function clearAddPhonemodal(){
 
 function pickPhoto(id){
     $('input[type=file][data-id=' + id +']').click();
+    console.log(id);
 }
 
 function updatePreview(input){
     let id = input.getAttribute('data-id');
+    console.log("id ", id);
 
     if(input.files && input.files[0]){
         let reader = new FileReader();
@@ -402,11 +409,11 @@ $(document).ready(function () {
     initValidations();
     navigate(0);
 
-    /*$('.form-container[data-id=' + 0 + ']').slideUp(function () {
-        $('.form-container[data-id=' + 2 + ']').slideDown();
+    $('.form-container[data-id=' + 0 + ']').slideUp(function () {
+        $('.form-container[data-id=' + 3 + ']').slideDown();
     });
 
-    page = 2;*/
+    page = 3;
 
     navNext.click(function () {
         navigate(1);

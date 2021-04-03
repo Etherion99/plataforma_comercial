@@ -203,12 +203,6 @@ function validateRequired(id, type) {
 
 function finish() {
   var data = new FormData();
-  /*$('.photos-form .input-photo').each(function (){
-      if ($(this)[0].files && $(this)[0].files[0]){
-          data.append('gallery[]', $(this)[0].files[0]);
-      }
-  });*/
-
   data.append('logo', $('#logo')[0].files[0]);
   var companyData = {
     name: $('#name').val(),
@@ -241,11 +235,18 @@ function finish() {
 
   for (var _i2 = 0, _Object$keys = Object.keys(phonesModel); _i2 < _Object$keys.length; _i2++) {
     var phoneKey = _Object$keys[_i2];
-    phones.push(phonesModel[phoneKey]);
+    var phone = phonesModel[phoneKey];
+    phones.push({
+      number: phone.number,
+      phone_type_id: phone.type
+    });
   }
 
-  console.log(phones);
   var addresses = [];
+  addresses.push({
+    municipality_id: $('#municipality').val(),
+    text: $('#address').val()
+  });
   var otherData = {
     payment_methods: paymentMethods,
     schedules: schedules,
@@ -253,6 +254,11 @@ function finish() {
     addresses: addresses
   };
   data.append('other_data', JSON.stringify(otherData));
+  $('.photos-form .input-photo').each(function () {
+    if ($(this)[0].files && $(this)[0].files[0]) {
+      data.append('gallery[]', $(this)[0].files[0]);
+    }
+  });
   $.ajax({
     url: signupURL,
     method: 'POST',
@@ -414,10 +420,12 @@ function clearAddPhonemodal() {
 
 function pickPhoto(id) {
   $('input[type=file][data-id=' + id + ']').click();
+  console.log(id);
 }
 
 function updatePreview(input) {
   var id = input.getAttribute('data-id');
+  console.log("id ", id);
 
   if (input.files && input.files[0]) {
     var reader = new FileReader();
@@ -438,11 +446,10 @@ $(document).ready(function () {
   uniqueId = 0;
   initValidations();
   navigate(0);
-  /*$('.form-container[data-id=' + 0 + ']').slideUp(function () {
-      $('.form-container[data-id=' + 2 + ']').slideDown();
+  $('.form-container[data-id=' + 0 + ']').slideUp(function () {
+    $('.form-container[data-id=' + 3 + ']').slideDown();
   });
-   page = 2;*/
-
+  page = 3;
   navNext.click(function () {
     navigate(1);
   });

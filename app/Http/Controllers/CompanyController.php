@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Address;
+use App\Models\Phone;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use App\Models\Company;
@@ -29,14 +31,14 @@ class CompanyController extends Controller
     }
 
     public function signup(Request $request){
-        /*$files = $request->file('gallery');
+        /*
         $texto = json_decode($request->input('texto'));
         $profilePhoto = $request->file('profile-photo');
         $new_var = $profilePhoto->getClientOriginalName() . '-';
 //        foreach ($files as $file){
 //            $new_var.= $file->getClientOriginalName();
-//        }
-        return $new_var;*/
+//        }*/
+
 
         //$logo = $request->file('logo');
 
@@ -55,10 +57,26 @@ class CompanyController extends Controller
         }
 
         foreach ($otherData['payment_methods'] as $paymentmethod){
-            $company->paymentMethods()->save($paymentmethod);
+            $company->paymentMethods()->attach($paymentmethod);
         }
 
-        var_dump('dd');
+        foreach ($otherData['phones'] as $phone){
+            $phone['company_id'] = $company->id;
+            Phone::create($phone);
+        }
+
+        foreach ($otherData['addresses'] as $address){
+            $address['company_id'] = $company->id;
+            Address::create($address);
+        }
+
+        $gallery = $request->file('gallery[]');
+
+        foreach ($gallery as $photo){
+            $photo->storeAs('public/company_gallery/'.$company->id, $company->id.'.'.$photo->extension());
+        }
+
+        var_dump('ll');
 
     }
 }

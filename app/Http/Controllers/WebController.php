@@ -6,6 +6,7 @@ use App\Models\Company;
 use App\Models\Department;
 use App\Models\Pack;
 use App\Models\PaymentMethod;
+use App\Models\PhoneType;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
@@ -88,12 +89,14 @@ class WebController extends Controller
         }, $departments);
 
         $packs = Pack::select(['id', 'name'])->get();
+        $phoneTypes = PhoneType::select(['id', 'name'])->get();
 
         return view('access', [
             'paymentMethods' => $payments,
             'categories' => $categories,
             'departments' => $departments,
-            'packs' => $packs
+            'packs' => $packs,
+            'phoneTypes' => $phoneTypes
         ]);
     }
 }

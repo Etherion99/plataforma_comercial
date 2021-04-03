@@ -5,7 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pack extends Model
+class PhoneType extends Model
 {
     protected $fillable = ['name'];
+
+    public function phones(){
+        return $this->hasMany(Phone::class);
+    }
 }

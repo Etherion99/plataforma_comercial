@@ -20,4 +20,8 @@ class Company extends Model
     public function paymentMethods(){
         return $this->belongsToMany(PaymentMethod::class);
     }
+
+    public function phones(){
+        return $this->hasMany(Phone::class);
+    }
 }

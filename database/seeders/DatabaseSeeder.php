@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
             CompanySeeder::class,
             PaymentMethodSeeder::class,
             DepartmentSeeder::class,
-            MunicipalitySeeder::class
+            MunicipalitySeeder::class,
+            PhoneTypeSeeder::class
         ]);
     }
 }

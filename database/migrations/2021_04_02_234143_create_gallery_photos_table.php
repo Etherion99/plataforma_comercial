@@ -4,20 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompaniesPaymentMethodsTable extends Migration
+class CreateGalleryPhotosTable extends Migration
 {
     public function up()
     {
-        Schema::create('company_payment_method', function (Blueprint $table) {
+        Schema::create('gallery_photos', function (Blueprint $table) {
             $table->id();
+            $table->tinyInteger('number');
             $table->foreignId('company_id')->constrained();
-            $table->foreignId('payment_method_id')->constrained();
+            $table->string('extension', 4);
             $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('company_payment_method');
+        Schema::dropIfExists('gallery_photos');
     }
 }
