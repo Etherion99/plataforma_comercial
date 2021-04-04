@@ -183,7 +183,6 @@ function finish() {
             schedules.push(schedule);
         }
     }
-    console.log(schedules);
 
     let phones = [];
 
@@ -199,18 +198,26 @@ function finish() {
         text: $('#address').val()
     });
 
+    let socialNetworks = [];
+
+    $('.social-network input').each(function (){
+       if($(this).val() !== '') socialNetworks.push({ url: $(this).val(), social_network_id: $(this).attr('data-id') });
+    });
+
     let otherData = {
         payment_methods: paymentMethods,
         schedules: schedules,
         phones: phones,
-        addresses: addresses
+        addresses: addresses,
+        social_networks: socialNetworks
     }
 
-    data.append('other_data', JSON.stringify(otherData))
+    data.append('other_data', JSON.stringify(otherData));
 
-    $('.photos-form .input-photo').each(function (){
+    $('.photos-form .input-photo').each(function (index){
         if ($(this)[0].files && $(this)[0].files[0]){
             data.append('gallery[]', $(this)[0].files[0]);
+            console.log(index);
         }
     });
 
@@ -381,12 +388,10 @@ function clearAddPhonemodal(){
 
 function pickPhoto(id){
     $('input[type=file][data-id=' + id +']').click();
-    console.log(id);
 }
 
 function updatePreview(input){
     let id = input.getAttribute('data-id');
-    console.log("id ", id);
 
     if(input.files && input.files[0]){
         let reader = new FileReader();
@@ -396,7 +401,7 @@ function updatePreview(input){
             $('.photo[data-id='+ id +'] i').hide();
         }
 
-        reader.readAsDataURL(input.files[0])
+        reader.readAsDataURL(input.files[0]);
     }else{
         $('.photo[data-id='+ id +']').css('background-image', 'none');
         $('.photo[data-id='+ id +'] i').show();
@@ -407,12 +412,6 @@ $(document).ready(function () {
     uniqueId = 0;
     initValidations();
     navigate(0);
-
-    /*$('.form-container[data-id=' + 0 + ']').slideUp(function () {
-        $('.form-container[data-id=' + 3 + ']').slideDown();
-    });
-
-    page = 3;*/
 
     navNext.click(function () {
         navigate(1);

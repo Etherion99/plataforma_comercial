@@ -12,6 +12,7 @@ class CreateSocialLinksTable extends Migration
             $table->id();
             $table->string('url', 88);
             $table->foreignId('social_network_id')->constrained();
+            $table->foreignId('company_id')->constrained();
             $table->timestamps();
         });
     }

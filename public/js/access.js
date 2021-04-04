@@ -230,7 +230,6 @@ function finish() {
     }
   }
 
-  console.log(schedules);
   var phones = [];
 
   for (var _i2 = 0, _Object$keys = Object.keys(phonesModel); _i2 < _Object$keys.length; _i2++) {
@@ -247,16 +246,25 @@ function finish() {
     municipality_id: $('#municipality').val(),
     text: $('#address').val()
   });
+  var socialNetworks = [];
+  $('.social-network input').each(function () {
+    if ($(this).val() !== '') socialNetworks.push({
+      url: $(this).val(),
+      social_network_id: $(this).attr('data-id')
+    });
+  });
   var otherData = {
     payment_methods: paymentMethods,
     schedules: schedules,
     phones: phones,
-    addresses: addresses
+    addresses: addresses,
+    social_networks: socialNetworks
   };
   data.append('other_data', JSON.stringify(otherData));
-  $('.photos-form .input-photo').each(function () {
+  $('.photos-form .input-photo').each(function (index) {
     if ($(this)[0].files && $(this)[0].files[0]) {
       data.append('gallery[]', $(this)[0].files[0]);
+      console.log(index);
     }
   });
   $.ajax({
@@ -420,12 +428,10 @@ function clearAddPhonemodal() {
 
 function pickPhoto(id) {
   $('input[type=file][data-id=' + id + ']').click();
-  console.log(id);
 }
 
 function updatePreview(input) {
   var id = input.getAttribute('data-id');
-  console.log("id ", id);
 
   if (input.files && input.files[0]) {
     var reader = new FileReader();
@@ -446,11 +452,6 @@ $(document).ready(function () {
   uniqueId = 0;
   initValidations();
   navigate(0);
-  /*$('.form-container[data-id=' + 0 + ']').slideUp(function () {
-      $('.form-container[data-id=' + 3 + ']').slideDown();
-  });
-   page = 3;*/
-
   navNext.click(function () {
     navigate(1);
   });

@@ -15,13 +15,19 @@ namespace App\Models{
  * App\Models\Address
  *
  * @property int $id
+ * @property string $text
+ * @property int $municipality_id
+ * @property int $company_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Address newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Address newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Address query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Address whereCompanyId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Address whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Address whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Address whereMunicipalityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Address whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Address whereUpdatedAt($value)
  */
 	class Address extends \Eloquent {}
@@ -112,6 +118,29 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\GalleryPhoto
+ *
+ * @property int $id
+ * @property int $number
+ * @property int $company_id
+ * @property string $extension
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|GalleryPhoto newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GalleryPhoto newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GalleryPhoto query()
+ * @method static \Illuminate\Database\Eloquent\Builder|GalleryPhoto whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GalleryPhoto whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GalleryPhoto whereExtension($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GalleryPhoto whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GalleryPhoto whereNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GalleryPhoto whereUpdatedAt($value)
+ */
+	class GalleryPhoto extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Municipality
  *
  * @property int $id
@@ -178,15 +207,19 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $number
+ * @property int $phone_type_id
+ * @property int $company_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Company $company
  * @method static \Illuminate\Database\Eloquent\Builder|Phone newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Phone newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Phone query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Phone whereCompanyId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Phone whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Phone whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Phone whereNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Phone wherePhoneTypeId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Phone whereUpdatedAt($value)
  */
 	class Phone extends \Eloquent {}
@@ -196,11 +229,19 @@ namespace App\Models{
 /**
  * App\Models\PhoneType
  *
+ * @property int $id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Phone[] $phones
  * @property-read int|null $phones_count
  * @method static \Illuminate\Database\Eloquent\Builder|PhoneType newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PhoneType newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PhoneType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PhoneType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PhoneType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PhoneType whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PhoneType whereUpdatedAt($value)
  */
 	class PhoneType extends \Eloquent {}
 }
@@ -237,11 +278,13 @@ namespace App\Models{
  * @property int $id
  * @property string $url
  * @property int $social_network_id
+ * @property int $company_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|SocialLink newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SocialLink newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|SocialLink query()
+ * @method static \Illuminate\Database\Eloquent\Builder|SocialLink whereCompanyId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SocialLink whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SocialLink whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|SocialLink whereSocialNetworkId($value)

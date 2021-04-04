@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Pack;
 use App\Models\PaymentMethod;
 use App\Models\PhoneType;
+use App\Models\SocialNetwork;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
@@ -51,7 +52,7 @@ class WebController extends Controller
         ]);
     }
 
-    public function access(){
+    public function access(Request $request){
         $categories = Category::select(['id', 'name'])
             ->whereNull('category_id')
             ->with(['categories' => function($q){ return $q->select(['id', 'name', 'category_id']); }])
@@ -90,13 +91,16 @@ class WebController extends Controller
 
         $packs = Pack::select(['id', 'name'])->get();
         $phoneTypes = PhoneType::select(['id', 'name'])->get();
+        $socialNetworks = SocialNetwork::select(['id', 'name', 'icon'])->get();
 
         return view('access', [
             'paymentMethods' => $payments,
             'categories' => $categories,
             'departments' => $departments,
             'packs' => $packs,
-            'phoneTypes' => $phoneTypes
+            'phoneTypes' => $phoneTypes,
+            'socialNetworks' => $socialNetworks,
+            'plan' => $request->has('plan') ? $request->query('plan') : ''
         ]);
     }
 }

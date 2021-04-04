@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Address;
+use App\Models\GalleryPhoto;
 use App\Models\Phone;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
@@ -31,23 +32,13 @@ class CompanyController extends Controller
     }
 
     public function signup(Request $request){
-        /*
-        $texto = json_decode($request->input('texto'));
-        $profilePhoto = $request->file('profile-photo');
-        $new_var = $profilePhoto->getClientOriginalName() . '-';
-//        foreach ($files as $file){
-//            $new_var.= $file->getClientOriginalName();
-//        }*/
-
-
-        //$logo = $request->file('logo');
+        $logo = $request->file('logo');
 
         $companyData = json_decode($request->input('company_data'), true);
         $companyData['logo_ext'] = 'jpg'; //$logo->extension();
         $company = Company::create($companyData);
 
-        //$logo->storeAs('public/company_logo', $company->id.'.'.$logo->extension());
-
+        $logo->storeAs('public/company_logo', $company->id.'.'.$logo->extension());
 
         $otherData = json_decode($request->input('other_data'), true);
 
@@ -70,13 +61,21 @@ class CompanyController extends Controller
             Address::create($address);
         }
 
-        $gallery = $request->file('gallery[]');
+        $gallery = $request->file('gallery');
 
-        foreach ($gallery as $photo){
-            $photo->storeAs('public/company_gallery/'.$company->id, $company->id.'.'.$photo->extension());
+        for ($i = 0; $i < count($gallery); $i++){
+            $photo = $gallery[$i];
+
+            $galleryPhoto = GalleryPhoto::create(array(
+                'number' => $i,
+                'company_id' => $company->id,
+                'extension' => $photo->extension()
+            ));
+
+            $photo->storeAs('public/company_gallery/'.$company->id, $galleryPhoto->number.'.'.$photo->extension());
         }
 
-        var_dump('ll');
+        var_dump($gallery);
 
     }
 }

@@ -58,6 +58,11 @@
             "id": "phones",
             "type": "special",
             "required": true
+        },
+        {
+            "id": "social-networks",
+            "type": "special",
+            "required": false
         }
     ]
 ]

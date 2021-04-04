@@ -199,7 +199,7 @@
                 <div class="row d-flex justify-content-center mt-5">
                     <div class="form-group col">
                         <label for="name" class="color-main"><strong>Nombre</strong></label>
-                        <input type="text" class="form-control" name="name" id="name" value="prueba">
+                        <input type="text" class="form-control" name="name" id="name">
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                     <div class="form-group col">
@@ -207,7 +207,7 @@
                         <select id="pack" class="wide">
                             <option value="">Seleccione</option>
                             @foreach($packs as $pack)
-                                <option value="{{ $pack->id }}" {{ $pack->id == 1 ? 'selected' : '' }}>{{ $pack->name }}</option>
+                                <option value="{{ $pack->id }}" {{ $pack->id == $plan ? 'selected' : '' }}>{{ $pack->name }}</option>
                             @endforeach
                         </select>
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
@@ -227,7 +227,7 @@
                     <div class="form-group col">
                         <label for="category" class="color-main"><strong>Categoría</strong></label>
                         <select id="category" class="wide" disabled>
-                            <option value="4">Seleccione</option>
+                            <option value="">Seleccione</option>
                         </select>
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
@@ -235,7 +235,7 @@
                 <div class="row mt-3">
                     <div class="form-group col">
                         <label for="description" class="color-main"><strong>Descripción</strong></label>
-                        <textarea name="description" class="form-control" id="description" rows="5" placeholder="Descríbenos brevemente tu empresa, los productos que vende o servicios que presta...">descripcion</textarea>
+                        <textarea name="description" class="form-control" id="description" rows="5" placeholder="Descríbenos brevemente tu empresa, los productos que vende o servicios que presta..."></textarea>
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                 </div>
@@ -341,10 +341,27 @@
                         <i class="fas fa-plus"></i> Agregar teléfono
                     </button>
                 </div>
+                <div class="row mt-5">
+                    <h4 class="color-main">Redes</h4>
+                </div>
+                <div class="row mt-3 d-flex justify-content-center" id="social-networks">
+                    @foreach($socialNetworks as $socialNetwork)
+                        <div class="social-network form-group col-6">
+                            <label for="social-network-{{ $socialNetwork->id }}" class="color-main"><strong>{{ $socialNetwork->name }}</strong></label>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text"><i class="{{ $socialNetwork->icon }}"></i></div>
+                                </div>
+                                <input type="text" placeholder="Enlace de tu {{ $socialNetwork->name }}" class="form-control" data-id="{{ $socialNetwork->id }}" value="{{ $socialNetwork->name }}">
+                            </div>
+                            <small class="form-text text-danger font-weight-bold form-input-alert"></small>
+                        </div>
+                    @endforeach
+                </div>
             </div>
             <div class="form-container col-8 offset-2" data-id="3">
                 <div class="row photos-form">
-                    @for($i = 0; $i < 12; $i++)
+                    @for($i = 1; $i <= 12; $i++)
                         <div class="col-4 p-3">
                             <input type="file" class="d-none input-photo" data-id="{{ $i }}">
                             <div class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center" data-id="{{ $i }}">
