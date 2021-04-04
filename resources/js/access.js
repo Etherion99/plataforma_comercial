@@ -3,11 +3,11 @@ var navPrev = $('#nav-prev'), navNext = $('#nav-next'), navFinish = $('#nav-fini
 
 var page = 0;
 const lastPage = 3;
-var daySchedules = JSON.parse("[{\"0\":{\"start\":\"08:00\",\"end\":\"10:00\"}},{},{\"1\":{\"start\":\"12:00\",\"end\":\"15:00\"},\"2\":{\"start\":\"16:00\",\"end\":\"18:30\"}},{},{},{},{}]");// [{}, {}, {}, {}, {}, {}, {}];
+var daySchedules = [{}, {}, {}, {}, {}, {}, {}];
 var validations = [];
 var uniqueId = 0;
 
-var phonesModel = JSON.parse("{\"0\":{\"number\":\"3104778865\",\"type\":\"1\"},\"1\":{\"number\":\"3134153786\",\"type\":\"4\"}}"); //{};
+var phonesModel = {};
 var phonesId = 0;
 var phoneTypes = {
     1: { name: 'Fijo', icons: ['fas fa-phone'] },
@@ -76,7 +76,7 @@ function validateNav() {
         navFinish.show();
     } else {
         navNext.show();
-        //navFinish.hide();
+        navFinish.hide();
     }
 
     $('.form-step').removeClass('filled');
@@ -90,14 +90,14 @@ function validatePage() {
     let res = true;
 
     for (let rule of validation) {
-        if (rule['required'] && !validateRequired(rule['id'], rule['type']))
+        if (rule['required'] && !validateRequired(rule['id'], rule['type'], rule['message']))
             res = false;
     }
 
     return res;
 }
 
-function validateRequired(id, type) {
+function validateRequired(id, type, message) {
     let element = $('#' + id);
     let res = true;
 
@@ -136,12 +136,10 @@ function validateRequired(id, type) {
             break;
     }
 
-    console.log(id);
-    console.log(res);
-
     let alert = element.closest('.form-group').find('.form-input-alert');
+    console.log(message);
 
-    alert.text('Campo obligatorio');
+    alert.text(message);
     alert.toggle(!res);
 
     return res;
@@ -240,6 +238,7 @@ function removeSchedules(result){
 
 function fillSchedule(result, day) {
     let idToFill = 'horario-'+day+'-'+uniqueId;
+
     let horario = $('<div>', {
         'class': 'badge-custom d-flex align-items-center',
         'id': idToFill
@@ -264,9 +263,9 @@ function fillSchedule(result, day) {
     );
 
     $('#day-' + day).append(horario);
+    console.log($('#day-' + day));
 
     daySchedules[day][uniqueId] = {start: result.start, end: result.end};
-    console.log(JSON.stringify(daySchedules));
 
     $('#'+idToFill).find('.delete-hour').click(function(){
         removeSchedules(idToFill);
@@ -278,15 +277,17 @@ function fillSchedule(result, day) {
 
 function validateHours() {
     const day = $('#select-days').val();
-    let hoursToSend = {
+    let hours = {
         start: $('#select-first-hour').val(),
         end: $('#select-last-hour').val()
-    }
+    };
     let can = true;
     let message;
-    const f2 = new Date('01/01/2020 ' + hoursToSend.end).getTime();
-    const i2 = new Date('01/01/2020 ' + hoursToSend.start).getTime();
-    if (hoursToSend.end!=='' && hoursToSend.start!==''){
+
+    const f2 = new Date('01/01/2020 ' + hours.end).getTime();
+    const i2 = new Date('01/01/2020 ' + hours.start).getTime();
+
+    if (hours.end!=='' && hours.start!==''){
         if (f2>i2){
             for(let index of Object.keys(daySchedules[day])){
                 const f1 = new Date('01/01/2020 ' + daySchedules[day][index].end).getTime();
@@ -304,15 +305,22 @@ function validateHours() {
         can = false;
         message = 'Debe ingresar una hora final y una hora inicial';
     }
+
     if(can){
         $('#alertScheduleModal').slideUp();
-        $('#send-hour').attr('data-dismiss', 'modal');
-        fillSchedule(hoursToSend, day);
+        $('#add-schedule-modal').modal('hide');
+        fillSchedule(hours, day);
+        clearAddScheduleModal();
     }else{
-        $('#send-hour').attr('data-dismiss', '');
-        $('#alertScheduleModal #messageSchedule').text(message);
+        $('#messageSchedule').text(message);
         $('#alertScheduleModal').slideDown();
     }
+}
+
+function clearAddScheduleModal(){
+    $('#select-first-hour').val('');
+    $('#select-last-hour').val('');
+    $('#select-days').val('');
 }
 
 function addPhone(){
@@ -321,48 +329,56 @@ function addPhone(){
         type: $('#phone-type').val(),
     };
 
-    if(addPhoneValidation(phone)){
-        let idHtml = 'phone-' + phonesId;
+    if($('#phone-number').val() !== '' && $('#phone-type').val() !== ''){
+        if(addPhoneValidation(phone)){
+            $('#alertPhoneModal').slideUp();
 
-        let iconsHtml = $('<span>');
+            let idHtml = 'phone-' + phonesId;
 
-        for(let icon of phoneTypes[phone.type].icons)
-            iconsHtml.append($('<i>', {
-                class: icon + ' ml-2'
-            }))
+            let iconsHtml = $('<span>');
 
-        let phoneHtml = $('<div>', {
-            class: 'badge-custom d-flex align-items-center',
-            id: idHtml
-        }).append(
-            iconsHtml
-        ).append(
-            $('<span>', {
-                class: 'ml-3'
-            }).text(phone.number)
-        ).append(
-            $('<button>', {
-                'type': 'button',
-                'class': 'close ml-4 delete-phone'
-            }).html(
-                $('<i>', {
-                    'class': 'fas fa-trash-alt'
-                })
-            )
-        );
+            for(let icon of phoneTypes[phone.type].icons)
+                iconsHtml.append($('<i>', {
+                    class: icon + ' ml-2'
+                }))
 
-        $('#phones').append(phoneHtml);
-        phonesModel[phonesId] = phone;
+            let phoneHtml = $('<div>', {
+                class: 'badge-custom d-flex align-items-center',
+                id: idHtml
+            }).append(
+                iconsHtml
+            ).append(
+                $('<span>', {
+                    class: 'ml-3'
+                }).text(phone.number)
+            ).append(
+                $('<button>', {
+                    'type': 'button',
+                    'class': 'close ml-4 delete-phone'
+                }).html(
+                    $('<i>', {
+                        'class': 'fas fa-trash-alt'
+                    })
+                )
+            );
 
-        $('#' + idHtml).find('.delete-phone').click(function (){
-           removePhone(idHtml);
-        });
+            $('#phones').append(phoneHtml);
+            phonesModel[phonesId] = phone;
 
-        phonesId++;
+            $('#' + idHtml).find('.delete-phone').click(function (){
+                removePhone(idHtml);
+            });
 
-        clearAddPhonemodal();
+            phonesId++;
+
+            clearAddPhonemodal();
+        }else{
+            $('#messagePhone').text('Este número ya ha sido registrado')
+            $('#alertPhoneModal').slideDown();
+        }
     }else{
-        console.log('invalid');
+        $('#messagePhone').text('Ingresa el número y selecciona el tipo')
+        $('#alertPhoneModal').slideDown();
     }
 }
 
@@ -428,7 +444,7 @@ $(document).ready(function () {
 
     $('#closeAlertScheduleModal').click(function(){$('#alertScheduleModal').slideUp()});
 
-    $('#exampleModal #send-hour').click(validateHours);
+    $('#add-schedule').click(validateHours);
 
     //phones
     $('#add-phone').click(addPhone);

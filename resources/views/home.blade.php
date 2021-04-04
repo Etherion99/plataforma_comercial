@@ -171,7 +171,7 @@
                                     Horarios específicos de lunes a domingos y festivos
                                 </p>
                             </div>
-                            <a href="catagori.html">View Details</a>
+                            <a href="{{ route('access', ['plan' => 1]) }}">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -234,7 +234,7 @@
                                     (Especifica que realiza su empresa)
                                 </p>
                             </div>
-                            <a href="catagori.html">View Details</a>
+                            <a href="{{ route('access', ['plan' => 2]) }}">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -297,7 +297,7 @@
                                     (Especifica que realiza su empresa)
                                 </p>
                             </div>
-                            <a href="catagori.html">View Details</a>
+                            <a href="{{ route('access', ['plan' => 3]) }}">View Details</a>
                         </div>
                     </div>
                 </div>

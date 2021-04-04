@@ -3,61 +3,72 @@
         {
             "id": "name",
             "type": "text",
-            "required": true
+            "required": true,
+            "message": "Campo Obligatorio"
         },
         {
             "id": "pack",
             "type": "dropdown",
-            "required": true
+            "required": true,
+            "message": "Campo Obligatorio"
         },
         {
             "id": "logo",
             "type": "file",
-            "required": false
+            "required": true,
+            "message": "Carga una foto presionando el ícono de arriba"
         },
         {
             "id": "category",
             "type": "dropdown",
-            "required": true
+            "required": true,
+            "message": "Campo Obligatorio"
         },
         {
             "id": "description",
             "type": "text",
-            "required": true
+            "required": true,
+            "message": "Campo Obligatorio"
         }
     ],
     [
         {
             "id": "schedules",
             "type": "special",
-            "required": true
+            "required": true,
+            "message": "Agrega al menos un horario"
         },
         {
             "id": "payment_methods",
             "type": "checkbox",
-            "required": true
+            "required": true,
+            "message": "Selecciona al menos un método de pago"
         },
         {
             "id": "delivery",
             "type": "dropdown",
-            "required": true
+            "required": true,
+            "message": "Campo Obligatorio"
         }
     ],
     [
         {
             "id": "municipality",
             "type": "dropdown",
-            "required": true
+            "required": true,
+            "message": "Campo Obligatorio"
         },
         {
             "id": "address",
             "type": "text",
-            "required": true
+            "required": true,
+            "message": "Campo Obligatorio"
         },
         {
             "id": "phones",
             "type": "special",
-            "required": true
+            "required": true,
+            "message": "Agrega al menos un teléfono"
         },
         {
             "id": "social-networks",

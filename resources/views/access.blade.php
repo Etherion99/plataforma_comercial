@@ -20,7 +20,7 @@
     @include('components.loader')
 
     <!--Modal Add Phone Start-->
-    <div class="modal" tabindex="-1" id="add-phone-modal">
+    <div class="modal fade" tabindex="-1" id="add-phone-modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -30,6 +30,15 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div class="row">
+                        <div class="alert alert-warning alert-dismissible fade show mx-2 col" id="alertPhoneModal" style="display: none">
+                            <div id="messagePhone"></div>
+                            <button type="button" class="close" aria-label="Close"
+                                    id="closeAlertScheduleModal">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
                     <div class="row d-flex justify-content-center mt-3">
                         <div class="form-group col">
                             <label for="phone-number" class="color-main"><strong>Número</strong></label>
@@ -58,21 +67,19 @@
     <!--Modal Add Phone End-->
 
     <!--Modal add Schedule Start-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+    <div class="modal fade" tabindex="-1" id="add-schedule-modal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                    <h5 class="modal-title" id="add-schedule-modalLabel">Añadir nuevo horario</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="alert alert-warning alert-dismissible fade show" id="alertScheduleModal"
-                             role="alert" style="display: none">
-                            <div id="messageSchedule">jajjajaja</div>
+                        <div class="alert alert-warning alert-dismissible fade show" id="alertScheduleModal" role="alert" style="display: none">
+                            <div id="messageSchedule"></div>
                             <button type="button" class="close" aria-label="Close"
                                     id="closeAlertScheduleModal">
                                 <span aria-hidden="true">&times;</span>
@@ -80,7 +87,7 @@
                         </div>
                         <div class="form-row" id="select-for-days">
                             <div class="form-group col-md-12">
-                                <label for="select-days">Day</label> <br>
+                                <label for="select-days">Día de la semana</label> <br>
                                 <select class="form-control wide" name="days" id="select-days">
                                     <option value="0">Domingo</option>
                                     <option value="1">Lunes</option>
@@ -92,22 +99,19 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="select-first-hour">Hora-Inicio</label>
+                                <label for="select-first-hour">Hora Inicio</label>
                                 <input type="time" class="form-control" id="select-first-hour">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="select-last-hour">Hora-Fin</label>
+                                <label for="select-last-hour">Hora Fin</label>
                                 <input type="time" class="form-control" id="select-last-hour">
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-main-square ml-3" data-dismiss="modal">Close
-                    </button>
-                    <button type="button" class="btn btn-main-square ml-3" data-dismiss="modal"
-                            id="send-hour">Send message
-                    </button>
+                    <button type="button" class="btn btn-main-square ml-3" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-main-square ml-3" id="add-schedule">Añadir</button>
                 </div>
             </div>
         </div>
@@ -175,7 +179,7 @@
                 <i class="fas fa-camera fa-2x"></i>
             </div>
         </div>
-        <div class="row my-5 py-5">
+        <div class="row my-5 py-3">
             <div class="form-container col-8 offset-2" data-id="0">
                 <div class="d-none" id="categories-optgroups">
                     @foreach($categories as $category)
@@ -185,6 +189,9 @@
                             @endforeach
                         </optgroup>
                     @endforeach
+                </div>
+                <div class="row mt-3 mb-5 d-flex justify-content-center">
+                    <h3 class="color-main font-weight-bold">Información de la Empresa</h3>
                 </div>
                 <div class="row d-flex justify-content-center">
                     <div class="form-group col-4">
@@ -241,11 +248,14 @@
                 </div>
             </div>
             <div class="form-container col-8 offset-2" data-id="1">
+                <div class="row mt-3 mb-5 d-flex justify-content-center">
+                    <h3 class="color-main font-weight-bold">Servicios</h3>
+                </div>
                 <div class="form-group">
                     <div id="schedules">
                         <div class="row d-flex align-items-center">
                             <div class="col text-center">
-                                <button class="btn btn-main-square ml-3" data-toggle="modal" data-target="#exampleModal"
+                                <button class="btn btn-main-square ml-3" data-toggle="modal" data-target="#add-schedule-modal"
                                         data-whatever="@getbootstrap"><i class="fa fa-plus"></i> Agregar Horario
                                 </button>
                             </div>
@@ -280,7 +290,7 @@
                         <div id="payment_methods">
                             @foreach($paymentMethods as $paymentMethod)
                                 <div class="form-check">
-                                    <input {{ $paymentMethod->id %2 == 0 ? 'checked' : '' }} class="form-check-input payment-method" type="checkbox" id="payment-method-{{ $paymentMethod->id }}" value="{{ $paymentMethod->id }}">
+                                    <input class="form-check-input payment-method" type="checkbox" id="payment-method-{{ $paymentMethod->id }}" value="{{ $paymentMethod->id }}">
                                     <label class="form-check-label" for="payment-method-{{ $paymentMethod->id }}">{{ $paymentMethod->name }}</label>
                                 </div>
                             @endforeach
@@ -291,7 +301,7 @@
                         <label for="delivery" class="color-main"><strong>Domicilios</strong></label>
                         <select id="delivery" class="wide">
                             <option value="">Seleccione</option>
-                            <option value="1" selected>Sí</option>
+                            <option value="1">Sí</option>
                             <option value="0">No</option>
                         </select>
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
@@ -308,6 +318,9 @@
                         </optgroup>
                     @endforeach
                 </div>
+                <div class="row mt-3 mb-5 d-flex justify-content-center">
+                    <h3 class="color-main font-weight-bold">Ubicación y Contacto</h3>
+                </div>
                 <div class="row d-flex justify-content-center mt-3">
                     <div class="form-group col">
                         <label for="department" class="color-main"><strong>Departamento</strong></label>
@@ -322,24 +335,29 @@
                     <div class="form-group col">
                         <label for="municipality" class="color-main"><strong>Municipio</strong></label>
                         <select name="municipality" id="municipality" class="wide" disabled>
-                            <option value="1">Seleccione</option>
+                            <option value="">Seleccione</option>
                         </select>
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                     <div class="form-group col">
                         <label for="address" class="color-main"><strong>Dirección</strong></label>
-                        <input type="text" class="form-control" name="address" id="address" value="calle 1 # 3-53">
+                        <input type="text" class="form-control" name="address" id="address">
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                 </div>
                 <div class="row mt-5 mb-3">
                     <h4 class="color-main">Teléfonos</h4>
                 </div>
-                <div class="row" id="phones"></div>
-                <div class="row d-flex justify-content-center my-5">
-                    <button class="btn btn-main-square" data-toggle="modal" data-target="#add-phone-modal">
-                        <i class="fas fa-plus"></i> Agregar teléfono
-                    </button>
+                <div class="row">
+                    <div class="form-group col">
+                        <div class="row d-flex justify-content-center" id="phones"></div>
+                        <div class="row col d-flex justify-content-center my-5 mx-0">
+                            <button class="btn btn-main-square" data-toggle="modal" data-target="#add-phone-modal">
+                                <i class="fas fa-plus"></i> Agregar teléfono
+                            </button>
+                        </div>
+                        <small class="form-text text-danger text-center font-weight-bold form-input-alert"></small>
+                    </div>
                 </div>
                 <div class="row mt-5">
                     <h4 class="color-main">Redes</h4>
