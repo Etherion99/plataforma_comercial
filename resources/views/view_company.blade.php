@@ -10,7 +10,7 @@
 @section('scripts')
     @parent
     <script>
-        let schedulesPrueba = {{ $company->schedules }};
+        let schedulesPrueba = JSON.parse(`{!! json_encode($company->schedules) !!}`);
         console.log(schedulesPrueba);
         // Estructura que van a tener los horarios al ser recibidos por el backend
         // Ordenados pls (si puede)
