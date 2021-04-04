@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Address extends Model
 {
     protected $fillable = ['text', 'municipality_id', 'company_id'];
+
+    public function municipality(){
+        return $this->belongsTo(Municipality::class);
+    }
 }

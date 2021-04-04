@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Address;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Department;
@@ -45,11 +46,17 @@ class WebController extends Controller
     }
 
     public function viewCompany($id){
-        $company = Company::where('id', $id)->with('category')->first();
+        $company = Company::select(['id', 'name', 'description', 'delivery', 'logo_ext', 'category_id'])->where('id', $id)->with('category')->first();
+        $address = Address::select(['text', 'municipality_id'])->whereCompanyId($id)
+            ->with(['municipality:id,name,department_id', 'municipality.department:id,name' ])->first();
+        
 
-        return view('view_company', [
-            'company' => $company
-        ]);
+        var_dump($address);
+
+        /*return view('view_company', [
+            'company' => $company,
+            'address' => $address
+        ]);*/
     }
 
     public function access(Request $request){
