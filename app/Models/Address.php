@@ -12,4 +12,8 @@ class Address extends Model
     public function municipality(){
         return $this->belongsTo(Municipality::class);
     }
+
+    public function company(){
+        return $this->belongsTo(Company::class);
+    }
 }
