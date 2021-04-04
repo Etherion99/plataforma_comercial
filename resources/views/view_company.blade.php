@@ -10,6 +10,8 @@
 @section('scripts')
     @parent
     <script>
+        let schedulesPrueba = {{ $company->schedules }};
+        console.log(schedulesPrueba);
         // Estructura que van a tener los horarios al ser recibidos por el backend
         // Ordenados pls (si puede)
         let schedules = [
@@ -21,7 +23,6 @@
             [],
             [{start: '08:00', end: '10:00'}, {start: '12:09', end: '14:00'}] // day-6
         ];
-
     </script>
     <script src="{{ asset('js/viewCompany.js') }}" defer></script>
 @endsection
@@ -120,7 +121,7 @@
                         <h3>Detalles</h3>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item border-0 pl-0"><i class="fa fa-map-marker-alt"></i>
-                                <span>Cra. 45 #23-12, Bucaramanga, Santander.</span>
+                                <span>{{ $company->address->text .', '.$company->address->municipality->name.', '.$company->address->municipality->department->name}}</span>
                             </li>
                             <li class="list-group-item border-0 pl-0">
                                 <i class="fa fa-truck"></i>

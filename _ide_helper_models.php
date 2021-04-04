@@ -20,6 +20,7 @@ namespace App\Models{
  * @property int $company_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Municipality $municipality
  * @method static \Illuminate\Database\Eloquent\Builder|Address newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Address newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Address query()
@@ -148,6 +149,8 @@ namespace App\Models{
  * @property int $department_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Address[] $addresses
+ * @property-read int|null $addresses_count
  * @property-read \App\Models\Department $department
  * @method static \Illuminate\Database\Eloquent\Builder|Municipality newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Municipality newQuery()

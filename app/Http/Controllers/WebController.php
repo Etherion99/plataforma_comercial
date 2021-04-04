@@ -52,7 +52,6 @@ class WebController extends Controller
             ->with(['municipality:id,name,department_id', 'municipality.department:id,name' ])->first();
         $schedules = Schedule::whereCompanyId($id);
 
-
         return view('view_company', [
             'company' => $company,
             'address' => $address
