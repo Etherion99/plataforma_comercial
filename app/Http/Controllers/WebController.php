@@ -8,6 +8,7 @@ use App\Models\Department;
 use App\Models\Pack;
 use App\Models\PaymentMethod;
 use App\Models\PhoneType;
+use App\Models\Schedule;
 use App\Models\SocialNetwork;
 use Illuminate\Http\Request;
 
@@ -49,14 +50,13 @@ class WebController extends Controller
         $company = Company::select(['id', 'name', 'description', 'delivery', 'logo_ext', 'category_id'])->where('id', $id)->with('category')->first();
         $address = Address::select(['text', 'municipality_id'])->whereCompanyId($id)
             ->with(['municipality:id,name,department_id', 'municipality.department:id,name' ])->first();
-        
+        $schedules = Schedule::whereCompanyId($id);
 
-        var_dump($address);
 
-        /*return view('view_company', [
+        return view('view_company', [
             'company' => $company,
             'address' => $address
-        ]);*/
+        ]);
     }
 
     public function access(Request $request){
