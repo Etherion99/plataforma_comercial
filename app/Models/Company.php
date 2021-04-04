@@ -24,4 +24,16 @@ class Company extends Model
     public function phones(){
         return $this->hasMany(Phone::class);
     }
+
+    public function schedules(){
+        return $this->hasMany(Schedule::class);
+    }
+
+    public function address(){
+        return $this->hasOne(Address::class);
+    }
+
+    public function galleryPhotos(){
+        return $this->hasMany(GalleryPhoto::class);
+    }
 }

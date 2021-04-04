@@ -47,15 +47,22 @@ class WebController extends Controller
     }
 
     public function viewCompany($id){
-        $company = Company::select(['id', 'name', 'description', 'delivery', 'logo_ext', 'category_id'])->where('id', $id)->with('category')->first();
-        $address = Address::select(['text', 'municipality_id'])->whereCompanyId($id)
-            ->with(['municipality:id,name,department_id', 'municipality.department:id,name' ])->first();
-        $schedules = Schedule::whereCompanyId($id);
-
+        $company = Company::select(['id', 'name', 'description', 'delivery', 'logo_ext', 'category_id'])
+            ->where('id', $id)
+            ->with(['category:id,name',
+                'schedules:id,day,start,end,company_id',
+                'address:id,text,company_id,municipality_id',
+                'address.municipality:id,name,department_id',
+                'address.municipality.department:id,name',
+                'paymentMethods:id,name',
+                'phones:id,number,phone_type_id,company_id',
+                'phones.phoneType:id,name',
+                'galleryPhotos:id,number,extension,company_id'
+            ])
+            ->first();
 
         return view('view_company', [
-            'company' => $company,
-            'address' => $address
+            'company' => $company
         ]);
     }
 

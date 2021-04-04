@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class GalleryPhoto extends Model
 {
     protected $fillable = ['number', 'company_id', 'extension'];
+
+    public function company(){
+        return $this->belongsTo(Company::class);
+    }
 }

@@ -12,4 +12,8 @@ class Phone extends Model
     public function company(){
         return $this->belongsTo(Company::class);
     }
+
+    public function phoneType(){
+        return $this->belongsTo(PhoneType::class);
+    }
 }

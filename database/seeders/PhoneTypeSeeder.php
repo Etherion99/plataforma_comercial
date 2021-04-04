@@ -17,7 +17,7 @@ class PhoneTypeSeeder extends Seeder
                 'name' => 'Celular'
             ),
             array(
-                'name' => 'Whastapp-plus'
+                'name' => 'Whastapp'
             ),
             array(
                 'name' => 'Llamadas y Whatsapp'
