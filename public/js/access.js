@@ -313,6 +313,7 @@ function fillSchedule(result, day) {
 
 function validateHours() {
   var day = $('#select-days').val();
+  console.log("selector ", day);
   var hours = {
     start: $('#select-first-hour').val(),
     end: $('#select-last-hour').val()
@@ -324,6 +325,9 @@ function validateHours() {
 
   if (hours.end !== '' && hours.start !== '') {
     if (f2 > i2) {
+      console.log(day);
+      console.log(daySchedules);
+
       for (var _i3 = 0, _Object$keys2 = Object.keys(daySchedules[day]); _i3 < _Object$keys2.length; _i3++) {
         var index = _Object$keys2[_i3];
         var f1 = new Date('01/01/2020 ' + daySchedules[day][index].end).getTime();
@@ -357,7 +361,8 @@ function validateHours() {
 function clearAddScheduleModal() {
   $('#select-first-hour').val('');
   $('#select-last-hour').val('');
-  $('#select-days').val('');
+  $('#select-days').val('0');
+  $('#select-days').niceSelect('update');
 }
 
 function addPhone() {

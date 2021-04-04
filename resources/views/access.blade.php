@@ -370,7 +370,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="{{ $socialNetwork->icon }}"></i></div>
                                 </div>
-                                <input type="text" placeholder="Enlace de tu {{ $socialNetwork->name }}" class="form-control" data-id="{{ $socialNetwork->id }}" value="{{ $socialNetwork->name }}">
+                                <input type="text" placeholder="Enlace de tu {{ $socialNetwork->name }}" class="form-control" data-id="{{ $socialNetwork->id }}">
                             </div>
                             <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                         </div>

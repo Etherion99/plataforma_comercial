@@ -6,6 +6,7 @@ use App\Models\Address;
 use App\Models\GalleryPhoto;
 use App\Models\Phone;
 use App\Models\Schedule;
+use App\Models\SocialLink;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Models\Category;
@@ -59,6 +60,11 @@ class CompanyController extends Controller
         foreach ($otherData['addresses'] as $address){
             $address['company_id'] = $company->id;
             Address::create($address);
+        }
+
+        foreach ($otherData['social_networks'] as $socialNetwork){
+            $socialNetwork['company_id'] = $company->id;
+            SocialLink::create($socialNetwork);
         }
 
         $gallery = $request->file('gallery');
