@@ -23,7 +23,7 @@ function showStateToday() {
         }
     });
     let but = '';
-    but = $('<div>').html(
+    but = $('<div>', {'class':'d-inline-block'}).html(
         $('<span>').text(
             'HOY, cierra a las ' + closeSchedule +' '
         )
@@ -35,7 +35,7 @@ function showStateToday() {
         )
     );
     if (!open) {
-        but = $('<div>').html(
+        but = $('<div>', {'class':'d-inline-block'}).html(
             $('<span>').text('HOY ')
         ).append(
             $('<div>', {

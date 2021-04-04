@@ -98,7 +98,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body p-0">
                     <img src="" alt="" id="imgInModal" style="max-width: 100%;">
                 </div>
                 {{--                <div class="modal-footer">--}}
@@ -162,7 +162,7 @@
                     <div class="text-information">
                         <h3>Horarios</h3>
                         <div class="border-top-line">
-                            <button class="btn-menu btn-block text-left collapsed" type="button" data-toggle="collapse"
+                            <button class="btn-menu d-flex align-items-center text-left collapsed w-100" type="button" data-toggle="collapse"
                                     data-target="#collapseSchedule" aria-expanded="true" aria-controls="collapseOne"
                                     id="todaySchedule">
                                 <span>Hoy </span>

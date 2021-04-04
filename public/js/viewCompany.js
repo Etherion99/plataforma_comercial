@@ -32,12 +32,16 @@ function showStateToday() {
     }
   });
   var but = '';
-  but = $('<div>').html($('<span>').text('HOY, cierra a las ' + closeSchedule + ' ')).append($('<div>', {
+  but = $('<div>', {
+    'class': 'd-inline-block'
+  }).html($('<span>').text('HOY, cierra a las ' + closeSchedule + ' ')).append($('<div>', {
     'class': 'd-inline-block viewUniqueSchedule text-success'
   }).text('Abierto'));
 
   if (!open) {
-    but = $('<div>').html($('<span>').text('HOY ')).append($('<div>', {
+    but = $('<div>', {
+      'class': 'd-inline-block'
+    }).html($('<span>').text('HOY ')).append($('<div>', {
       'class': 'd-inline-block viewUniqueSchedule text-danger'
     }).text('Cerrado'));
   }
