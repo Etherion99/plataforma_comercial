@@ -21,6 +21,7 @@
             [],
             [{start: '08:00', end: '10:00'}, {start: '12:09', end: '14:00'}] // day-6
         ];
+
     </script>
     <script src="{{ asset('js/viewCompany.js') }}" defer></script>
 @endsection
@@ -123,14 +124,14 @@
                             </li>
                             <li class="list-group-item border-0 pl-0">
                                 <i class="fa fa-truck"></i>
-                                <span> Domicilios: SI/NO</span>
+                                <span> Domicilios: {{ $company->delivery==1?'Si':'No' }}</span>
                             </li>
                             <li class="list-group-item border-0 pl-0"><i class="fas fa-shopping-cart"></i>
                                 <span>Métodos de pago</span>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">
                                         <i class="fas fa-credit-card"></i>
-                                        <span> Tarjeta</span>
+                                        <span>Tarjeta</span>
                                     </li>
                                     <li class="list-group-item">
                                         <i class="fas fa-money-bill-wave"></i>
@@ -153,11 +154,7 @@
                 <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 p-0">
                     <div class="text-information">
                         <h3>Descripción: </h3>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet culpa cumque distinctio, dolor
-                        doloribus,
-                        ea ex facilis id illo maxime modi mollitia, numquam odit pariatur ratione rem repudiandae
-                        tenetur
-                        voluptatem.
+                       <p>{{ $company->description }}</p>
                     </div>
                     <div class="text-information">
                         <h3>Horarios</h3>
