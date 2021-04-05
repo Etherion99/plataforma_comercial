@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PhoneType extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'icons'];
 
     public function phones(){
         return $this->hasMany(Phone::class);
