@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{ asset('css/components/header.css') }}">
+
 <header>
     <!-- Header Start -->
     <div class="header-area header-transparent">
@@ -20,16 +22,7 @@
                                     <ul id="navigation">
                                         <li><a href="{{ route('home') }}">Inicio</a></li>
                                         <li><a href="{{ route('aboutUs') }}">Nosotros</a></li>
-                                        <li><a href="#">Page</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="blog_details.html">Blog Details</a></li>
-                                                <li><a href="elements.html">Element</a></li>
-                                                <li><a href="listing_details.html">Listing details</a></li>
-                                            </ul>
-                                        </li>
                                         <li><a href="contact.html">Contact</a></li>
-                                        <li class="add-list"><a href="listing_details.html"><i class="ti ti-plus"></i> add Listing</a></li>
                                         <li class="login"><a href="{{ route('access') }}">
                                                 <i class="ti ti-user"></i> Regístrate o Ingresa</a>
                                         </li>

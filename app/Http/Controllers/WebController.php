@@ -56,7 +56,7 @@ class WebController extends Controller
                 'address.municipality.department:id,name',
                 'paymentMethods:id,name',
                 'phones:id,number,phone_type_id,company_id',
-                'phones.phoneType:id,name',
+                'phones.phoneType:id,name,icons',
                 'galleryPhotos:id,number,extension,company_id'
             ])
             ->first();

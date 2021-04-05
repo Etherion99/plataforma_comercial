@@ -11,16 +11,20 @@ class PhoneTypeSeeder extends Seeder
     {
         $data = array(
             array(
-                'name' => 'Fijo'
+                'name' => 'Fijo',
+                'icons' => '[\'fas fa-phone\']'
             ),
             array(
-                'name' => 'Celular'
+                'name' => 'Celular',
+                'icons' => '[\'fas fa-mobile-alt\']'
             ),
             array(
-                'name' => 'Whastapp'
+                'name' => 'Whastapp',
+                'icons' => '[\'fab fa-whatsapp\']'
             ),
             array(
-                'name' => 'Llamadas y Whatsapp'
+                'name' => 'Llamadas y Whatsapp',
+                'icons' => '[\'fas fa-mobile-alt\', \'fab fa-whatsapp\']'
             )
         );
 
