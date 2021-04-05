@@ -3,6 +3,13 @@ var __webpack_exports__ = {};
 /*!*************************************!*\
   !*** ./resources/js/viewCompany.js ***!
   \*************************************/
+var paymentIcons = {
+  1: "fas fa-money-bill-wave",
+  2: "fas fa-credit-card",
+  3: "fas fa-receipt",
+  4: "fas fa-qrcode"
+};
+
 function pickPhoto() {
   var sourceImage = $(this).css("background-image").replace(/^url\(['"](.+)['"]\)/, '$1');
   console.log(sourceImage);
@@ -64,9 +71,36 @@ function updateScheduleNow() {
   showStateToday();
 }
 
+function fillPhoneIcons() {
+  var _loop = function _loop() {
+    var i = _Object$keys[_i];
+    $('#icons-' + i).html('');
+    icons[i].forEach(function (element) {
+      $('#icons-' + i).append($('<i>', {
+        'class': element + " mr-1"
+      }));
+    });
+  };
+
+  for (var _i = 0, _Object$keys = Object.keys(icons); _i < _Object$keys.length; _i++) {
+    _loop();
+  }
+}
+
+function fillPaymentIcons() {
+  for (var _i2 = 0, _Object$keys2 = Object.keys(paymentIcons); _i2 < _Object$keys2.length; _i2++) {
+    var i = _Object$keys2[_i2];
+    $('#method-' + i).html($('<i>', {
+      'class': paymentIcons[i]
+    }));
+  }
+}
+
 $(document).ready(function () {
   $('.photo').click(pickPhoto);
   updateScheduleNow();
+  fillPhoneIcons();
+  fillPaymentIcons();
 });
 /******/ })()
 ;
