@@ -10,7 +10,7 @@
 @section('scripts')
     @parent
     <script>
-        let schedulesPrueba = JSON.parse(`{!! json_encode($company->schedules) !!}`);
+        let schedulesPrueba = JSON.parse(`{!! json_encode($company->galleryPhotos) !!}`);
         console.log(schedulesPrueba);
         // Estructura que van a tener los horarios al ser recibidos por el backend
         // Ordenados pls (si puede)
@@ -215,78 +215,14 @@
                     <div class="text-information">
                         <h3>Fotos</h3>
                         <div class="row">
-                            <div class="col-12 col-lg-6 p-2">
-                                <div
-                                    style="background-image: url('https://picsum.photos/1920/600?q=3')"
-                                    class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center">
+                            @foreach($company->galleryPhotos as $photo)
+                                <div class="col-12 col-lg-6 p-2">
+                                    <div
+                                        style="background-image: url({{ asset('storage/company_gallery/'.$company->id.'/'.$photo->number.'.'.$photo->extension) }});"
+                                        class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-12 col-lg-6 p-2">
-                                <div
-                                    style="background-image: url('https://picsum.photos/1920/600?q={{ random_int(1, 25) }}')"
-                                    class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center">
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6 p-2">
-                                <div
-                                    style="background-image: url('https://picsum.photos/1920/600?q={{ random_int(1, 25) }}')"
-                                    class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center">
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6 p-2">
-                                <div
-                                    style="background-image: url('https://picsum.photos/1920/600?q={{ random_int(1, 25) }}')"
-                                    class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center">
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6 p-2">
-                                <div
-                                    style="background-image: url('https://picsum.photos/1920/600?q={{ random_int(1, 25) }}')"
-                                    class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center">
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6 p-2">
-                                <div
-                                    style="background-image: url('https://picsum.photos/1920/600?q={{ random_int(1, 25) }}')"
-                                    class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center">
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6 p-2">
-                                <div
-                                    style="background-image: url('https://picsum.photos/1920/600?q={{ random_int(1, 25) }}')"
-                                    class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center">
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6 p-2">
-                                <div
-                                    style="background-image: url('https://picsum.photos/1920/600?q={{ random_int(1, 25) }}')"
-                                    class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center">
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6 p-2">
-                                <div
-                                    style="background-image: url('https://picsum.photos/1920/600?q={{ random_int(1, 25) }}')"
-                                    class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center">
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6 p-2">
-                                <div
-                                    style="background-image: url('https://picsum.photos/1920/600?q={{ random_int(1, 25) }}')"
-                                    class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center">
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6 p-2">
-                                <div
-                                    style="background-image: url('https://picsum.photos/1920/600?q={{ random_int(1, 25) }}')"
-                                    class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center">
-                                </div>
-                            </div>
-                            <div class="col-12 col-lg-6 p-2">
-                                <div
-                                    style="background-image: url('https://picsum.photos/1920/600?q={{ random_int(1, 25) }}')"
-                                    class="photo embed-responsive embed-responsive-1by1 d-flex align-items-center justify-content-center">
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
