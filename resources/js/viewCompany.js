@@ -72,18 +72,6 @@ function updateScheduleNow() {
     showStateToday();
 }
 
-function fillPhoneIcons(){
-    for (let i of Object.keys(icons)){
-        $('#icons-'+i).html('');
-        icons[i].forEach(element=>{
-            $('#icons-'+i).append(
-                $('<i>', {
-                    'class': element+" mr-1"
-                })
-            );
-        })
-    }
-}
 
 function fillPaymentIcons(){
     for (let i of Object.keys(paymentIcons)){
@@ -98,6 +86,5 @@ function fillPaymentIcons(){
 $(document).ready(function () {
     $('.photo').click(pickPhoto);
     updateScheduleNow();
-    fillPhoneIcons();
     fillPaymentIcons();
 })

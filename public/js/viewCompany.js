@@ -71,25 +71,9 @@ function updateScheduleNow() {
   showStateToday();
 }
 
-function fillPhoneIcons() {
-  var _loop = function _loop() {
-    var i = _Object$keys[_i];
-    $('#icons-' + i).html('');
-    icons[i].forEach(function (element) {
-      $('#icons-' + i).append($('<i>', {
-        'class': element + " mr-1"
-      }));
-    });
-  };
-
-  for (var _i = 0, _Object$keys = Object.keys(icons); _i < _Object$keys.length; _i++) {
-    _loop();
-  }
-}
-
 function fillPaymentIcons() {
-  for (var _i2 = 0, _Object$keys2 = Object.keys(paymentIcons); _i2 < _Object$keys2.length; _i2++) {
-    var i = _Object$keys2[_i2];
+  for (var _i = 0, _Object$keys = Object.keys(paymentIcons); _i < _Object$keys.length; _i++) {
+    var i = _Object$keys[_i];
     $('#method-' + i).html($('<i>', {
       'class': paymentIcons[i]
     }));
@@ -99,7 +83,6 @@ function fillPaymentIcons() {
 $(document).ready(function () {
   $('.photo').click(pickPhoto);
   updateScheduleNow();
-  fillPhoneIcons();
   fillPaymentIcons();
 });
 /******/ })()
