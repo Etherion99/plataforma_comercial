@@ -10,8 +10,9 @@
 @section('scripts')
     @parent
     <script>
-        let schedulesPrueba = JSON.parse(`{!! json_encode($company->galleryPhotos) !!}`);
+        let schedulesPrueba = JSON.parse(`{!! json_encode($company->paymentMethods) !!}`);
         console.log(schedulesPrueba);
+        let icons = {};
         // Estructura que van a tener los horarios al ser recibidos por el backend
         // Ordenados pls (si puede)
         let schedules = [
@@ -46,22 +47,20 @@
                     class="col-sm-auto mt-3 col-md-5 d-flex align-items-end justify-content-lg-end justify-content-center mr-md-auto">
                     <div id="phones" class="float-right">
                         <ul class="list-group list-group-horizontal-xl">
-                            <li class="list-group-item">
-                                <span>3165865658</span>
-                                <a href="https://wa.me/5211234567890?text=me%20gustaría%20saber%20el%20precio%20del%20coche">
-                                    <div class="rounded-circle whatsapp d-inline-block">
-                                        <div class="d-inline-block whatsapp-icon">
-                                            <i class="fab fa-whatsapp"></i>
+                            @foreach($company->phones as $phone)
+                                <li class="list-group-item">
+                                    <span>{{ $phone->number }}</span>
+                                    <div class="rounded-circle d-inline-block">
+                                        <script>
+                                            icons['{{ $phone->id }}'] = JSON.parse(JSON.parse(`{!! json_encode($phone->phoneType->icons) !!}`).replace(/'/g, '"'));
+                                        </script>
+                                        <div id="icons-{{ $phone->id }}">
+
                                         </div>
                                     </div>
-                                </a>
-                            </li>
-                            <li class="list-group-item">
-                                <span>3165865658</span>
-                                <div class="rounded-circle d-inline-block">
-                                    <i class="fas fa-mobile-alt"></i>
-                                </div>
-                            </li>
+                                </li>
+                            @endforeach
+
                             <li class="list-group-item">
                                 <span>3165865658</span>
                                 <div class="rounded-circle d-inline-block">
@@ -93,15 +92,15 @@
     </div>
     <!-- Modal to view photos start -->
     <div class="modal" tabindex="-1" id="viewPhotosModal">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" id="modal-xxl">
-            <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered justify-content-center" id="modal-xxl">
+            <div class="modal-content w-auto">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body p-0">
-                    <img src="" alt="" id="imgInModal" style="max-width: 100%;">
+                    <img src="" alt="" id="imgInModal">
                 </div>
                 {{--                <div class="modal-footer">--}}
                 {{--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
@@ -130,22 +129,13 @@
                             <li class="list-group-item border-0 pl-0"><i class="fas fa-shopping-cart"></i>
                                 <span>Métodos de pago</span>
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <i class="fas fa-credit-card"></i>
-                                        <span>Tarjeta</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <i class="fas fa-money-bill-wave"></i>
-                                        <span>Efectivo</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <i class="fas fa-receipt"></i>
-                                        <span>Transferencia</span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <i class="fas fa-qrcode"></i>
-                                        <span>Código QR</span>
-                                    </li>
+                                    @foreach($company->paymentMethods as $method)
+                                        <li class="list-group-item">
+                                            <div class="d-inline-block" id="method-{{ $method->pivot->payment_method_id }}">
+                                            </div>
+                                            <span>{{ $method->name }}</span>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </li>
                         </ul>
@@ -155,12 +145,13 @@
                 <div class="col-xl-7 col-lg-7 col-md-12 col-sm-12 p-0">
                     <div class="text-information">
                         <h3>Descripción: </h3>
-                       <p>{{ $company->description }}</p>
+                        <p>{{ $company->description }}</p>
                     </div>
                     <div class="text-information">
                         <h3>Horarios</h3>
                         <div class="border-top-line">
-                            <button class="btn-menu d-flex align-items-center text-left collapsed w-100" type="button" data-toggle="collapse"
+                            <button class="btn-menu d-flex align-items-center text-left collapsed w-100" type="button"
+                                    data-toggle="collapse"
                                     data-target="#collapseSchedule" aria-expanded="true" aria-controls="collapseOne"
                                     id="todaySchedule">
                                 <span>Hoy </span>
@@ -173,31 +164,45 @@
                                     <tbody>
                                     <tr>
                                         <th scope="row">Domingo</th>
-                                        <td id="day-0"><div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div></td>
+                                        <td id="day-0">
+                                            <div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Lunes</th>
-                                        <td id="day-1"><div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div></td>
+                                        <td id="day-1">
+                                            <div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Martes</th>
-                                        <td id="day-2"><div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div></td>
+                                        <td id="day-2">
+                                            <div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Miércoles</th>
-                                        <td id="day-3"><div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div></td>
+                                        <td id="day-3">
+                                            <div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Jueves</th>
-                                        <td id="day-4"><div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div></td>
+                                        <td id="day-4">
+                                            <div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Viernes</th>
-                                        <td id="day-5"><div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div></td>
+                                        <td id="day-5">
+                                            <div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Sábado</th>
-                                        <td id="day-6"><div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div></td>
+                                        <td id="day-6">
+                                            <div class="d-inline-block viewUniqueSchedule text-danger">Cerrado</div>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>

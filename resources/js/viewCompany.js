@@ -1,3 +1,10 @@
+var paymentIcons = {
+    1: "fas fa-money-bill-wave",
+    2: "fas fa-credit-card",
+    3: "fas fa-receipt",
+    4: "fas fa-qrcode"
+}
+
 function pickPhoto() {
     const sourceImage = $(this).css("background-image").replace(/^url\(['"](.+)['"]\)/, '$1');
     console.log(sourceImage);
@@ -65,7 +72,32 @@ function updateScheduleNow() {
     showStateToday();
 }
 
+function fillPhoneIcons(){
+    for (let i of Object.keys(icons)){
+        $('#icons-'+i).html('');
+        icons[i].forEach(element=>{
+            $('#icons-'+i).append(
+                $('<i>', {
+                    'class': element+" mr-1"
+                })
+            );
+        })
+    }
+}
+
+function fillPaymentIcons(){
+    for (let i of Object.keys(paymentIcons)){
+        $('#method-'+i).html(
+            $('<i>', {
+                'class': paymentIcons[i]
+            })
+        )
+    }
+}
+
 $(document).ready(function () {
     $('.photo').click(pickPhoto);
     updateScheduleNow();
+    fillPhoneIcons();
+    fillPaymentIcons();
 })
