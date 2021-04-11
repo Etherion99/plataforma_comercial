@@ -10,20 +10,24 @@
 @section('scripts')
     @parent
     <script>
-        let schedulesPrueba = JSON.parse(`{!! json_encode($company->paymentMethods) !!}`);
-        console.log(schedulesPrueba);
+        let schedules = [
+            [], // day-0
+            [], // ....
+            [],
+            [],
+            [],
+            [],
+            [] // day-6
+        ];
+        let schedulesPrueba = JSON.parse(`{!! json_encode($company->schedules) !!}`);
+        console.log(schedulesPrueba)
+        schedulesPrueba.forEach(element=>{
+            schedules[element.day].push({start:element.start, end:element.end});
+        });
         let icons = {};
         // Estructura que van a tener los horarios al ser recibidos por el backend
         // Ordenados pls (si puede)
-        let schedules = [
-            [{start: '08:00', end: '10:00'}, {start: '12:00', end: '14:00'}], // day-0
-            [], // ....
-            [{start: '08:00', end: '10:00'}],
-            [],
-            [],
-            [],
-            [{start: '08:00', end: '10:00'}, {start: '12:09', end: '14:00'}] // day-6
-        ];
+
     </script>
     <script src="{{ asset('js/viewCompany.js') }}" defer></script>
 @endsection
