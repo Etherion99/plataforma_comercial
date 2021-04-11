@@ -54,7 +54,7 @@ class WebController extends Controller
         $company = Company::select(['id', 'name', 'description', 'delivery', 'logo_ext', 'category_id'])
             ->where('id', $id)
             ->with(['category:id,name',
-                'schedules:id,day,start,end,company_id',
+                'schedules' => function($q){ $q->select(['id', 'day', 'start', 'end', 'company_id'])->orderBy('start', 'ASC'); },
                 'address:id,text,company_id,municipality_id',
                 'address.municipality:id,name,department_id',
                 'address.municipality.department:id,name',
