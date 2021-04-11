@@ -51,22 +51,14 @@
                                 <li class="list-group-item">
                                     <span>{{ $phone->number }}</span>
                                     <div class="rounded-circle d-inline-block">
-                                        <script>
-                                            icons['{{ $phone->id }}'] = JSON.parse(JSON.parse(`{!! json_encode($phone->phoneType->icons) !!}`).replace(/'/g, '"'));
-                                        </script>
-                                        <div id="icons-{{ $phone->id }}">
-
+                                        <div>
+                                            @foreach(json_decode($phone->phoneType->icons) as $icon)
+                                                <i class="{{ $icon }} mr-1"></i>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </li>
                             @endforeach
-
-                            <li class="list-group-item">
-                                <span>3165865658</span>
-                                <div class="rounded-circle d-inline-block">
-                                    <i class="fas fa-phone"></i>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </div>
