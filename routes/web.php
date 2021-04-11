@@ -8,3 +8,5 @@ Route::get('/categoria/{id}', [WebController::class, 'viewCategory'])->name('vie
 Route::get('/empresa/{id}', [WebController::class, 'viewCompany'])->name('viewCompany');
 Route::get('/nosotros', [WebController::class, 'aboutUs'])->name('aboutUs');
 Route::get('/acceso', [WebController::class, 'access'])->name('access');
+Route::get('/ingreso', [WebController::class, 'login'])->name('login');
+Route::get('/contacto', [WebController::class, 'contact'])->name('contact');

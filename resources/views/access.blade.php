@@ -11,6 +11,7 @@
     @parent
     <script>
         var signupURL = '{{ route('companySignup') }}';
+        var plan = '{{ $plan }}';
     </script>
     <script src="{{ asset('js/access.js') }}" defer></script>
 @endsection
@@ -211,7 +212,7 @@
                     </div>
                     <div class="form-group col">
                         <label for="pack" class="color-main"><strong>Plan</strong></label>
-                        <select id="pack" class="wide">
+                        <select id="pack" class="wide" disabled>
                             <option value="">Seleccione</option>
                             @foreach($packs as $pack)
                                 <option value="{{ $pack->id }}" {{ $pack->id == $plan ? 'selected' : '' }}>{{ $pack->name }}</option>

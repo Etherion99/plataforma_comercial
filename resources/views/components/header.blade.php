@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="{{ asset('css/components/header.css') }}">
-
 <header>
     <!-- Header Start -->
     <div class="header-area header-transparent">
@@ -22,9 +20,9 @@
                                     <ul id="navigation">
                                         <li><a href="{{ route('home') }}">Inicio</a></li>
                                         <li><a href="{{ route('aboutUs') }}">Nosotros</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                        <li class="login"><a href="{{ route('access') }}">
-                                                <i class="ti ti-user"></i> Regístrate o Ingresa</a>
+                                        <li><a href="{{ route('contact') }}">Contacto</a></li>
+                                        <li class="login"><a href="{{ route('login') }}">
+                                                <i class="ti ti-user"></i> Ingresar</a>
                                         </li>
                                     </ul>
                                 </nav>

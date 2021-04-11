@@ -42,6 +42,10 @@ class WebController extends Controller
         return view('aboutus');
     }
 
+    public function contact(){
+
+    }
+
     public function viewCategory($id){
 
     }

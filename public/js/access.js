@@ -103,8 +103,7 @@ function validateNav() {
     navNext.hide();
     navFinish.show();
   } else {
-    navNext.show();
-    navFinish.hide();
+    navNext.show(); //navFinish.hide();
   }
 
   $('.form-step').removeClass('filled');
@@ -206,9 +205,22 @@ function finish() {
     name: $('#name').val(),
     category_id: $('#category').val(),
     description: $('#description').val(),
-    delivery: $('#delivery').val(),
-    pack_id: $('#pack').val()
+    pack_id: plan
   };
+
+  switch (plan) {
+    case '1':
+      break;
+
+    case '2':
+      companyData['delivery'] = $('#delivery').val();
+      break;
+
+    case '3':
+      companyData['delivery'] = $('#delivery').val();
+      break;
+  }
+
   data.append('company_data', JSON.stringify(companyData));
   var paymentMethods = [];
   $('.payment-method').each(function () {
