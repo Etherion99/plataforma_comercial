@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Acceso')
+@section('title', 'Acceso a Plataforma Comercial')
 
 @section('styles')
     @parent
@@ -165,12 +165,10 @@
     <!--Signup Start-->
     <div class="container my-5">
         <div class="row d-flex justify-content-center" id="form-steps">
-            <div class="form-step rounded-circle d-flex justify-content-center align-items-center p-3 mx-4 filled"
-                 data-id="0">
+            <div class="form-step rounded-circle d-flex justify-content-center align-items-center p-3 mx-4 filled" data-id="0">
                 <i class="fas fa-clipboard-list fa-2x"></i>
             </div>
-            <div class="form-step rounded-circle d-flex justify-content-center align-items-center p-3 mx-4 filled"
-                 data-id="1">
+            <div class="form-step rounded-circle d-flex justify-content-center align-items-center p-3 mx-4 filled" data-id="1">
                 <i class="fas fa-concierge-bell fa-2x"></i>
             </div>
             <div class="form-step rounded-circle d-flex justify-content-center align-items-center p-3 mx-4" data-id="2">
@@ -207,7 +205,7 @@
                 <div class="row d-flex justify-content-center mt-5">
                     <div class="form-group col">
                         <label for="name" class="color-main"><strong>Nombre</strong></label>
-                        <input type="text" class="form-control" name="name" id="name">
+                        <input type="text" class="form-control" name="name" id="name" value="prueba nombre"><!--test-->
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                     <div class="form-group col">
@@ -235,7 +233,7 @@
                     <div class="form-group col">
                         <label for="category" class="color-main"><strong>Categoría</strong></label>
                         <select id="category" class="wide" disabled>
-                            <option value="">Seleccione</option>
+                            <option value="4">Seleccione</option><!--test-->
                         </select>
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
@@ -336,13 +334,13 @@
                     <div class="form-group col">
                         <label for="municipality" class="color-main"><strong>Municipio</strong></label>
                         <select name="municipality" id="municipality" class="wide" disabled>
-                            <option value="">Seleccione</option>
+                            <option value="1">Seleccione</option><!--test-->
                         </select>
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                     <div class="form-group col">
                         <label for="address" class="color-main"><strong>Dirección</strong></label>
-                        <input type="text" class="form-control" name="address" id="address">
+                        <input type="text" class="form-control" name="address" id="address" value="calle"><!--test-->
                         <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                     </div>
                 </div>
@@ -371,7 +369,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text"><i class="{{ $socialNetwork->icon }}"></i></div>
                                 </div>
-                                <input type="text" placeholder="Enlace de tu {{ $socialNetwork->name }}" class="form-control" data-id="{{ $socialNetwork->id }}"pppppppp>
+                                <input type="text" placeholder="Enlace de tu {{ $socialNetwork->name }}" class="form-control" data-id="{{ $socialNetwork->id }}" value="{{ $socialNetwork->name }}"><!--test-->
                             </div>
                             <small class="form-text text-danger font-weight-bold form-input-alert"></small>
                         </div>

@@ -1,13 +1,14 @@
 var navPrev = $('#nav-prev'), navNext = $('#nav-next'), navFinish = $('#nav-finish'), group = $('#group'),
     category = $('#category'), department = $('#department'), municipality = $('#municipality');
 
-var page = 0;
-const lastPage = 3;
-var daySchedules = [{}, {}, {}, {}, {}, {}, {}];
+var page;
+var lastPage;
+var pages = [];
+var daySchedules = [{'0': {start: "07:27", end: "07:28"}}, {}, {}, {}, {}, {}, {}]; /*test*/
 var validations = [];
 var uniqueId = 0;
 
-var phonesModel = {};
+var phonesModel = {'0': {number: "344343", type: "2"}};/*test*/
 var phonesId = 0;
 var phoneTypes = {
     1: { name: 'Fijo', icons: ['fas fa-phone'] },
@@ -50,15 +51,82 @@ function loadMunicipalities(){
 
 function initValidations() {
     $.getJSON('../json/signup_validations.json', function (data) {
-        validations = data;
-    })
+        validations = [];
+
+        for(let pageIndex in data){
+            let page = data[pageIndex];
+            let pageInPlan = false;
+
+            let pageValidations = [];
+
+            for(let item of page){
+                if(item['plans'].includes(plan)){
+                    pageInPlan = true;
+                    pageValidations.push(item);
+                }else
+                    $('#' + item['id']).closest('.form-group').remove();
+            }
+
+            if(!pageInPlan){
+                $('.form-step[data-id=' + pageIndex + ']').remove();
+                $('.form-container[data-id=' + pageIndex + ']').remove();
+            }else{
+                validations.push(pageValidations);
+                pages.push(pageIndex.toString());
+            }
+        }
+
+        page = 0;
+        lastPage = validations.length-1;
+
+        navigate(page);
+
+
+        /*
+
+        for(let pageIndex in validations){
+            let page = validations[pageIndex];
+            let existsInPlan = false;
+
+            console.log(page);
+
+            for(let itemIndex in page){
+                let item = page[itemIndex];
+                let itemInPlan = item['plans'].includes(plan);
+
+                console.log(item['id'], itemInPlan);
+
+                if(itemInPlan){
+                    existsInPlan = true;
+                }else{
+                    $('#' + item['id']).closest('.form-group').remove();
+                    validations[pageIndex].splice(itemIndex, 1);
+                }
+            }
+
+            if(!existsInPlan){
+                $('.form-step[data-id=' + pageIndex + ']').remove();
+                $('.form-container[data-id=' + pageIndex + ']').remove();
+            }else{
+                pagesInPlan.push(pageIndex.toString());
+            }
+        }
+
+        console.log(validations);
+
+        pages = pagesInPlan;
+        page = 0;
+        lastPage = pagesInPlan.length;
+
+        navigate(0);*/
+    });
 }
 
 function navigate(change) {
     if (change > 0 && validatePage() || change <= 0) {
-        $('.form-container[data-id=' + page + ']').slideUp(function () {
+        $('.form-container[data-id=' + pages[page] + ']').slideUp(function () {
             page += change;
-            $('.form-container[data-id=' + page + ']').slideDown();
+            $('.form-container[data-id=' + pages[page] + ']').slideDown();
             validateNav();
         });
     }
@@ -76,17 +144,17 @@ function validateNav() {
         navFinish.show();
     } else {
         navNext.show();
-        //navFinish.hide();
+        navFinish.hide();
     }
 
     $('.form-step').removeClass('filled');
 
     for(let i = 0; i <= page; i++)
-        $('.form-step[data-id=' + i + ']').addClass('filled');
+        $('.form-step[data-id=' + pages[i] + ']').addClass('filled');
 }
 
 function validatePage() {
-    let validation = validations[page];
+    let validation = validations[pages[page]];
     let res = true;
 
     for (let rule of validation) {
@@ -130,6 +198,7 @@ function validateRequired(id, type, message) {
                         }
                     break;
                 case 'phones':
+                    console.log(phonesModel);
                     res = Object.keys(phonesModel).length > 0;
                     break;
             }
@@ -146,97 +215,114 @@ function validateRequired(id, type, message) {
 }
 
 function finish() {
-    let data = new FormData();
+    if(validatePage()){
+        let data = new FormData();
 
-    data.append('logo', $('#logo')[0].files[0]);
+        let companyData = {};
+        let otherData = {};
 
-    let companyData = {
-        name: $('#name').val(),
-        category_id: $('#category').val(),
-        description: $('#description').val(),
-        pack_id: plan
-    }
+        let addresses = [{}];
 
-    switch(plan){
-        case '1':
-            break;
-        case '2':
-            companyData['delivery'] = $('#delivery').val();
-            break;
-        case '3':
-            companyData['delivery'] = $('#delivery').val();
-            break;
-    }
+        for(let page of validations){
+            for(let item of page){
+                switch(item['id']){
+                    case 'name':
+                        companyData['name'] = $('#name').val();
+                        break;
+                    case 'pack':
+                        companyData['pack_id'] = plan;
+                        break;
+                    case 'category':
+                        companyData['category_id'] = $('#category').val();
+                        break;
+                    case 'description':
+                        companyData['description'] = $('#description').val();
+                        break;
+                    case 'logo':
+                        data.append('logo', $('#logo')[0].files[0]);
+                        break;
+                    case 'schedules':
+                        let schedules = [];
 
-    data.append('company_data', JSON.stringify(companyData));
+                        for(let dayKey in daySchedules){
+                            let day = daySchedules[dayKey];
+                            let keys = Object.keys(day);
 
-    let paymentMethods = [];
+                            for(let key of keys){
+                                let schedule = day[key];
+                                schedule['day'] = dayKey;
+                                schedules.push(schedule);
+                            }
+                        }
 
-    $('.payment-method').each(function(){
-        if($(this).prop('checked'))
-            paymentMethods.push($(this).val());
-    });
+                        otherData['schedules'] = schedules;
+                        break;
+                    case 'delivery':
+                        companyData['delivery'] = $('#delivery').val();
+                        break;
+                    case 'payment_methods':
+                        let paymentMethods = [];
 
-    let schedules = [];
+                        $('.payment-method').each(function(){
+                            if($(this).prop('checked'))
+                                paymentMethods.push($(this).val());
+                        });
 
-    for(let dayKey in daySchedules){
-        let day = daySchedules[dayKey];
-        let keys = Object.keys(day);
+                        otherData['payment_methods'] = paymentMethods;
+                        break;
+                    case 'municipality':
+                        addresses[0]['municipality_id'] = $('#municipality').val();
+                        break;
+                    case 'address':
+                        addresses[0]['text'] = $('#address').val();
+                        break;
+                    case 'phones':
+                        let phones = [];
 
-        for(let key of keys){
-            let schedule = day[key];
+                        for(let phoneKey of Object.keys(phonesModel)){
+                            let phone = phonesModel[phoneKey];
+                            phones.push({ number: phone.number, phone_type_id: phone.type });
+                        }
 
-            schedule['day'] = dayKey;
+                        otherData['phones'] = phones;
+                        break;
+                    case 'social_networks':
+                        let socialNetworks = [];
 
-            schedules.push(schedule);
+                        $('.social-network input').each(function (){
+                            if($(this).val() !== '') socialNetworks.push({ url: $(this).val(), social_network_id: $(this).attr('data-id') });
+                        });
+
+                        otherData['social_networks'] = socialNetworks;
+                        break;
+                }
+            }
         }
+
+        otherData['addresses'] = addresses;
+
+        data.append('company_data', JSON.stringify(companyData));
+        data.append('other_data', JSON.stringify(otherData));
+
+        console.log(otherData);
+
+        /*
+        $('.photos-form .input-photo').each(function (index){
+            if ($(this)[0].files && $(this)[0].files[0]){
+                data.append('gallery[]', $(this)[0].files[0]);
+                console.log(index);
+            }
+        });*/
+
+        $.ajax({
+            url: signupURL,
+            method: 'POST',
+            data: data,
+            contentType: false,
+            cache: false,
+            processData: false
+        });
     }
-
-    let phones = [];
-
-    for(let phoneKey of Object.keys(phonesModel)){
-        let phone = phonesModel[phoneKey];
-        phones.push({ number: phone.number, phone_type_id: phone.type });
-    }
-
-    let addresses = [];
-
-    addresses.push({
-        municipality_id: $('#municipality').val(),
-        text: $('#address').val()
-    });
-
-    let socialNetworks = [];
-
-    $('.social-network input').each(function (){
-       if($(this).val() !== '') socialNetworks.push({ url: $(this).val(), social_network_id: $(this).attr('data-id') });
-    });
-
-    let otherData = {
-        payment_methods: paymentMethods,
-        schedules: schedules,
-        phones: phones,
-        addresses: addresses,
-        social_networks: socialNetworks
-    }
-
-    data.append('other_data', JSON.stringify(otherData));
-
-    $('.photos-form .input-photo').each(function (index){
-        if ($(this)[0].files && $(this)[0].files[0]){
-            data.append('gallery[]', $(this)[0].files[0]);
-            console.log(index);
-        }
-    });
-
-    $.ajax({
-        url: signupURL,
-        method: 'POST',
-        data: data,
-        contentType: false,
-        cache: false,
-        processData: false
-    });
 }
 
 function removeSchedules(result){
@@ -441,7 +527,6 @@ function updatePreview(input){
 $(document).ready(function () {
     uniqueId = 0;
     initValidations();
-    navigate(0);
 
     navNext.click(function () {
         navigate(1);
@@ -460,10 +545,8 @@ $(document).ready(function () {
 
     $('#add-schedule').click(validateHours);
 
-    //phones
     $('#add-phone').click(addPhone);
 
-    //photos
     $('.photo').click(function (){
         pickPhoto($(this).attr('data-id'));
     });

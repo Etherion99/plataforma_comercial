@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'prueba')
+@section('title', $company->name)
 
 @section('styles')
     @parent

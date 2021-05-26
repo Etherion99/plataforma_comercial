@@ -33,41 +33,58 @@ class CompanyController extends Controller
     }
 
     public function signup(Request $request){
-        $logo = $request->file('logo');
+        if($request->has('company_data')){
+            $companyData = json_decode($request->input('company_data'), true);
 
-        $companyData = json_decode($request->input('company_data'), true);
-        $companyData['logo_ext'] = 'jpg'; //$logo->extension();
-        $company = Company::create($companyData);
+            if($request->hasFile('logo')){
+                $logo = $request->file('logo');
 
-        $logo->storeAs('public/company_logo', $company->id.'.'.$logo->extension());
+                $companyData['logo_ext'] = $logo->extension();
+                $company = Company::create($companyData);
 
-        $otherData = json_decode($request->input('other_data'), true);
+                $logo->storeAs('public/company_logo', $company->id.'.'.$logo->extension());
+            }
 
-        foreach ($otherData['schedules'] as $schedule){
-            $schedule['company_id'] = $company->id;
-            Schedule::create($schedule);
+            if($request->has('other_data')){
+                $otherData = json_decode($request->input('other_data'), true);
+
+                if(array_key_exists('schedules', $otherData)){
+                    foreach ($otherData['schedules'] as $schedule){
+                        $schedule['company_id'] = $company->id;
+                        Schedule::create($schedule);
+                    }
+                }
+
+                if(array_key_exists('payment_methods', $otherData)){
+                    foreach ($otherData['payment_methods'] as $paymentmethod){
+                        $company->paymentMethods()->attach($paymentmethod);
+                    }
+                }
+
+                if(array_key_exists('phones', $otherData)){
+                    foreach ($otherData['phones'] as $phone){
+                        $phone['company_id'] = $company->id;
+                        Phone::create($phone);
+                    }
+                }
+
+                if(array_key_exists('addresses', $otherData)){
+                    foreach ($otherData['addresses'] as $address){
+                        $address['company_id'] = $company->id;
+                        Address::create($address);
+                    }
+                }
+
+                if(array_key_exists('social_networks', $otherData)){
+                    foreach ($otherData['social_networks'] as $socialNetwork){
+                        $socialNetwork['company_id'] = $company->id;
+                        SocialLink::create($socialNetwork);
+                    }
+                }
+            }
         }
 
-        foreach ($otherData['payment_methods'] as $paymentmethod){
-            $company->paymentMethods()->attach($paymentmethod);
-        }
-
-        foreach ($otherData['phones'] as $phone){
-            $phone['company_id'] = $company->id;
-            Phone::create($phone);
-        }
-
-        foreach ($otherData['addresses'] as $address){
-            $address['company_id'] = $company->id;
-            Address::create($address);
-        }
-
-        foreach ($otherData['social_networks'] as $socialNetwork){
-            $socialNetwork['company_id'] = $company->id;
-            SocialLink::create($socialNetwork);
-        }
-
-        $gallery = $request->file('gallery');
+        /*$gallery = $request->file('gallery');
 
         for ($i = 0; $i < count($gallery); $i++){
             $photo = $gallery[$i];
@@ -79,9 +96,8 @@ class CompanyController extends Controller
             ));
 
             $photo->storeAs('public/company_gallery/'.$company->id, $galleryPhoto->number.'.'.$photo->extension());
-        }
+        }*/
 
-        var_dump($gallery);
-
+        return true;
     }
 }

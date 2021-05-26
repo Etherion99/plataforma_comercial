@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'prueba')
+@section('title', 'Plataforma Comercial')
 
 @section('styles')
     @parent
@@ -171,7 +171,7 @@
                                     Horarios específicos de lunes a domingos y festivos
                                 </p>
                             </div>
-                            <a href="{{ route('access', ['plan' => 1]) }}">View Details</a>
+                            <a class="pick-plan" href="{{ route('access', ['plan' => 1]) }}">Elegir Plan</a>
                         </div>
                     </div>
                 </div>
@@ -234,7 +234,7 @@
                                     (Especifica que realiza su empresa)
                                 </p>
                             </div>
-                            <a href="{{ route('access', ['plan' => 2]) }}">View Details</a>
+                            <a class="pick-plan" href="{{ route('access', ['plan' => 2]) }}">Elegir Plan</a>
                         </div>
                     </div>
                 </div>
@@ -297,7 +297,7 @@
                                     (Especifica que realiza su empresa)
                                 </p>
                             </div>
-                            <a href="{{ route('access', ['plan' => 3]) }}">View Details</a>
+                            <a class="pick-plan" href="{{ route('access', ['plan' => 3]) }}">Elegir Plan</a>
                         </div>
                     </div>
                 </div>

@@ -11,7 +11,7 @@ class CreateCompaniesTable extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->string('name', 80);
-            $table->string('description', 400);
+            $table->string('description', 400)->default('');
             $table->foreignId('category_id')->constrained();
             $table->foreignId('pack_id')->constrained();
             $table->boolean('delivery')->nullable();

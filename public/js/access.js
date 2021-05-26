@@ -16,12 +16,27 @@ var navPrev = $('#nav-prev'),
     category = $('#category'),
     department = $('#department'),
     municipality = $('#municipality');
-var page = 0;
-var lastPage = 3;
-var daySchedules = [{}, {}, {}, {}, {}, {}, {}];
+var page;
+var lastPage;
+var pages = [];
+var daySchedules = [{
+  '0': {
+    start: "07:27",
+    end: "07:28"
+  }
+}, {}, {}, {}, {}, {}, {}];
+/*test*/
+
 var validations = [];
 var uniqueId = 0;
-var phonesModel = {};
+var phonesModel = {
+  '0': {
+    number: "344343",
+    type: "2"
+  }
+};
+/*test*/
+
 var phonesId = 0;
 var phoneTypes = {
   1: {
@@ -78,15 +93,79 @@ function loadMunicipalities() {
 
 function initValidations() {
   $.getJSON('../json/signup_validations.json', function (data) {
-    validations = data;
+    validations = [];
+
+    for (var pageIndex in data) {
+      var _page = data[pageIndex];
+      var pageInPlan = false;
+      var pageValidations = [];
+
+      var _iterator = _createForOfIteratorHelper(_page),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var item = _step.value;
+
+          if (item['plans'].includes(plan)) {
+            pageInPlan = true;
+            pageValidations.push(item);
+          } else $('#' + item['id']).closest('.form-group').remove();
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      if (!pageInPlan) {
+        $('.form-step[data-id=' + pageIndex + ']').remove();
+        $('.form-container[data-id=' + pageIndex + ']').remove();
+      } else {
+        validations.push(pageValidations);
+        pages.push(pageIndex.toString());
+      }
+    }
+
+    page = 0;
+    lastPage = validations.length - 1;
+    navigate(page);
+    /*
+     for(let pageIndex in validations){
+        let page = validations[pageIndex];
+        let existsInPlan = false;
+         console.log(page);
+         for(let itemIndex in page){
+            let item = page[itemIndex];
+            let itemInPlan = item['plans'].includes(plan);
+             console.log(item['id'], itemInPlan);
+             if(itemInPlan){
+                existsInPlan = true;
+            }else{
+                $('#' + item['id']).closest('.form-group').remove();
+                validations[pageIndex].splice(itemIndex, 1);
+            }
+        }
+         if(!existsInPlan){
+            $('.form-step[data-id=' + pageIndex + ']').remove();
+            $('.form-container[data-id=' + pageIndex + ']').remove();
+        }else{
+            pagesInPlan.push(pageIndex.toString());
+        }
+    }
+     console.log(validations);
+     pages = pagesInPlan;
+    page = 0;
+    lastPage = pagesInPlan.length;
+     navigate(0);*/
   });
 }
 
 function navigate(change) {
   if (change > 0 && validatePage() || change <= 0) {
-    $('.form-container[data-id=' + page + ']').slideUp(function () {
+    $('.form-container[data-id=' + pages[page] + ']').slideUp(function () {
       page += change;
-      $('.form-container[data-id=' + page + ']').slideDown();
+      $('.form-container[data-id=' + pages[page] + ']').slideDown();
       validateNav();
     });
   }
@@ -103,32 +182,33 @@ function validateNav() {
     navNext.hide();
     navFinish.show();
   } else {
-    navNext.show(); //navFinish.hide();
+    navNext.show();
+    navFinish.hide();
   }
 
   $('.form-step').removeClass('filled');
 
   for (var i = 0; i <= page; i++) {
-    $('.form-step[data-id=' + i + ']').addClass('filled');
+    $('.form-step[data-id=' + pages[i] + ']').addClass('filled');
   }
 }
 
 function validatePage() {
-  var validation = validations[page];
+  var validation = validations[pages[page]];
   var res = true;
 
-  var _iterator = _createForOfIteratorHelper(validation),
-      _step;
+  var _iterator2 = _createForOfIteratorHelper(validation),
+      _step2;
 
   try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      var rule = _step.value;
+    for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+      var rule = _step2.value;
       if (rule['required'] && !validateRequired(rule['id'], rule['type'], rule['message'])) res = false;
     }
   } catch (err) {
-    _iterator.e(err);
+    _iterator2.e(err);
   } finally {
-    _iterator.f();
+    _iterator2.f();
   }
 
   return res;
@@ -163,12 +243,12 @@ function validateRequired(id, type, message) {
         case 'schedules':
           res = false;
 
-          var _iterator2 = _createForOfIteratorHelper(daySchedules),
-              _step2;
+          var _iterator3 = _createForOfIteratorHelper(daySchedules),
+              _step3;
 
           try {
-            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-              var schedule = _step2.value;
+            for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+              var schedule = _step3.value;
 
               if (Object.keys(schedule).length > 0) {
                 res = true;
@@ -176,14 +256,15 @@ function validateRequired(id, type, message) {
               }
             }
           } catch (err) {
-            _iterator2.e(err);
+            _iterator3.e(err);
           } finally {
-            _iterator2.f();
+            _iterator3.f();
           }
 
           break;
 
         case 'phones':
+          console.log(phonesModel);
           res = Object.keys(phonesModel).length > 0;
           break;
       }
@@ -199,92 +280,147 @@ function validateRequired(id, type, message) {
 }
 
 function finish() {
-  var data = new FormData();
-  data.append('logo', $('#logo')[0].files[0]);
-  var companyData = {
-    name: $('#name').val(),
-    category_id: $('#category').val(),
-    description: $('#description').val(),
-    pack_id: plan
-  };
+  if (validatePage()) {
+    var data = new FormData();
+    var companyData = {};
+    var otherData = {};
+    var addresses = [{}];
 
-  switch (plan) {
-    case '1':
-      break;
+    var _iterator4 = _createForOfIteratorHelper(validations),
+        _step4;
 
-    case '2':
-      companyData['delivery'] = $('#delivery').val();
-      break;
+    try {
+      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+        var _page2 = _step4.value;
 
-    case '3':
-      companyData['delivery'] = $('#delivery').val();
-      break;
-  }
+        var _iterator5 = _createForOfIteratorHelper(_page2),
+            _step5;
 
-  data.append('company_data', JSON.stringify(companyData));
-  var paymentMethods = [];
-  $('.payment-method').each(function () {
-    if ($(this).prop('checked')) paymentMethods.push($(this).val());
-  });
-  var schedules = [];
+        try {
+          for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+            var item = _step5.value;
 
-  for (var dayKey in daySchedules) {
-    var day = daySchedules[dayKey];
-    var keys = Object.keys(day);
+            (function () {
+              switch (item['id']) {
+                case 'name':
+                  companyData['name'] = $('#name').val();
+                  break;
 
-    for (var _i = 0, _keys = keys; _i < _keys.length; _i++) {
-      var key = _keys[_i];
-      var schedule = day[key];
-      schedule['day'] = dayKey;
-      schedules.push(schedule);
+                case 'pack':
+                  companyData['pack_id'] = plan;
+                  break;
+
+                case 'category':
+                  companyData['category_id'] = $('#category').val();
+                  break;
+
+                case 'description':
+                  companyData['description'] = $('#description').val();
+                  break;
+
+                case 'logo':
+                  data.append('logo', $('#logo')[0].files[0]);
+                  break;
+
+                case 'schedules':
+                  var schedules = [];
+
+                  for (var dayKey in daySchedules) {
+                    var day = daySchedules[dayKey];
+                    var keys = Object.keys(day);
+
+                    for (var _i = 0, _keys = keys; _i < _keys.length; _i++) {
+                      var key = _keys[_i];
+                      var schedule = day[key];
+                      schedule['day'] = dayKey;
+                      schedules.push(schedule);
+                    }
+                  }
+
+                  otherData['schedules'] = schedules;
+                  break;
+
+                case 'delivery':
+                  companyData['delivery'] = $('#delivery').val();
+                  break;
+
+                case 'payment_methods':
+                  var paymentMethods = [];
+                  $('.payment-method').each(function () {
+                    if ($(this).prop('checked')) paymentMethods.push($(this).val());
+                  });
+                  otherData['payment_methods'] = paymentMethods;
+                  break;
+
+                case 'municipality':
+                  addresses[0]['municipality_id'] = $('#municipality').val();
+                  break;
+
+                case 'address':
+                  addresses[0]['text'] = $('#address').val();
+                  break;
+
+                case 'phones':
+                  var phones = [];
+
+                  for (var _i2 = 0, _Object$keys = Object.keys(phonesModel); _i2 < _Object$keys.length; _i2++) {
+                    var phoneKey = _Object$keys[_i2];
+                    var phone = phonesModel[phoneKey];
+                    phones.push({
+                      number: phone.number,
+                      phone_type_id: phone.type
+                    });
+                  }
+
+                  otherData['phones'] = phones;
+                  break;
+
+                case 'social_networks':
+                  var socialNetworks = [];
+                  $('.social-network input').each(function () {
+                    if ($(this).val() !== '') socialNetworks.push({
+                      url: $(this).val(),
+                      social_network_id: $(this).attr('data-id')
+                    });
+                  });
+                  otherData['social_networks'] = socialNetworks;
+                  break;
+              }
+            })();
+          }
+        } catch (err) {
+          _iterator5.e(err);
+        } finally {
+          _iterator5.f();
+        }
+      }
+    } catch (err) {
+      _iterator4.e(err);
+    } finally {
+      _iterator4.f();
     }
-  }
 
-  var phones = [];
+    otherData['addresses'] = addresses;
+    data.append('company_data', JSON.stringify(companyData));
+    data.append('other_data', JSON.stringify(otherData));
+    console.log(otherData);
+    /*
+    $('.photos-form .input-photo').each(function (index){
+        if ($(this)[0].files && $(this)[0].files[0]){
+            data.append('gallery[]', $(this)[0].files[0]);
+            console.log(index);
+        }
+    });*/
 
-  for (var _i2 = 0, _Object$keys = Object.keys(phonesModel); _i2 < _Object$keys.length; _i2++) {
-    var phoneKey = _Object$keys[_i2];
-    var phone = phonesModel[phoneKey];
-    phones.push({
-      number: phone.number,
-      phone_type_id: phone.type
+    $.ajax({
+      url: signupURL,
+      method: 'POST',
+      data: data,
+      contentType: false,
+      cache: false,
+      processData: false
     });
   }
-
-  var addresses = [];
-  addresses.push({
-    municipality_id: $('#municipality').val(),
-    text: $('#address').val()
-  });
-  var socialNetworks = [];
-  $('.social-network input').each(function () {
-    if ($(this).val() !== '') socialNetworks.push({
-      url: $(this).val(),
-      social_network_id: $(this).attr('data-id')
-    });
-  });
-  var otherData = {
-    payment_methods: paymentMethods,
-    schedules: schedules,
-    phones: phones,
-    addresses: addresses,
-    social_networks: socialNetworks
-  };
-  data.append('other_data', JSON.stringify(otherData));
-  $('.photos-form .input-photo').each(function (index) {
-    if ($(this)[0].files && $(this)[0].files[0]) {
-      data.append('gallery[]', $(this)[0].files[0]);
-      console.log(index);
-    }
-  });
-  $.ajax({
-    url: signupURL,
-    method: 'POST',
-    data: data,
-    contentType: false,
-    cache: false,
-    processData: false
-  });
 }
 
 function removeSchedules(result) {
@@ -389,20 +525,20 @@ function addPhone() {
       var idHtml = 'phone-' + phonesId;
       var iconsHtml = $('<span>');
 
-      var _iterator3 = _createForOfIteratorHelper(phoneTypes[phone.type].icons),
-          _step3;
+      var _iterator6 = _createForOfIteratorHelper(phoneTypes[phone.type].icons),
+          _step6;
 
       try {
-        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-          var icon = _step3.value;
+        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+          var icon = _step6.value;
           iconsHtml.append($('<i>', {
             "class": icon + ' ml-2'
           }));
         }
       } catch (err) {
-        _iterator3.e(err);
+        _iterator6.e(err);
       } finally {
-        _iterator3.f();
+        _iterator6.f();
       }
 
       var phoneHtml = $('<div>', {
@@ -479,7 +615,6 @@ function updatePreview(input) {
 $(document).ready(function () {
   uniqueId = 0;
   initValidations();
-  navigate(0);
   navNext.click(function () {
     navigate(1);
   });
@@ -492,10 +627,8 @@ $(document).ready(function () {
   $('#closeAlertScheduleModal').click(function () {
     $('#alertScheduleModal').slideUp();
   });
-  $('#add-schedule').click(validateHours); //phones
-
-  $('#add-phone').click(addPhone); //photos
-
+  $('#add-schedule').click(validateHours);
+  $('#add-phone').click(addPhone);
   $('.photo').click(function () {
     pickPhoto($(this).attr('data-id'));
   });

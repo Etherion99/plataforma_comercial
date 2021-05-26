@@ -4,51 +4,60 @@
             "id": "name",
             "type": "text",
             "required": true,
-            "message": "Campo Obligatorio"
+            "message": "Campo Obligatorio",
+            "plans": ["1", "2", "3"]
         },
         {
             "id": "pack",
             "type": "dropdown",
             "required": true,
-            "message": "Campo Obligatorio"
+            "message": "Campo Obligatorio",
+            "plans": ["1", "2", "3"]
         },
         {
             "id": "logo",
             "type": "file",
             "required": true,
-            "message": "Carga una foto presionando el ícono de arriba"
+            "message": "Carga una foto presionando el ícono de arriba",
+            "plans": ["1", "2", "3"]
         },
         {
             "id": "category",
             "type": "dropdown",
             "required": true,
-            "message": "Campo Obligatorio"
+            "message": "Campo Obligatorio",
+            "plans": ["1", "2", "3"]
         },
         {
             "id": "description",
             "type": "text",
             "required": true,
-            "message": "Campo Obligatorio"
+            "message": "Campo Obligatorio",
+            "plans": ["2", "3"]
         }
     ],
     [
+
         {
             "id": "schedules",
             "type": "special",
             "required": true,
-            "message": "Agrega al menos un horario"
-        },
-        {
-            "id": "payment_methods",
-            "type": "checkbox",
-            "required": true,
-            "message": "Selecciona al menos un método de pago"
+            "message": "Agrega al menos un horario",
+            "plans": ["1", "2", "3"]
         },
         {
             "id": "delivery",
             "type": "dropdown",
             "required": true,
-            "message": "Campo Obligatorio"
+            "message": "Campo Obligatorio",
+            "plans": ["2", "3"]
+        },
+        {
+            "id": "payment_methods",
+            "type": "checkbox",
+            "required": true,
+            "message": "Selecciona al menos un método de pago",
+            "plans": ["2", "3"]
         }
     ],
     [
@@ -56,24 +65,28 @@
             "id": "municipality",
             "type": "dropdown",
             "required": true,
-            "message": "Campo Obligatorio"
+            "message": "Campo Obligatorio",
+            "plans": ["1", "2", "3"]
         },
         {
             "id": "address",
             "type": "text",
             "required": true,
-            "message": "Campo Obligatorio"
+            "message": "Campo Obligatorio",
+            "plans": ["1", "2", "3"]
         },
         {
             "id": "phones",
             "type": "special",
             "required": true,
-            "message": "Agrega al menos un teléfono"
+            "message": "Agrega al menos un teléfono",
+            "plans": ["1", "2", "3"]
         },
         {
-            "id": "social-networks",
+            "id": "social_networks",
             "type": "special",
-            "required": false
+            "required": false,
+            "plans": ["2", "3"]
         }
     ]
 ]
